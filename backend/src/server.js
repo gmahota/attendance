@@ -18,5 +18,5 @@ function sendJsonResult(res, obj) {
 }
 
 app.listen(process.env.PORT || 5000, function () {
-  console.log("Listening!");
+  console.log(`Listening ${process.env.PORT || 5000}`);
 });

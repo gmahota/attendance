@@ -7,7 +7,7 @@ var timeCardRecord = function (time) {};
 var getTimeCardReport = async () => {
   const pool = mariadb.createPool({
     host: process.env.MariaBd_HOST,
-    database: process.env.MariaDb_DATABASE,
+    database: process.env.MariaDb_DATABASE2,
     user: process.env.MariaDb_USERNAME,
     password: process.env.MariaDb_PASSWORD,
     connectionLimit: 5,

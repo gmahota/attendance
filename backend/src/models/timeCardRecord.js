@@ -1,22 +1,10 @@
-//import mariadb from "./../database/mariadb.js";
-import mariadb from "mariadb";
+import mariadb from "./../database/mariadb.js";
 import Excell from "./../services/excel.js";
 
-var timeCardRecord = function (time) {};
-
 var getTimeCardReport = async () => {
-  const pool = mariadb.createPool({
-    host: process.env.MariaBd_HOST,
-    database: process.env.MariaDb_DATABASE2,
-    user: process.env.MariaDb_USERNAME,
-    password: process.env.MariaDb_PASSWORD,
-    connectionLimit: 5,
-    port: process.env.MariaDb_PORT,
-  });
-
   let conn;
   try {
-    conn = await pool.getConnection();
+    conn = await mariadb.getConnection();
     let rows = await conn.query(`SELECT t.* from T_USR t`);
     rows = rows.map((row) => {
       return {

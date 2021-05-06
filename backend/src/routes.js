@@ -4,6 +4,7 @@ import timeCardReport from "./models/timeCardRecord.js";
 import employees from "./models/employees.js";
 import departments from "./models/departments.js";
 import shifts from "./models/shifts.js";
+import path from 'path';
 
 const routes = Router();
 
@@ -38,7 +39,12 @@ routes.get("/", async function (req, res) {
 routes.get("/api/reports/individuals", async (req, res) => {
   const items = await timeCardReport.getTimeCardReport();
   timeCardReport.fillExcell(items);
-  sendJsonResult(res, items);
+  //sendJsonResult(res, items);
+ var file= path.join('./content/template1.xlsx');  
+ console.log(file);
+        res.download(file);
+        
+
 });
 
 routes.get("/api/reports/employees", async (req, res) => {

@@ -3,6 +3,7 @@ import { Router } from "express";
 import timeCardReport from "./models/timeCardRecord.js";
 import employees from "./models/employees.js";
 import departments from "./models/departments.js";
+import shifts from "./models/shifts.js";
 
 const routes = Router();
 
@@ -56,10 +57,8 @@ routes.get("/api/employ/:id", async (req, res) => {
 });
 
 routes.get("/api/departments", async (req, res) => {
-  sendJsonResult(res, [
-    { id: 1, dep: "OLA 1" },
-    { id: 2, dep: "OLA 2" },
-  ]);
+  const items = await departments.getDepartments();
+  sendJsonResult(res, items);
 });
 
 routes.get("/api/department/:id", async (req, res) => {
@@ -68,11 +67,13 @@ routes.get("/api/department/:id", async (req, res) => {
 });
 
 routes.get("/api/shifts", async (req, res) => {
-  sendJsonResult(res, [{ id: "Turno 1" }, { id: "Turno 2" }]);
+  const items = await shifts.getShifts();
+  sendJsonResult(res, items);
 });
 
 routes.get("api/shift/:id", async (req, res) => {
-  sendJsonResult(res, { id: "Turno 1" });
+  const item = await shifts.getShift(req.params.id);
+  sendJsonResult(res, item);
 });
 
 function sendJsonResult(res, obj) {

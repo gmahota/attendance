@@ -1,6 +1,6 @@
-const XlsxPopulate = require("xlsx-populate");
+import XlsxPopulate from "xlsx-populate";
 
-function excell() {
+function Excell() {
   function fillData(items) {
     XlsxPopulate.fromBlankAsync().then((workbook) => {
       // Modify the workbook.
@@ -90,4 +90,4 @@ function excell() {
   };
 }
 
-module.exports = excell;
+export default Excell;

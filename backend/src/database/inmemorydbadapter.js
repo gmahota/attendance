@@ -1,4 +1,4 @@
-var demoData = require("./../data/demo-attandance");
+import demoData from "./../data/demo-attandance";
 
 function InMemoryDBAdapter(session) {
   function getTable(tableName) {
@@ -127,4 +127,4 @@ function InMemoryDBAdapter(session) {
   };
 }
 
-module.exports = InMemoryDBAdapter;
+export default InMemoryDBAdapter;

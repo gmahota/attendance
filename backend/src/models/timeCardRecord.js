@@ -1,6 +1,7 @@
 import mariadb from "./../database/mariadb.js";
 import Excell from "./../services/excel.js";
 
+
 var getTimeCardReport = async () => {
   let conn;
   try {
@@ -49,65 +50,50 @@ var getTimeCardReport = async () => {
   }
 };
 
+var getTimeCardReportForSimpleShchedule = async() =>{
+  let conn;
+  try {
+    conn = await mariadb.getConnection();
+    let rows = await conn.query(`SELECT t.* from T_USR t`);
+    rows = rows.map((row) => {
+      return {
+        Date: row.date,
+        Name: row.name,
+        UserId: row.user_id,
+        Department: "",
+        Shift: row.shift_name,
+        firstTime: {
+          clockInDefault: "7:00:00",
+          clockIn: "7:00:00",
+          clockOut: "14:00:00",
+          timeLate: "00:00:00",
+         extraHours: "00:00:00",
+         regularHours: "6:00:00",
+         totalTime: "5:40:00"
+
+        },
+        ...row,
+      };
+    });
+
+    return rows;
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.release(); //release to pool
+  }
+}
+
 var fillExcell = (rows) => {
-  const excell = new Excell();
-  excell.fillData(rows);
+  
+  Excell.fillData(rows);
 };
 
-// function MariaDBAdapter() {
-//   async function getTimeCardReport() {
-//     let conn;
-//     try {
-//       conn = await pool.getConnection();
-//       let rows = await conn.query(`SELECT t.* from T_USR t
+var fillSimpleExcell = (rows) => {
+  //const excell = new Excell();
+  Excell.fillDataForSimpleSchedule(rows);
+};
 
-//       `);
 
-//       return rows;
-//       // rows: [ {val: 1}, meta: ... ]
 
-//       // const res = await conn.query("INSERT INTO myTable value (?, ?)", [
-//       //   1,
-//       //   "mariadb",
-//       // ]);
-//       // res: { affectedRows: 1, insertId: 1, warningStatus: 0 }
-//     } catch (err) {
-//       throw err;
-//     } finally {
-//       if (conn) conn.release(); //release to pool
-//     }
-//   }
-
-//   async function search(table, fields, filters) {}
-
-//   return {
-//     getTimeCardReport: getTimeCardReport,
-//   };
-
-//   const a = pool
-//     .getConnection()
-//     .then((conn) => {
-//       conn
-//         .query("SELECT * from viewtimecardreportdetail")
-//         .then((rows) => {
-//           console.log(rows);
-//           // rows: [ {val: 1}, meta: ... ]
-//           return rows;
-//         })
-//         .then((res) => {
-//           // res: { affectedRows: 1, insertId: 1, warningStatus: 0 }
-//           conn.release(); // release to pool
-//           return res;
-//         })
-//         .catch((err) => {
-//           conn.release(); // release to pool
-//         });
-//     })
-//     .catch((err) => {
-//       //not connected
-//     });
-
-//   return a;
-// }
-
-export default { getTimeCardReport, fillExcell };
+export default { getTimeCardReport, fillExcell, getTimeCardReportForSimpleShchedule , fillSimpleExcell};

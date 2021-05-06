@@ -15,8 +15,8 @@ function MariaDBAdapter() {
     let conn;
     try {
       conn = await pool.getConnection();
-      let rows = await conn.query(`SELECT u.idx_name as name,t.* from timecard t
-        inner join User u on u.user_id=t.user_id
+      let rows = await conn.query(`SELECT t.* from T_USR t
+        
       `);
 
       rows = rows.map((row) => {

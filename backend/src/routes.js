@@ -1,10 +1,12 @@
-var Router = require("express").Router();
-var GroupRepositor = require("./repository/groupRepository");
+var routes = require("express").Router();
+//var GroupRepositor = require("./repository/groupRepository");
 
-const routes = new Router();
+// routes.get("/api/groups/", async (req, res) => {
+//   const group = new GroupRepositor();
+//   sendJsonResult(res, await group.getAll());
+// });
 
-routes.get("/api/groups/", async (req, res) => {
-  const group = new GroupRepositor();
+routes.get("/attendance/reports", async (req, res) => {
   sendJsonResult(res, await group.getAll());
 });
 

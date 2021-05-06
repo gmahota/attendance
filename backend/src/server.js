@@ -1,6 +1,9 @@
 var express = require("express");
 var dotenv = require("dotenv").config();
 var app = express();
+var routes = require("./routes");
+
+app.use("/api", routes);
 
 var MariaDBAdapter = require("./database/connection");
 

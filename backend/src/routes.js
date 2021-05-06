@@ -38,9 +38,20 @@ routes.get("/", async function (req, res) {
 
 routes.get("/api/reports/individuals", async (req, res) => {
   const items = await timeCardReport.getTimeCardReport();
-  timeCardReport.fillExcell(items);
+ await timeCardReport.fillExcell(items);
   //sendJsonResult(res, items);
  var file= path.join('./content/template1.xlsx');  
+ console.log(file);
+        res.download(file);
+        
+
+});
+
+routes.get("/api/reports/simplerep", async (req, res) => {
+  const items = await timeCardReport.getTimeCardReportForSimpleShchedule();
+ await timeCardReport.fillSimpleExcell(items);
+  //sendJsonResult(res, items);
+ var file= path.join('./content/template2.xlsx');  
  console.log(file);
         res.download(file);
         

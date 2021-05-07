@@ -19,7 +19,7 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
+          <a href="/reports" className={styles.card}>
             <h3>Report Creator &rarr;</h3>
             <p>Biostar Report Generator</p>
           </a>

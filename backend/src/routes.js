@@ -1,10 +1,11 @@
 import { Router } from "express";
 
 import timeCardReport from "./models/timeCardRecord.js";
+import timeCardReportDetail from "./models/timeCardReportDetail.js";
 import employees from "./models/employees.js";
 import departments from "./models/departments.js";
 import shifts from "./models/shifts.js";
-import path from 'path';
+import path from "path";
 
 const routes = Router();
 
@@ -36,26 +37,28 @@ routes.get("/", async function (req, res) {
   res.send("WellCome!");
 });
 
+routes.get("/api/timecards/detail", async (req, res) => {
+  const items = await timeCardReportDetail.getTimeCardReportDetail();
+
+  sendJsonResult(res, items);
+});
+
 routes.get("/api/reports/individuals", async (req, res) => {
   const items = await timeCardReport.getTimeCardReport();
- await timeCardReport.fillExcell(items);
+  await timeCardReport.fillExcell(items);
   //sendJsonResult(res, items);
- var file= path.join('./content/template1.xlsx');  
- console.log(file);
-        res.download(file);
-        
-
+  var file = path.join("./content/template1.xlsx");
+  console.log(file);
+  res.download(file);
 });
 
 routes.get("/api/reports/simplerep", async (req, res) => {
   const items = await timeCardReport.getTimeCardReportForSimpleShchedule();
- await timeCardReport.fillSimpleExcell(items);
+  await timeCardReport.fillSimpleExcell(items);
   //sendJsonResult(res, items);
- var file= path.join('./content/template2.xlsx');  
- console.log(file);
-        res.download(file);
-        
-
+  var file = path.join("./content/template2.xlsx");
+  console.log(file);
+  res.download(file);
 });
 
 routes.get("/api/reports/employees", async (req, res) => {

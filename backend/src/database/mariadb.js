@@ -3,7 +3,7 @@ import mariadb from "mariadb";
 const getConnection = async () => {
   var pool = mariadb.createPool({
     host: process.env.MariaBd_HOST,
-    database: process.env.MariaDb_DATABASE2,
+    database: process.env.MariaDb_DATABASE,
     user: process.env.MariaDb_USERNAME,
     password: process.env.MariaDb_PASSWORD,
     connectionLimit: 5,

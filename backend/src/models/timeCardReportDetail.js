@@ -356,23 +356,24 @@ var timerecords = [
 var getTimeCardReportDetail = async () => {
   let conn;
   try {
-    let rows = timerecords;
+    // let rows = timerecords;
 
-    rows = rows.map((row) => {
-      return {
-        Date: row.datetime,
-        UserName: row["user.idx_name"],
-      };
-    });
+    // rows = rows.map((row) => {
+    //   return {
+    //     Date: row.datetime,
+    //     UserName: row["user.idx_name"],
+    //   };
+    // });
 
-    console.log(rows);
-
-    return rows;
-
-    // conn = await mariadb.getConnection();
-    // let rows = await conn.query(`SELECT t.* from viewtimecardreport t`);
+    // console.log(rows);
 
     // return rows;
+
+    conn = await mariadb.getConnection();
+    let rows = await conn.query(`select * from View_TimeCard;`);
+
+    
+    return rows;
 
     // rows = rows.map((row) => {
     //   return {

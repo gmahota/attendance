@@ -52,6 +52,11 @@ routes.get("/api/reports/individuals", async (req, res) => {
   res.download(file);
 });
 
+routes.get("/api/search/:table", async (req, res) => {
+  const items = await timeCardReportDetail.mysqlQuery(req.params.table);
+  sendJsonResult(res, items);
+});
+
 routes.get("/api/reports/simplerep", async (req, res) => {
   const items = await timeCardReport.getTimeCardReportForSimpleShchedule();
   await timeCardReport.fillSimpleExcell(items);

@@ -353,6 +353,20 @@ var timerecords = [
   },
 ];
 
+var mysqlQuery = async (table) => {
+  let conn;
+  try {
+    conn = await mariadb.getConnection();
+    let rows = await conn.query(`select * from ${table} where usrid = 2;`);
+
+    return rows;
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.release(); //release to pool
+  }
+};
+
 var getTimeCardReportDetail = async () => {
   let conn;
   try {
@@ -372,7 +386,6 @@ var getTimeCardReportDetail = async () => {
     conn = await mariadb.getConnection();
     let rows = await conn.query(`select * from View_TimeCard;`);
 
-    
     return rows;
 
     // rows = rows.map((row) => {
@@ -405,4 +418,5 @@ var getTimeCardReportDetail = async () => {
 
 export default {
   getTimeCardReportDetail,
+  mysqlQuery,
 };

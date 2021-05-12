@@ -14,7 +14,6 @@ const findById = async function findById(id: string): Promise<PunchLog> {
 
   const item: PunchLog = await PunchLogRepository.findOneOrFail(
     { 
-      relations:['items'],
       where: { id: id }
     }    
   );

@@ -13,4 +13,7 @@ export default class WorkSchedule {
 
     @Column()
     extraTime: number
+
+    @Column()
+    gracePeriod:number
 }

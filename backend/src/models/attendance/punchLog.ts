@@ -6,6 +6,9 @@ export default class PunchLog {
   id: number;
 
   @Column({length: 50, nullable:false })  
+  code?:string;
+
+  @Column({length: 50, nullable:false })  
   userId?: string
 
   @Column({length: 50, nullable:false })  

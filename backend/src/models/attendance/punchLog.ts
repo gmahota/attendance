@@ -22,10 +22,10 @@ export default class PunchLog {
   date: Date
   
   @Column({ length: 20, nullable: false })
-  device: string
+  device?: string
 
   @Column({ length: 20, nullable: false })
-  deviceId: string
+  deviceId?: string
   
   @Column({ length: 20, nullable: false })
   schedulerId: string

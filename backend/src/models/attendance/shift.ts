@@ -19,4 +19,7 @@ export default class shift {
 
     @Column()
     timeOut: number
+
+    @Column()
+    gracePeriod: number
 }

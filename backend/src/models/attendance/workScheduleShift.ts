@@ -1,7 +1,7 @@
 import { Entity, Column,PrimaryColumn, PrimaryGeneratedColumn, ManyToOne, OneToOne, JoinColumn, OneToMany } from "typeorm";
 
 @Entity("workSchedule")
-export default class WorkSchedule {
+export default class workScheduleShift {
     @PrimaryColumn()
     id: string;
 

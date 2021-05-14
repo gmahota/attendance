@@ -29,7 +29,7 @@ const findAll = async function findAll(): Promise<PunchDailyCard[]> {
     order: {
       date: "ASC"
     },
-    relations: ["details"]
+    relations: ["details","details.punchLogs"]
   })
 
   return PunchDailyCards;

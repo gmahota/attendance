@@ -10,8 +10,7 @@ const getAll = () =>
 
 const create = (PunchLog:PunchLog) =>
   PunchLogRepository.create(PunchLog)
-
-
+  
 export default {
   getAll,
   getById,

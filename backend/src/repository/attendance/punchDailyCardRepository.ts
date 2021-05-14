@@ -28,7 +28,8 @@ const findAll = async function findAll(): Promise<PunchDailyCard[]> {
   const PunchDailyCards: PunchDailyCard[] = await PunchDailyCardRepository.find({
     order: {
       date: "ASC"
-    }
+    },
+    relations: ["details"]
   })
 
   return PunchDailyCards;

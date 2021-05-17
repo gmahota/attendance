@@ -1,9 +1,13 @@
 import { Request, Response } from "express";
 import PunchLogService from "../../services/attendance/punchLog";
 import PunchLog from "../../models/attendance/punchLog";
+import ExcelPunchLog from "../../services/attendance/punchLogExcel";
 
 export const get_all_PunchLogs = async (request: Request, response: Response) => {
   const PunchLogs = await PunchLogService.getAll();
+
+  ExcelPunchLog.fillPunchLog(PunchLogs);
+
   return response.status(200).json(PunchLogs);
 };
 

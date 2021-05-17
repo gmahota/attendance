@@ -1,4 +1,7 @@
 import XlsxPopulate from "xlsx-populate";
+import path from "path";
+import appRoot from "app-root-path"
+
 
 function fillDataForSimpleSchedule(items) {
   console.log("Entramos no fillDataForSimpleSchedule");
@@ -343,7 +346,34 @@ function fillData(items) {
   });
 }
 
+function fillPunchLog(items)
+{
+  XlsxPopulate.fromBlankAsync().then((workbook) => {
+    // Modify the workbook.
+    let row = 3;
+
+    workbook.sheet("Sheet1").range("E1:I1").merged(true).style("border", true);
+
+    workbook.sheet("Sheet1").cell(`B2`).value("Teste do Excel").style("border", true);
+
+    items.forEach((item) => {
+      workbook.sheet("Sheet1").cell(`A${row}`).value(item.deviceId).style({
+        leftBorder: true,
+        topBorder: true,
+        rightBorder: true,
+        bottomBorder: true,
+      });
+
+      row++;
+    });
+
+    // Write to file.
+    return workbook.toFileAsync(appRoot + '/content/punchlog.xlsx'); //(path.  join("../../../../api-biostar/content/punchlog.xlsx"));
+  });
+}
+
 export default {
   fillData,
   fillDataForSimpleSchedule,
+  fillPunchLog
 };

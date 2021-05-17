@@ -1,4 +1,5 @@
 import { Entity, Column,PrimaryColumn, PrimaryGeneratedColumn, ManyToOne, OneToOne, JoinColumn, OneToMany } from "typeorm";
+import WorkSchedule from "./workSchedule";
 
 @Entity("shift")
 export default class shift {
@@ -22,4 +23,10 @@ export default class shift {
 
     @Column()
     gracePeriod: number
+
+    @Column()
+    dayOfWeek: number
+
+    @ManyToOne(() => WorkSchedule, (item) => item.id)
+    scheduleId?: WorkSchedule;
 }

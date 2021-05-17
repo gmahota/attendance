@@ -15,6 +15,8 @@ import {
   Selects
 } from '../forms/selects'
 
+import Datepicker from '../datepicker'
+
 
 const FilterReport = ({ message = null }) => {
   const [name, setName] = useState("General")
@@ -30,29 +32,6 @@ const FilterReport = ({ message = null }) => {
     setType(value)
     setName(value)
   }
-
-  let items = [
-    {
-      label: 'User Group',
-      name: 'userGroup',
-      type: 'select',
-      placeholder: 'Group User',
-      options: [{ key: "All", value: "All", label: "All" },
-      { key: "G001", value: "G001", label: "Group 1" },
-      { key: "G002", value: "G002", label: "Group 2" },
-      { key: "G003", value: "G003", label: "Group 3" },]
-    },
-    {
-      label: 'User',
-      name: 'user',
-      type: 'select',
-      options: [{ key: "All", value: "All", label: "All" },
-      { key: "F001", value: "F001", label: "Employee 1" },
-      { key: "F002", value: "F002", label: "Employee 2" },
-      { key: "F003", value: "F003", label: "Employee 3" },],
-      placeholder: 'Users'
-    }
-  ]
 
   let itemsReport = {
     label: 'Report Type',
@@ -93,19 +72,29 @@ const FilterReport = ({ message = null }) => {
     <>
       <form
         className="form flex flex-wrap w-full">
-        <div className="flex flex-col lg:flex-row lg:flex-wrap w-full lg:space-x-4">
-          <div className="w-full lg:w-1/4">
+        <div className="w-full">
+          <div className="w-full lg:w-1/2">
             <TextInput label='Name' value={name} placeholder='Enter you name' onTextChange={handlerName} />
           </div>
-          <div className="w-full lg:w-1/4">
+          <div className="w-full lg:w-1/2">
             <Radios item={itemsReport} selected={type} />
           </div>
-          <div className="w-full lg:w-1/4">
+          <div className="w-full lg:w-1/2">
             <Selects item={itemsGroup} selected={group} />
           </div>
-          <div className="w-full lg:w-1/4">
+          <div className="w-full lg:w-1/2">
             <Selects item={itemsUsers} selected={user} />
           </div>
+
+          <div className="flex flex-wrap w-full">
+            <div className="w-full lg:w-1/3">
+              <Datepicker title="Begin"/>
+            </div>
+
+            <div className="w-full lg:w-1/3">
+              <Datepicker title="End"/>
+            </div>
+      </div>
         </div>
       </form>
     </>

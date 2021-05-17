@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Datetime from 'react-datetime'
 
-const Datepicker = () => {
+const Datepicker = ({title}) => {
   const [value, setValue] = useState(null)
   const onChange = v => {
     console.log(v.format())
@@ -10,8 +10,7 @@ const Datepicker = () => {
   return (
     <div className="form-element">
       <span className="text-sm text-default">
-        <span>Date picker</span>
-        {value && <span>: {value.format('DD-MM-YYYY')}</span>}
+        <span>{title}</span>
       </span>
       <Datetime
         defaultValue={new Date()}

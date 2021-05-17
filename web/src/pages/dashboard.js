@@ -21,7 +21,7 @@ const Index = () => {
         {/*widget*/}
         <div className="w-full lg:w-1/4">
           <Widget1
-            title="Users"
+            title="Active"
             description={588}
             right={
               <FiUsers size={24} className="stroke-current text-gray-500" />
@@ -31,7 +31,7 @@ const Index = () => {
         {/*widget*/}
         <div className="w-full lg:w-1/4">
           <Widget1
-            title="Sessions"
+            title="On Time"
             description={(1, 435)}
             right={
               <FiActivity size={24} className="stroke-current text-gray-500" />
@@ -41,7 +41,7 @@ const Index = () => {
         {/*widget*/}
         <div className="w-full lg:w-1/4">
           <Widget1
-            title="Bounce rate"
+            title="Late"
             description="40.5%"
             right={
               <FiExternalLink
@@ -54,7 +54,7 @@ const Index = () => {
         {/*widget*/}
         <div className="w-full lg:w-1/4">
           <Widget1
-            title="Session duration"
+            title="Over Time"
             description="1m 24s"
             right={
               <FiClock size={24} className="stroke-current text-gray-500" />
@@ -98,51 +98,6 @@ const Index = () => {
         </Section>
       </div>
 
-      <div className="flex flex-col lg:flex-row w-full lg:space-x-2 space-y-2 lg:space-y-0 mb-2 lg:mb-4">
-        <div className="w-full lg:w-1/2">
-          <Section
-            title="Project status"
-            description={<span>This week</span>}
-            right={<Dropdown1 />}>
-            <div className="flex flex-row w-full">
-              <List />
-            </div>
-          </Section>
-        </div>
-        <div className="w-full lg:w-1/2">
-          <Section
-            title="Sales"
-            description={<span>This month</span>}
-            right={<Dropdown1 />}>
-            <div className="flex flex-row w-full">
-              <Line1 />
-            </div>
-          </Section>
-        </div>
-      </div>
-
-      <div className="flex flex-col lg:flex-row w-full lg:space-x-2 space-y-2 lg:space-y-0 mb-2 lg:mb-4">
-        <div className="w-full lg:w-1/3">
-          <Section
-            title="Activities"
-            description={<span>Today</span>}
-            right={<Dropdown1 />}>
-            <div className="flex flex-row w-full">
-              <Timeline1 />
-            </div>
-          </Section>
-        </div>
-        <div className="w-full lg:w-2/3">
-          <Section
-            title="To do"
-            description={<span>In progress</span>}
-            right={<Dropdown1 />}>
-            <div className="flex flex-row w-full">
-              <Tasks />
-            </div>
-          </Section>
-        </div>
-      </div>
     </>
   )
 }

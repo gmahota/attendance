@@ -1,18 +1,20 @@
 
-export const TextInput = ({inline = false}) => (
+export const TextInput = ({ label = "Label", value = "", inline = false, name = "name",
+  placeholder = "Enter something...", onTextChange }) => (
   <div className={`form-element ${inline ? 'form-element-inline' : ''}`}>
-    <div className="form-label">Label</div>
+    <div className="form-label">{label}</div>
     <input
-      name="name"
+      name={name}
+      value={value}
       type="text"
       className="form-input"
-      placeholder="Enter something..."
+      placeholder={placeholder}
+      onChange={event => onTextChange(event.target.value)}
     />
-    <div className="form-hint">This is a hint</div>
   </div>
 )
 
-export const InvalidTextInput = ({inline = false}) => (
+export const InvalidTextInput = ({ inline = false }) => (
   <div className={`form-element ${inline ? 'form-element-inline' : ''}`}>
     <div className="form-label">First name</div>
     <input
@@ -25,7 +27,7 @@ export const InvalidTextInput = ({inline = false}) => (
   </div>
 )
 
-export const ValidTextInput = ({inline = false}) => (
+export const ValidTextInput = ({ inline = false }) => (
   <div className={`form-element ${inline ? 'form-element-inline' : ''}`}>
     <div className="form-label">First name</div>
     <input

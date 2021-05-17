@@ -1,5 +1,20 @@
+export const Selects = ({ inline = false, item, selected }) => (
+  <div className="form-element">
+    {item.label && <div className="form-label">{item.label}</div>}
+    <select
+      ref={item.ref}
+      name={item.name}
+      className="form-select">
+      {item.options.map((option, j) => (
+        <option key={j} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </select>
+  </div>
+)
 
-export const Select = ({inline = false}) => (
+export const Select = ({ inline = false }) => (
   <div className={`form-element ${inline ? 'form-element-inline' : ''}`}>
     <div className="form-label">Label</div>
     <select className="form-select">
@@ -12,7 +27,7 @@ export const Select = ({inline = false}) => (
   </div>
 )
 
-export const InvalidSelect = ({inline = false}) => (
+export const InvalidSelect = ({ inline = false }) => (
   <div className={`form-element ${inline ? 'form-element-inline' : ''}`}>
     <div className="form-label">First name</div>
     <select className="form-select form-select-invalid">
@@ -25,7 +40,7 @@ export const InvalidSelect = ({inline = false}) => (
   </div>
 )
 
-export const ValidSelect = ({inline = false}) => (
+export const ValidSelect = ({ inline = false }) => (
   <div className={`form-element ${inline ? 'form-element-inline' : ''}`}>
     <div className="form-label">First name</div>
     <select className="form-select form-select-valid">

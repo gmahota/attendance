@@ -1,5 +1,27 @@
+export const Radios = ({item,selected}) => (
+  <div className="form-element">
+    {item.label && <div className="form-label">{item.label}</div>}
+    <div className="flex items-center justify-start space-x-2">
+      {item.options?.map((option, j) => (
+        <label className="flex items-center justify-start space-x-2">
+          <input
+            type="radio"
+            value={option.value}
+            name={item.name}
+            checked={option.value === selected}
+            onChange={event => item.onValueChange(event.target.value)}
+            className="form-radio h-4 w-4"
+          />
+          <span>
+            {option.label}
+          </span>
+        </label>
+      ))}
+    </div>
+  </div>
+)
 
-export const Radio = ({inline = false}) => (
+export const Radio = ({ inline = false }) => (
   <div className={`form-element ${inline ? 'form-element-inline' : ''}`}>
     <div className="form-label">Label</div>
     <div className="flex items-center justify-start space-x-2">
@@ -26,7 +48,7 @@ export const Radio = ({inline = false}) => (
   </div>
 )
 
-export const InvalidRadio = ({inline = false}) => (
+export const InvalidRadio = ({ inline = false }) => (
   <div className={`form-element ${inline ? 'form-element-inline' : ''}`}>
     <div className="form-label">First name</div>
 
@@ -55,7 +77,7 @@ export const InvalidRadio = ({inline = false}) => (
   </div>
 )
 
-export const ValidRadio = ({inline = false}) => (
+export const ValidRadio = ({ inline = false }) => (
   <div className={`form-element ${inline ? 'form-element-inline' : ''}`}>
     <div className="form-label">First name</div>
     <div className="flex items-center justify-start space-x-2">

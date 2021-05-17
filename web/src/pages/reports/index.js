@@ -3,6 +3,9 @@ import styles from "../../styles/Home.module.css";
 import { Menu, Dialog, Transition } from "@headlessui/react";
 import { ExclamationIcon } from "@heroicons/react/outline";
 import { DocumentReportIcon, ChevronDownIcon } from "@heroicons/react/solid";
+import SectionTitle from '../../components/section-title'
+import Widget from '../../components/widget'
+import FilterReport from '../../components/attendance-reports/filter-report'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -214,6 +217,17 @@ export default function ReportIndividual() {
   const [listUsers, setListUsers] = useState(listUsersOptions);
   return (
     <>
+    <SectionTitle title="Report's" subtitle="Attendance Repots" />
+
+    <Widget
+      title="Filter"
+      description={<span>Filter Conditions</span>}>
+      <div className="w-full flex">
+        <div className="w-full lg:w-1/2">
+          <FilterReport/>
+        </div>
+      </div>
+    </Widget>
       <main className={styles.main}>
         <div className={styles.container}>
           <h1 className={styles.title}>Gerar Relatorios</h1>

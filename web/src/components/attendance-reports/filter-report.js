@@ -16,7 +16,7 @@ import {
 } from '../forms/selects'
 
 import Datepicker from '../datepicker'
-
+import {FiSearch} from "react-icons/fi"
 
 const FilterReport = ({ message = null }) => {
   const [name, setName] = useState("General")
@@ -33,6 +33,25 @@ const FilterReport = ({ message = null }) => {
     setName(value)
   }
 
+  function handleGroupChange(value) {
+    setGroup(value)
+  }
+
+  function handleUserChange(value) {
+    setUser(value)
+  }
+
+  function handlerSearch(){
+    let data = {
+      name,
+      type,
+      group,
+      user
+    }
+
+    console.log(data)
+  }
+
   let itemsReport = {
     label: 'Report Type',
     name: 'type',
@@ -40,8 +59,7 @@ const FilterReport = ({ message = null }) => {
     placeholder: 'Report Type',
     options: [
       { value: "General", name: "General", label: "General" },
-      { value: "Individual", name: "Individual", label: "Individual" },
-      { value: "Simple", name: "Simple", label: "Simple" },
+      { value: "Individual", name: "Individual", label: "Individual" }
     ],
     onValueChange: handleReportType
   }
@@ -54,7 +72,8 @@ const FilterReport = ({ message = null }) => {
     options: [{ key: "All", value: "All", label: "All" },
     { key: "G001", value: "G001", label: "Group 1" },
     { key: "G002", value: "G002", label: "Group 2" },
-    { key: "G003", value: "G003", label: "Group 3" },]
+    { key: "G003", value: "G003", label: "Group 3" }],
+    onValueChange: handleReportType
   };
 
   let itemsUsers = {
@@ -64,7 +83,7 @@ const FilterReport = ({ message = null }) => {
     options: [{ key: "All", value: "All", label: "All" },
     { key: "F001", value: "F001", label: "Employee 1" },
     { key: "F002", value: "F002", label: "Employee 2" },
-    { key: "F003", value: "F003", label: "Employee 3" },],
+    { key: "F003", value: "F003", label: "Employee 3" }],
     placeholder: 'Users'
   };
 
@@ -88,13 +107,19 @@ const FilterReport = ({ message = null }) => {
 
           <div className="flex flex-wrap w-full">
             <div className="w-full lg:w-1/3">
-              <Datepicker title="Begin"/>
+              <Datepicker title="Begin"  />
             </div>
 
             <div className="w-full lg:w-1/3">
-              <Datepicker title="End"/>
+              <Datepicker title="End" />
             </div>
-      </div>
+          </div>
+          <button
+            className="btn btn-default bg-blue-500 hover:bg-blue-600 text-white btn-rounded"
+            onClick={handlerSearch}
+          >
+            <FiSearch className="stroke-current"/>
+          </button>
         </div>
       </form>
     </>

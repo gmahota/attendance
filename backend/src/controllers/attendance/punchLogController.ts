@@ -6,7 +6,7 @@ import ExcelPunchLog from "../../services/attendance/punchLogExcel";
 export const get_all_PunchLogs = async (request: Request, response: Response) => {
   const PunchLogs = await PunchLogService.getAll();
 
-  ExcelPunchLog.fillPunchLog(PunchLogs);
+  ExcelPunchLog.fillData(PunchLogs); //fillPunchLog(PunchLogs);
 
   return response.status(200).json(PunchLogs);
 };

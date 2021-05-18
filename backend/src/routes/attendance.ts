@@ -9,7 +9,7 @@ import {
 import {
   get_all_PunchDailyCards,
   get_PunchDailyCard,
-  create_PunchDailyCard,
+  get_Report
 } from "../controllers/attendance/punchDailyCardController";
 
 const attendanceRouter = Router();
@@ -21,6 +21,6 @@ attendanceRouter
 
 attendanceRouter.get("/punchDailyCards", get_all_PunchDailyCards)
   .get("/punchDailyCard/:id", get_PunchDailyCard)
-  .post("/punchDailyCard/", create_PunchDailyCard);
+  .get("/punchDailyCards/report", get_Report);
 
 export default attendanceRouter;

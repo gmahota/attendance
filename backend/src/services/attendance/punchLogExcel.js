@@ -1,15 +1,10 @@
 import XlsxPopulate from "xlsx-populate";
-import path from "path";
 import appRoot from "app-root-path"
 
 function fillPunchDaily(items) {
   XlsxPopulate.fromBlankAsync().then((workbook) => {
     // Modify the workbook.
     let row = 3;
-
-    // workbook.sheet("Sheet1").range("E1:I1").merged(true).style("border", true);
-    // workbook.sheet("Sheet1").range("J1:L1").merged(true).style("border", true);
-    // workbook.sheet("Sheet1").range("M1:O1").merged(true).style("border", true);
 
     workbook
       .sheet("Sheet1")
@@ -155,60 +150,6 @@ workbook
         .cell(`F${row}`)
         .value(atraso)
         .style("border", true);
-        
-      // workbook
-      //   .sheet("Sheet1")
-      //   .cell(`F${row}`)
-      //   .value(item.firstTime?.clockOut)
-      //   .style("border", true);
-      // workbook
-      //   .sheet("Sheet1")
-      //   .cell(`G${row}`)
-      //   .value(item.firstTime?.clockOutDefault)
-      //   .style("border", true);
-
-      // workbook
-      //   .sheet("Sheet1")
-      //   .cell(`H${row}`)
-      //   .value(item.secondTime?.clockInDefault)
-      //   .style("border", true);
-      // workbook
-      //   .sheet("Sheet1")
-      //   .cell(`I${row}`)
-      //   .value(item.secondTime?.clockIn)
-      //   .style("border", true);
-      // workbook
-      //   .sheet("Sheet1")
-      //   .cell(`J${row}`)
-      //   .value(item.secondTime?.clockOut)
-      //   .style("border", true);
-      // workbook
-      //   .sheet("Sheet1")
-      //   .cell(`K${row}`)
-      //   .value(item.secondTime?.clockOutDefault)
-      //   .style("border", true);
-
-      // workbook
-      //   .sheet("Sheet1")
-      //   .cell(`L${row}`)
-      //   .value(item.secondTimeOut?.clockInDefault)
-      //   .style("border", true);
-      // workbook
-      //   .sheet("Sheet1")
-      //   .cell(`M${row}`)
-      //   .value(item.secondOut?.clockIn)
-      //   .style("border", true);
-      // workbook
-      //   .sheet("Sheet1")
-      //   .cell(`N${row}`)
-      //   .value(item.secondTimeOut?.clockOut)
-      //   .style("border", true);
-      // workbook
-      //   .sheet("Sheet1")
-      //   .cell(`O${row}`)
-      //   .value(item.secondTimeOut?.clockOutDefault)
-      //   .style("border", true);
-      // row++;
     });
 
     // Write to file.

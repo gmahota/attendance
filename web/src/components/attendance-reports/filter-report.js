@@ -118,7 +118,7 @@ const FilterReport = ({ message = null }) => {
             className="btn btn-default bg-blue-500 hover:bg-blue-600 text-white btn-rounded"
             onClick={handlerSearch}
           >
-            <FiSearch className="stroke-current"/>
+            <FiSearch className="stroke-current"/> Search
           </button>
         </div>
       </form>

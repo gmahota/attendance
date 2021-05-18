@@ -1,54 +1,60 @@
 
 import PunchDailyCard from "../../models/attendance/punchDailyCard";
-import { getRepository,getManager } from "typeorm";
+import { getRepository,getManager,Between } from "typeorm";
+import { FindConditions } from "typeorm/find-options/FindConditions";
 
-interface Key {
-  id?: any;
+interface Filter {
+  group?: string;
+  user?: string;
+  dateBegin?: Date;
+  dateEnd?: Date;
+  date?:Date;
 }
 
-interface Key {
-  id?: any;
-}
-
-const findById = async function findById(id: string): Promise<PunchDailyCard> {
+const findByDate = async function findByDate(date: Date): Promise<PunchDailyCard> {
   const PunchDailyCardRepository = getRepository(PunchDailyCard);
 
   const item: PunchDailyCard = await PunchDailyCardRepository.findOneOrFail(
     { 
-      where: { id: id }
+      where: { date: Date }
     }    
   );
 
   return item;
 };
 
-const findAll = async function findAll(): Promise<PunchDailyCard[]> {
+const findAll = async function findAll(filter:Filter): Promise<PunchDailyCard[]> {
   const entityManager = getManager();
 
+  let condations:FindConditions<PunchDailyCard>[] = []
+
+  if(filter?.user) {
+    condations.push({userid:filter.user})
+  }
+
+  if(filter?.date) {
+    condations.push({date:filter.date})
+  }
+
+  if(filter?.dateBegin && filter?.dateEnd) {
+    condations.push({date:Between(filter?.dateBegin,filter?.dateEnd)})
+  }
+
+  console.log(filter)
+  console.log(condations)
+
   const items: PunchDailyCard[] = await entityManager.find(PunchDailyCard,{
+    where:condations,
     order: {
-      data: "ASC"
+      date: "ASC"
     }
   })
 
+  
   return items;
 };
 
-
-const create = async function create(
-  item: PunchDailyCard,
-): Promise<PunchDailyCard> {
-  const PunchDailyCardRepository = getRepository(PunchDailyCard);
-
-  const data  = PunchDailyCardRepository.create(item);
-
-  await PunchDailyCardRepository.save(data);
-
-  return data;
-};
-
 export default {
-  create,
-  findById,
+  findByDate,
   findAll
 };

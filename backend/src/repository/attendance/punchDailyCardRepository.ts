@@ -1,6 +1,6 @@
 
 import PunchDailyCard from "../../models/attendance/punchDailyCard";
-import { getRepository } from "typeorm";
+import { getRepository,getManager } from "typeorm";
 
 interface Key {
   id?: any;
@@ -23,16 +23,15 @@ const findById = async function findById(id: string): Promise<PunchDailyCard> {
 };
 
 const findAll = async function findAll(): Promise<PunchDailyCard[]> {
-  const PunchDailyCardRepository = getRepository(PunchDailyCard);
+  const entityManager = getManager();
 
-  const PunchDailyCards: PunchDailyCard[] = await PunchDailyCardRepository.find({
+  const items: PunchDailyCard[] = await entityManager.find(PunchDailyCard,{
     order: {
-      date: "ASC"
-    },
-    relations: ["details","details.punchLogs"]
+      data: "ASC"
+    }
   })
 
-  return PunchDailyCards;
+  return items;
 };
 
 

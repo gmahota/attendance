@@ -1,6 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne, JoinColumn, OneToMany } from "typeorm";
-import PunchDailyCardDetails from "./punchDailyCardDetails";
-import WorkSchedule from "./workSchedule";
 
 @Entity("punchLog")
 export default class PunchLog {
@@ -54,12 +52,7 @@ export default class PunchLog {
 
   @Column({ length: 50, nullable: false })
   shiftDescription: string
-
-  
-      
+       
   @Column()
   json: string
-
-  @ManyToOne(() => PunchDailyCardDetails, (item) => item.punchLogs)
-  dailyCard?: PunchDailyCardDetails;
 }

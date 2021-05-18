@@ -1,34 +1,39 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne, JoinColumn, OneToMany } from "typeorm";
-import PunchDailyCardDetails from './punchDailyCardDetails';
+import { ViewEntity, ViewColumn } from "typeorm";
 
-@Entity("punchDailyCard")
+@ViewEntity({
+  expression: "SELECT * from view_PunchDaily"
+})
 export default class PunchDailyCard {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
-  @Column({length: 50, nullable:false })  
-  userId?: string
-
-  @Column({length: 50, nullable:false })  
-  userName?: string
+  @ViewColumn()
+  data?: string;
   
-  @Column({length: 50, nullable:false })  
-  userGroup?:string
-  
-  @Column()
-  date: Date
-  
-  @Column({ length: 20, nullable: false })
-  schedulerId: string
+  @ViewColumn()
+  userid: string;
 
-  @Column({ length: 50, nullable: false })
-  exception: string
-      
-  @Column()
-  json: string
+  @ViewColumn()
+  userName: string;
+  
+  @ViewColumn()
+  userGroup: string;
+  
+  @ViewColumn()
+  shiftid: string;
 
-  @OneToMany(()=> PunchDailyCardDetails, item => item.dailyCard,{
-        cascade:['insert','update']
-    })
-    details?: PunchDailyCardDetails[]
+  @ViewColumn()
+  description?: string;
+
+  @ViewColumn()
+  entrada?: number;
+
+  @ViewColumn()
+  entradashift?: number;
+
+  @ViewColumn()
+  saida?: number;
+
+  @ViewColumn()
+  saidashift?: number;
+
+  @ViewColumn()
+  shiftSupposedGracePerior?: number;
 }

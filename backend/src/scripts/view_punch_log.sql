@@ -28,4 +28,4 @@ select v.data, v.userid, v.userName,userGroup,v.shiftid, v.description, max(v.en
 			case when punchtype = 'Entrada' then v.tempoEmMinutos end entrada,
 			case when punchtype = 'Saida' then v.tempoEmMinutos end saida 
     FROM View_PunchCard as v) as v
-    group by v.data, v.userid,userGroup,v.shiftid;
+    group by v.data, v.userid,userGroup,v.shiftid;x

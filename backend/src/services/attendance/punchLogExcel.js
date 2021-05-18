@@ -2,7 +2,7 @@ import XlsxPopulate from "xlsx-populate";
 import path from "path";
 import appRoot from "app-root-path"
 
-function fillPunchDailyDetails(items) {
+function fillPunchDaily(items) {
   XlsxPopulate.fromBlankAsync().then((workbook) => {
     // Modify the workbook.
     let row = 3;
@@ -228,8 +228,10 @@ function fillPunchCard(items)
     workbook.sheet("Sheet1").cell(`B2`).value("Username").style("border", true);
     workbook.sheet("Sheet1").cell(`C2`).value("Usergroup").style("border", true);
     workbook.sheet("Sheet1").cell(`D2`).value("Device").style("border", true);
-    workbook.sheet("Sheet1").cell(`B2`).value("Username").style("border", true);
-    workbook.sheet("Sheet1").cell(`B2`).value("Username").style("border", true);
+    workbook.sheet("Sheet1").cell(`E2`).value("Schedule").style("border", true);
+    workbook.sheet("Sheet1").cell(`F2`).value("Punch Type").style("border", true);
+    workbook.sheet("Sheet1").cell(`G2`).value("Shift Time in").style("border", true);
+    workbook.sheet("Sheet1").cell(`H2`).value("Shift Time out").style("border", true);
 
     items.forEach((item) => {
       workbook.sheet("Sheet1").cell(`A${row}`).value(item.userName).style({
@@ -238,6 +240,15 @@ function fillPunchCard(items)
         rightBorder: true,
         bottomBorder: true,
       });
+
+      workbook.sheet("Sheet1").cell(`A${row}`).value(item.date).style("border", true);
+      workbook.sheet("Sheet1").cell(`B${row}`).value(item.userName).style("border", true);
+      workbook.sheet("Sheet1").cell(`C${row}`).value(item.userGroup).style("border", true);
+      workbook.sheet("Sheet1").cell(`D${row}`).value(item.deviceId).style("border", true);
+      workbook.sheet("Sheet1").cell(`E${row}`).value(item.userDefinedSchedulerName).style("border", true);
+      workbook.sheet("Sheet1").cell(`F${row}`).value(item.punchType).style("border", true);
+      workbook.sheet("Sheet1").cell(`G${row}`).value(item.timeIn).style("border", true);
+      workbook.sheet("Sheet1").cell(`H${row}`).value(item.timeOut).style("border", true);
 
       row++;
     });
@@ -248,7 +259,6 @@ function fillPunchCard(items)
 }
 
 export default {
-  fillPunchDailyDetails,
-  fillDataForSimpleSchedule,
-  fillPunchLog
+  fillPunchDaily,
+  fillPunchCard  
 };

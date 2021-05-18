@@ -253,7 +253,7 @@ function fillData(items) {
       .style("border", true);
 
     items.forEach((item) => {
-      workbook.sheet("Sheet1").cell(`A${row}`).value(item.Date).style({
+      workbook.sheet("Sheet1").cell(`A${row}`).value(item.date).style({
         leftBorder: true,
         topBorder: true,
         rightBorder: true,
@@ -262,15 +262,15 @@ function fillData(items) {
       workbook
         .sheet("Sheet1")
         .cell(`B${row}`)
-        .value(item.Name)
+        .value(item.userName)
         .style("border", true);
-      workbook.sheet("Sheet1").cell(`C${row}`).value(item.UserId).style({
+      workbook.sheet("Sheet1").cell(`C${row}`).value(item.userId).style({
         leftBorder: true,
         topBorder: true,
         rightBorder: true,
         bottomBorder: true,
       });
-      workbook.sheet("Sheet1").cell(`D${row}`).value(item.Shift).style({
+      workbook.sheet("Sheet1").cell(`D${row}`).value(item.description).style({
         leftBorder: true,
         topBorder: true,
         rightBorder: true,
@@ -279,70 +279,84 @@ function fillData(items) {
       workbook
         .sheet("Sheet1")
         .cell(`E${row}`)
-        .value(item.firstTime?.clockInDefault)
+        .value(item.entrada)
         .style("border", true);
       workbook
         .sheet("Sheet1")
         .cell(`F${row}`)
-        .value(item.firstTime?.clockIn)
+        .value(item.entradashift)
+        .style("border", true);
+
+        workbook
+        .sheet("Sheet1")
+        .cell(`E${row}`)
+        .value(item.saida)
         .style("border", true);
       workbook
         .sheet("Sheet1")
         .cell(`F${row}`)
-        .value(item.firstTime?.clockOut)
-        .style("border", true);
-      workbook
-        .sheet("Sheet1")
-        .cell(`G${row}`)
-        .value(item.firstTime?.clockOutDefault)
+        .value(item.saidashift)
         .style("border", true);
 
-      workbook
-        .sheet("Sheet1")
-        .cell(`H${row}`)
-        .value(item.secondTime?.clockInDefault)
-        .style("border", true);
-      workbook
-        .sheet("Sheet1")
-        .cell(`I${row}`)
-        .value(item.secondTime?.clockIn)
-        .style("border", true);
-      workbook
-        .sheet("Sheet1")
-        .cell(`J${row}`)
-        .value(item.secondTime?.clockOut)
-        .style("border", true);
-      workbook
-        .sheet("Sheet1")
-        .cell(`K${row}`)
-        .value(item.secondTime?.clockOutDefault)
-        .style("border", true);
+let atraso = item.saida - item.saidashift <0? 0: item.saida - item.saidashift;
 
-      workbook
-        .sheet("Sheet1")
-        .cell(`L${row}`)
-        .value(item.secondTimeOut?.clockInDefault)
-        .style("border", true);
-      workbook
-        .sheet("Sheet1")
-        .cell(`M${row}`)
-        .value(item.secondOut?.clockIn)
-        .style("border", true);
-      workbook
-        .sheet("Sheet1")
-        .cell(`N${row}`)
-        .value(item.secondTimeOut?.clockOut)
-        .style("border", true);
-      workbook
-        .sheet("Sheet1")
-        .cell(`O${row}`)
-        .value(item.secondTimeOut?.clockOutDefault)
-        .style("border", true);
-      row++;
+      // workbook
+      //   .sheet("Sheet1")
+      //   .cell(`F${row}`)
+      //   .value(item.firstTime?.clockOut)
+      //   .style("border", true);
+      // workbook
+      //   .sheet("Sheet1")
+      //   .cell(`G${row}`)
+      //   .value(item.firstTime?.clockOutDefault)
+      //   .style("border", true);
+
+      // workbook
+      //   .sheet("Sheet1")
+      //   .cell(`H${row}`)
+      //   .value(item.secondTime?.clockInDefault)
+      //   .style("border", true);
+      // workbook
+      //   .sheet("Sheet1")
+      //   .cell(`I${row}`)
+      //   .value(item.secondTime?.clockIn)
+      //   .style("border", true);
+      // workbook
+      //   .sheet("Sheet1")
+      //   .cell(`J${row}`)
+      //   .value(item.secondTime?.clockOut)
+      //   .style("border", true);
+      // workbook
+      //   .sheet("Sheet1")
+      //   .cell(`K${row}`)
+      //   .value(item.secondTime?.clockOutDefault)
+      //   .style("border", true);
+
+      // workbook
+      //   .sheet("Sheet1")
+      //   .cell(`L${row}`)
+      //   .value(item.secondTimeOut?.clockInDefault)
+      //   .style("border", true);
+      // workbook
+      //   .sheet("Sheet1")
+      //   .cell(`M${row}`)
+      //   .value(item.secondOut?.clockIn)
+      //   .style("border", true);
+      // workbook
+      //   .sheet("Sheet1")
+      //   .cell(`N${row}`)
+      //   .value(item.secondTimeOut?.clockOut)
+      //   .style("border", true);
+      // workbook
+      //   .sheet("Sheet1")
+      //   .cell(`O${row}`)
+      //   .value(item.secondTimeOut?.clockOutDefault)
+      //   .style("border", true);
+      // row++;
     });
 
     // Write to file.
-    return workbook.toFileAsync("./content/template1.xlsx");
+    return workbook.toFileAsync(appRoot + '/content/punchlog.xlsx');
   });
 }
 
@@ -357,7 +371,7 @@ function fillPunchLog(items)
     workbook.sheet("Sheet1").cell(`B2`).value("Teste do Excel").style("border", true);
 
     items.forEach((item) => {
-      workbook.sheet("Sheet1").cell(`A${row}`).value(item.deviceId).style({
+      workbook.sheet("Sheet1").cell(`A${row}`).value(item.userName).style({
         leftBorder: true,
         topBorder: true,
         rightBorder: true,

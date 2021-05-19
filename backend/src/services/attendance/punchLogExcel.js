@@ -107,6 +107,8 @@ function fillPunchDaily(items) {
         topBorder: true,
         rightBorder: true,
         bottomBorder: true,
+        'dateFormat': 'yyyy-mm-dd hh:mm:ss'
+      
       });
       workbook
         .sheet("Sheet1")
@@ -130,23 +132,24 @@ function fillPunchDaily(items) {
         .sheet("Sheet1")
         .cell(`D${row}`)
         .value(item.entrada)
-        .style("border", true);
+        .style({"border": true, 'timeFormat': 'hh:mm:ss'});
       workbook
         .sheet("Sheet1")
         .cell(`E${row}`)
         .value(item.entradashift)
-        .style("border", true);
+        .style({"border": true, 'timeFormat': 'hh:mm:ss'});
+        // .style("border", true);
 
         workbook
         .sheet("Sheet1")
         .cell(`F${row}`)
         .value(item.saida)
-        .style("border", true);
+        .style({"border": true, 'timeFormat': 'hh:mm:ss'});
       workbook
         .sheet("Sheet1")
         .cell(`G${row}`)
         .value(item.saidashift)
-        .style("border", true);
+        .style({"border": true, 'timeFormat': 'hh:mm:ss'});
 
 
 
@@ -154,19 +157,19 @@ workbook
         .sheet("Sheet1")
         .cell(`H${row}`)
         .value(item.delayEntrance)
-        .style("border", true);
+        .style({"border": true, 'timeFormat': 'hh:mm:ss'});
     
     workbook
         .sheet("Sheet1")
         .cell(`I${row}`)
         .value(item.delayOut)
-        .style("border", true);
+        .style({"border": true, 'timeFormat': 'hh:mm:ss'});
     
          row++;
     });
 
     // Write to file.
-    return workbook.toFileAsync(appRoot + '/content/punchlog.xlsx');
+    return workbook.toFileAsync(appRoot + '/public/uploads/attendance/punchlog.xlsx');
   });
 }
 
@@ -208,7 +211,7 @@ function fillPunchCard(items)
     });
 
     // Write to file.
-    return workbook.toFileAsync(appRoot + '/content/punchlog.xlsx'); //(path.  join("../../../../api-biostar/content/punchlog.xlsx"));
+    return workbook.toFileAsync(appRoot + '/public/uploads/attendance/punchdaily.xlsx');
   });
 }
 

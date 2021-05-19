@@ -29,7 +29,7 @@ const findAll = async function findAll(filter:Filter): Promise<PunchDailyCard[]>
   let condations:FindConditions<PunchDailyCard>[] = []
 
   if(filter?.user) {
-    condations.push({userid:filter.user})
+    condations.push({userId:filter.user})
   }
 
   if(filter?.date) {
@@ -39,10 +39,7 @@ const findAll = async function findAll(filter:Filter): Promise<PunchDailyCard[]>
   if(filter?.dateBegin && filter?.dateEnd) {
     condations.push({date:Between(filter?.dateBegin,filter?.dateEnd)})
   }
-
-  console.log(filter)
-  console.log(condations)
-
+  
   const items: PunchDailyCard[] = await entityManager.find(PunchDailyCard,{
     where:condations,
     order: {

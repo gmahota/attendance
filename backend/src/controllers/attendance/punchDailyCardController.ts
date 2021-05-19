@@ -53,5 +53,7 @@ export const get_Report = async (request: Request, response: Response) => {
     dateEnd
   });
 
+  console.log(file);
+
   response.status(404).json({ msg: "not wert" });
 }

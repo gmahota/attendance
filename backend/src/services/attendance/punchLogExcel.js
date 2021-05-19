@@ -1,5 +1,5 @@
 import XlsxPopulate from "xlsx-populate";
-import appRoot from "app-root-path"
+import appRoot from "app-root-path";
 
 function fillPunchDaily(items) {
   XlsxPopulate.fromBlankAsync().then((workbook) => {
@@ -36,7 +36,7 @@ function fillPunchDaily(items) {
       .cell(`H2`)
       .value("Delay Entrance")
       .style("border", true);
-      workbook
+    workbook
       .sheet("Sheet1")
       .cell(`I2`)
       .value("Delay Out")
@@ -107,8 +107,7 @@ function fillPunchDaily(items) {
         topBorder: true,
         rightBorder: true,
         bottomBorder: true,
-        'dateFormat': 'yyyy-mm-dd hh:mm:ss'
-      
+        numberFormat: "yyyy-mm-dd hh:mm:ss",
       });
       workbook
         .sheet("Sheet1")
@@ -132,49 +131,48 @@ function fillPunchDaily(items) {
         .sheet("Sheet1")
         .cell(`D${row}`)
         .value(item.entrada)
-        .style({"border": true, 'timeFormat': 'hh:mm:ss'});
+        .style({ border: true, numberFormat: "hh:mm:ss" });
       workbook
         .sheet("Sheet1")
         .cell(`E${row}`)
         .value(item.entradashift)
-        .style({"border": true, 'timeFormat': 'hh:mm:ss'});
-        // .style("border", true);
+        .style({ border: true, numberFormat: "hh:mm:ss" });
+      // .style("border", true);
 
-        workbook
+      workbook
         .sheet("Sheet1")
         .cell(`F${row}`)
         .value(item.saida)
-        .style({"border": true, 'timeFormat': 'hh:mm:ss'});
+        .style({ border: true, numberFormat: "hh:mm:ss" });
       workbook
         .sheet("Sheet1")
         .cell(`G${row}`)
         .value(item.saidashift)
-        .style({"border": true, 'timeFormat': 'hh:mm:ss'});
+        .style({ border: true, numberFormat: "hh:mm:ss" });
 
-
-
-workbook
+      workbook
         .sheet("Sheet1")
         .cell(`H${row}`)
         .value(item.delayEntrance)
-        .style({"border": true, 'timeFormat': 'hh:mm:ss'});
-    
-    workbook
+        .style({ border: true, numberFormat: "hh:mm:ss" });
+
+      workbook
         .sheet("Sheet1")
         .cell(`I${row}`)
         .value(item.delayOut)
-        .style({"border": true, 'timeFormat': 'hh:mm:ss'});
-    
-         row++;
+        .style({ border: true, numberFormat: "hh:mm:ss" });
+
+      row++;
     });
 
     // Write to file.
-    return workbook.toFileAsync(appRoot + '/public/uploads/attendance/punchlog.xlsx');
+    return workbook.toFileAsync(
+      appRoot + "/public/uploads/attendance/punchlog.xlsx"
+    );
   });
 }
 
-function fillPunchCard(items)
-{
+function fillPunchCard(items) {
   XlsxPopulate.fromBlankAsync().then((workbook) => {
     // Modify the workbook.
     let row = 3;
@@ -183,12 +181,28 @@ function fillPunchCard(items)
 
     workbook.sheet("Sheet1").cell(`A2`).value("Date").style("border", true);
     workbook.sheet("Sheet1").cell(`B2`).value("Username").style("border", true);
-    workbook.sheet("Sheet1").cell(`C2`).value("Usergroup").style("border", true);
+    workbook
+      .sheet("Sheet1")
+      .cell(`C2`)
+      .value("Usergroup")
+      .style("border", true);
     workbook.sheet("Sheet1").cell(`D2`).value("Device").style("border", true);
     workbook.sheet("Sheet1").cell(`E2`).value("Schedule").style("border", true);
-    workbook.sheet("Sheet1").cell(`F2`).value("Punch Type").style("border", true);
-    workbook.sheet("Sheet1").cell(`G2`).value("Shift Time in").style("border", true);
-    workbook.sheet("Sheet1").cell(`H2`).value("Shift Time out").style("border", true);
+    workbook
+      .sheet("Sheet1")
+      .cell(`F2`)
+      .value("Punch Type")
+      .style("border", true);
+    workbook
+      .sheet("Sheet1")
+      .cell(`G2`)
+      .value("Shift Time in")
+      .style("border", true);
+    workbook
+      .sheet("Sheet1")
+      .cell(`H2`)
+      .value("Shift Time out")
+      .style("border", true);
 
     items.forEach((item) => {
       workbook.sheet("Sheet1").cell(`A${row}`).value(item.userName).style({
@@ -198,24 +212,58 @@ function fillPunchCard(items)
         bottomBorder: true,
       });
 
-      workbook.sheet("Sheet1").cell(`A${row}`).value(item.date).style("border", true);
-      workbook.sheet("Sheet1").cell(`B${row}`).value(item.userName).style("border", true);
-      workbook.sheet("Sheet1").cell(`C${row}`).value(item.userGroup).style("border", true);
-      workbook.sheet("Sheet1").cell(`D${row}`).value(item.deviceId).style("border", true);
-      workbook.sheet("Sheet1").cell(`E${row}`).value(item.userDefinedSchedulerName).style("border", true);
-      workbook.sheet("Sheet1").cell(`F${row}`).value(item.punchType).style("border", true);
-      workbook.sheet("Sheet1").cell(`G${row}`).value(item.timeIn).style("border", true);
-      workbook.sheet("Sheet1").cell(`H${row}`).value(item.timeOut).style("border", true);
+      workbook
+        .sheet("Sheet1")
+        .cell(`A${row}`)
+        .value(item.date)
+        .style("border", true);
+      workbook
+        .sheet("Sheet1")
+        .cell(`B${row}`)
+        .value(item.userName)
+        .style("border", true);
+      workbook
+        .sheet("Sheet1")
+        .cell(`C${row}`)
+        .value(item.userGroup)
+        .style("border", true);
+      workbook
+        .sheet("Sheet1")
+        .cell(`D${row}`)
+        .value(item.deviceId)
+        .style("border", true);
+      workbook
+        .sheet("Sheet1")
+        .cell(`E${row}`)
+        .value(item.userDefinedSchedulerName)
+        .style("border", true);
+      workbook
+        .sheet("Sheet1")
+        .cell(`F${row}`)
+        .value(item.punchType)
+        .style("border", true);
+      workbook
+        .sheet("Sheet1")
+        .cell(`G${row}`)
+        .value(item.timeIn)
+        .style("border", true);
+      workbook
+        .sheet("Sheet1")
+        .cell(`H${row}`)
+        .value(item.timeOut)
+        .style("border", true);
 
       row++;
     });
 
     // Write to file.
-    return workbook.toFileAsync(appRoot + '/public/uploads/attendance/punchdaily.xlsx');
+    return workbook.toFileAsync(
+      appRoot + "/public/uploads/attendance/punchdaily.xlsx"
+    );
   });
 }
 
 export default {
   fillPunchDaily,
-  fillPunchCard  
+  fillPunchCard,
 };

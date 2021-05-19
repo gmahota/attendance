@@ -12,7 +12,52 @@ import {
   get_Report
 } from "../controllers/attendance/punchDailyCardController";
 
+import {
+  get_all_Users,
+  get_User,
+  create_User
+} from "../controllers/attendance/userController";
+
+import {
+  get_all_UserGroups,
+  get_UserGroup,
+  create_UserGroup
+} from "../controllers/attendance/userGroupController"
+  ;
+
+  import {
+  get_all_Shifts,
+  get_Shift,
+  create_Shift
+} from "../controllers/attendance/shiftController";
+
+import {
+  get_all_WorkSchedules,
+  get_WorkSchedule,
+  create_WorkSchedule
+} from "../controllers/attendance/workScheduleController";
+
 const attendanceRouter = Router();
+
+attendanceRouter
+  .get("/users", get_all_Users)
+  .get("/user/:id", get_User)
+  .post("/user/", create_User);
+
+attendanceRouter
+  .get("/shifts", get_all_Shifts)
+  .get("/shift/:id", get_Shift)
+  .post("/shift/", create_Shift);
+
+attendanceRouter
+  .get("/workschedules", get_all_WorkSchedules)
+  .get("/workschedule/:id", get_WorkSchedule)
+  .post("/workschedule/", create_WorkSchedule);
+
+attendanceRouter
+  .get("/usergroups", get_all_UserGroups)
+  .get("/usergroup/:id", get_UserGroup)
+  .post("/usergroup/", create_UserGroup);
 
 attendanceRouter
   .get("/punchLogs", get_all_PunchLogs)

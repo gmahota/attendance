@@ -1,11 +1,16 @@
-import { ViewEntity, ViewColumn } from "typeorm";
+import { ViewEntity, ViewColumn ,PrimaryColumn} from "typeorm";
 
 @ViewEntity({
-  expression: "SELECT * from view_PunchDaily"
+  expression: `SELECT ROW_NUMBER() OVER(PARTITION BY userId) as id
+  , v.* FROM attendance_dev.view_PunchDaily v;`
 })
 export default class PunchDailyCard {
   @ViewColumn()
-  data?: string;
+  @PrimaryColumn()
+  id: number;
+
+  @ViewColumn()
+  date?: Date;
   
   @ViewColumn()
   userid: string;

@@ -13,32 +13,40 @@ export default class PunchDailyCard {
   date?: Date;
   
   @ViewColumn()
-  userid: string;
+  userId: string;
 
   @ViewColumn()
   userName: string;
   
   @ViewColumn()
-  userGroup: string;
+  userGroup?: string;
   
   @ViewColumn()
-  shiftid: string;
+  shiftId?: string;
 
   @ViewColumn()
   description?: string;
 
   @ViewColumn()
-  entrada?: number;
+  entrada?: Date;
 
   @ViewColumn()
-  entradashift?: number;
+  entradashift?: Date;
 
   @ViewColumn()
-  saida?: number;
+  saida?: Date;
 
   @ViewColumn()
-  saidashift?: number;
+  saidashift?: Date;
 
   @ViewColumn()
-  shiftSupposedGracePerior?: number;
+  shiftSupposedGracePerior?: Date;
+
+  @ViewColumn()
+  delayEntrance?: Date
+
+  @ViewColumn()
+  delayOut?: Date
+
+
 }

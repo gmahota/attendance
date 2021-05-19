@@ -18,23 +18,28 @@ function fillPunchDaily(items) {
 
     workbook
       .sheet("Sheet1")
-      .cell(`E1`)
+      .cell(`E2`)
       .value("Shift Check-in")
       .style("border", true);
     workbook
       .sheet("Sheet1")
-      .cell(`E2`)
+      .cell(`F2`)
       .value("Check-out")
       .style("border", true);
     workbook
       .sheet("Sheet1")
-      .cell(`F2`)
+      .cell(`G2`)
       .value("Shift Check-out")
       .style("border", true);
     workbook
       .sheet("Sheet1")
-      .cell(`G2`)
-      .value("Delay")
+      .cell(`H2`)
+      .value("Delay Entrance")
+      .style("border", true);
+      workbook
+      .sheet("Sheet1")
+      .cell(`I2`)
+      .value("Delay Out")
       .style("border", true);
 
     // workbook
@@ -108,38 +113,38 @@ function fillPunchDaily(items) {
         .cell(`B${row}`)
         .value(item.userName)
         .style("border", true);
-      workbook.sheet("Sheet1").cell(`C${row}`).value(item.userId).style({
+      // workbook.sheet("Sheet1").cell(`C${row}`).value(item.userId).style({
+      //   leftBorder: true,
+      //   topBorder: true,
+      //   rightBorder: true,
+      //   bottomBorder: true,
+      // });
+      workbook.sheet("Sheet1").cell(`C${row}`).value(item.description).style({
         leftBorder: true,
         topBorder: true,
         rightBorder: true,
         bottomBorder: true,
       });
-      workbook.sheet("Sheet1").cell(`D${row}`).value(item.description).style({
-        leftBorder: true,
-        topBorder: true,
-        rightBorder: true,
-        bottomBorder: true,
-      });
-      let atraso = item.saida - item.saidashift + item.shiftSupposedGracePerior <0? 0: item.saida+ item.shiftSupposedGracePerior - item.saidashift;
+      //let atraso = item.saida - item.saidashift + item.shiftSupposedGracePerior <0? 0: item.saida+ item.shiftSupposedGracePerior - item.saidashift;
       workbook
         .sheet("Sheet1")
-        .cell(`E${row}`)
+        .cell(`D${row}`)
         .value(item.entrada)
         .style("border", true);
       workbook
         .sheet("Sheet1")
-        .cell(`F${row}`)
+        .cell(`E${row}`)
         .value(item.entradashift)
         .style("border", true);
 
         workbook
         .sheet("Sheet1")
-        .cell(`E${row}`)
+        .cell(`F${row}`)
         .value(item.saida)
         .style("border", true);
       workbook
         .sheet("Sheet1")
-        .cell(`F${row}`)
+        .cell(`G${row}`)
         .value(item.saidashift)
         .style("border", true);
 
@@ -147,9 +152,17 @@ function fillPunchDaily(items) {
 
 workbook
         .sheet("Sheet1")
-        .cell(`F${row}`)
-        .value(atraso)
+        .cell(`H${row}`)
+        .value(item.delayEntrance)
         .style("border", true);
+    
+    workbook
+        .sheet("Sheet1")
+        .cell(`I${row}`)
+        .value(item.delayOut)
+        .style("border", true);
+    
+         row++;
     });
 
     // Write to file.

@@ -52,6 +52,7 @@ export default class PunchLog {
 
   @Column({ length: 50, nullable: false })
   shiftDescription: string
+
        
   @Column()
   json: string

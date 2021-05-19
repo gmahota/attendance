@@ -1,3 +1,4 @@
+import { Datetime } from 'react-datetime';
 import { Entity, Column,PrimaryColumn, PrimaryGeneratedColumn, ManyToOne, OneToOne, JoinColumn, OneToMany } from "typeorm";
 import WorkSchedule from "./workSchedule";
 
@@ -16,13 +17,13 @@ export default class shift {
     type: string
     
     @Column()
-    timeIn: number
+    timeIn: Date
 
     @Column()
-    timeOut: number
+    timeOut: Date
 
     @Column()
-    gracePeriod: number
+    gracePeriod: Date
 
     @Column()
     dayOfWeek: number

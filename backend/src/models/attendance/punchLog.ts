@@ -42,13 +42,13 @@ export default class PunchLog {
   punchType: string
 
   @Column()
-  shiftSupposedTimeIn: number
+  shiftSupposedTimeIn: Date
 
   @Column()
-  shiftSupposedTimeOut: number
+  shiftSupposedTimeOut: Date
 
   @Column()
-  shiftSupposedGracePerior: number
+  shiftSupposedGracePerior: Date
 
   @Column({ length: 50, nullable: false })
   shiftDescription: string

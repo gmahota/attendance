@@ -19,8 +19,9 @@ attendanceRouter
   .get("/punchLog/:id", get_PunchLog)
   .post("/punchLog/", create_PunchLog);
 
-attendanceRouter.get("/punchDailyCards", get_all_PunchDailyCards)
+attendanceRouter
+  .get("/punchDailyCards", get_all_PunchDailyCards)
   .get("/punchDailyCard/:id", get_PunchDailyCard)
-  .get("/punchDailyCards/report", get_Report);
+  .post("/punchDailyCards/report", get_Report);
 
 export default attendanceRouter;

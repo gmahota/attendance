@@ -2,7 +2,7 @@ import { ViewEntity, ViewColumn ,PrimaryColumn} from "typeorm";
 
 @ViewEntity({
   expression: `SELECT ROW_NUMBER() OVER(PARTITION BY userId) as id
-  , v.* FROM attendance_dev.view_PunchDaily v;`
+  , v.* FROM view_PunchDaily v;`
 })
 export default class PunchDailyCard {
   @ViewColumn()

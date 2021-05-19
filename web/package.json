@@ -1,6 +1,7 @@
 {
-  "name": "D-board",
-  "version": "1.4.0",
+  "name": "attendance",
+  "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -55,7 +56,6 @@
     "redux-thunk": "^2.3.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   },
-  "license": "ISC",
   "devDependencies": {
     "@tailwindcss/custom-forms": "^0.2.1",
     "@tailwindcss/forms": "^0.2.1",

@@ -1,17 +1,26 @@
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useRef, useState, useEffect } from "react";
+import Router, { useRouter } from "next/router";
 import styles from "../../styles/Home.module.css";
 import { Menu, Dialog, Transition } from "@headlessui/react";
 import { ExclamationIcon } from "@heroicons/react/outline";
 import { DocumentReportIcon, ChevronDownIcon } from "@heroicons/react/solid";
-import SectionTitle from '../../components/section-title'
-import Widget from '../../components/widget'
-import FilterReport from '../../components/attendance-reports/filter-report'
+import SectionTitle from "../../components/section-title";
+import Widget from "../../components/widget";
+import FilterReport from "../../components/attendance-reports/filter-report";
+import groupService from "../../services/userGroup";
+import userService from "../../services/user";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ReportIndividual() {
+export default function ReportIndividual({ allGroups }) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <p>Carregando...</p>;
+  }
+
   const handlerCreateReport = async () => {
     const res = await fetch(`http://localhost:5000/api/reports/individuals`)
       .then((response) => response.body)
@@ -213,21 +222,20 @@ export default function ReportIndividual() {
 
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("Relatório");
-  const [listGroups, setListGroups] = useState(listGroupsOptions);
+  const [listGroups, setListGroups] = useState(allGroups);
   const [listUsers, setListUsers] = useState(listUsersOptions);
+
   return (
     <>
-    <SectionTitle title="Report's" subtitle="Attendance Repots" />
+      <SectionTitle title="Report's" subtitle="Attendance Repots" />
 
-    <Widget
-      title="Filter"
-      description={<span>Filter Conditions</span>}>
-      <div className="w-full flex">
-        <div className="w-full lg:w-1/2">
-          <FilterReport/>
+      <Widget title="Filter" description={<span>Filter Conditions</span>}>
+        <div className="w-full flex">
+          <div className="w-full lg:w-1/2">
+            <FilterReport />
+          </div>
         </div>
-      </div>
-    </Widget>
+      </Widget>
       <main className={styles.main}>
         <div className={styles.container}>
           <h1 className={styles.title}>Gerar Relatorios</h1>
@@ -254,7 +262,7 @@ export default function ReportIndividual() {
           <DialogModal
             title={title}
             open={open}
-            listGroups={listGroups}
+            listGroups={allGroups}
             listUsers={listUsers}
           ></DialogModal>
         </div>
@@ -262,3 +270,15 @@ export default function ReportIndividual() {
     </>
   );
 }
+
+export const getStaticProps = async () => {
+  const allGroups = await groupService.get_Groups();
+  const allUsers = await userService.get_Users();
+
+  return {
+    props: {
+      allGroups,
+      allUsers,
+    },
+  };
+};

@@ -36,10 +36,12 @@ const getReport = async (filter: ReportFilter) => {
 
   switch (filter.type) {
     case "General":
-      return ExcelPunchLog.fillPunchDaily(items);
+      ExcelPunchLog.fillPunchDaily(items)
+      return "uploads/attendance/punchlog.xlsx" ;
       
     case "Individual":
-      return ExcelPunchLog.fillPunchCard(items); 
+      ExcelPunchLog.fillPunchCard(items)
+      return "ExcelPunchLog.fillPunchCard(items)"; 
   }
 
 }

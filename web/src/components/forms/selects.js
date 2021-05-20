@@ -1,10 +1,12 @@
-export const Selects = ({ inline = false, item, selected }) => (
+export const Selects = ({ inline = false, item, selected, onSelectChange }) => (
   <div className="form-element">
     {item.label && <div className="form-label">{item.label}</div>}
     <select
       ref={item.ref}
       name={item.name}
-      className="form-select">
+      className="form-select"
+      onChange={(event) => onSelectChange(event.target.value)}
+    >
       {item.options.map((option, j) => (
         <option key={j} value={option.value}>
           {option.label}
@@ -12,10 +14,10 @@ export const Selects = ({ inline = false, item, selected }) => (
       ))}
     </select>
   </div>
-)
+);
 
 export const Select = ({ inline = false }) => (
-  <div className={`form-element ${inline ? 'form-element-inline' : ''}`}>
+  <div className={`form-element ${inline ? "form-element-inline" : ""}`}>
     <div className="form-label">Label</div>
     <select className="form-select">
       <option>Option 1</option>
@@ -25,10 +27,10 @@ export const Select = ({ inline = false }) => (
     </select>
     <div className="form-hint">This is a hint</div>
   </div>
-)
+);
 
 export const InvalidSelect = ({ inline = false }) => (
-  <div className={`form-element ${inline ? 'form-element-inline' : ''}`}>
+  <div className={`form-element ${inline ? "form-element-inline" : ""}`}>
     <div className="form-label">First name</div>
     <select className="form-select form-select-invalid">
       <option>Option 1</option>
@@ -38,10 +40,10 @@ export const InvalidSelect = ({ inline = false }) => (
     </select>
     <div className="form-error">First name is required</div>
   </div>
-)
+);
 
 export const ValidSelect = ({ inline = false }) => (
-  <div className={`form-element ${inline ? 'form-element-inline' : ''}`}>
+  <div className={`form-element ${inline ? "form-element-inline" : ""}`}>
     <div className="form-label">First name</div>
     <select className="form-select form-select-valid">
       <option>Option 1</option>
@@ -51,4 +53,4 @@ export const ValidSelect = ({ inline = false }) => (
     </select>
     <div className="form-success">First name is valid</div>
   </div>
-)
+);

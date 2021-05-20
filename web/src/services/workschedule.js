@@ -3,9 +3,9 @@ import getConfig from "next/config";
 // Only holds serverRuntimeConfig and publicRuntimeConfig
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
-const get_UserGroups = async (filter) => {
+const get_Workschedules = async (filter) => {
   try {
-    const url = publicRuntimeConfig.SERVER_URI + "api/attendance/usergroups";
+    const url = publicRuntimeConfig.SERVER_URI + "api/attendance/workschedules";
 
     let res = [];
 
@@ -25,10 +25,10 @@ const get_UserGroups = async (filter) => {
   }
 };
 
-const get_UserGroup = async (id) => {
+const get_Workschedule = async (id) => {
   try {
     const url =
-      publicRuntimeConfig.SERVER_URI + `api/attendance/usergroup/${id}`;
+      publicRuntimeConfig.SERVER_URI + `api/attendance/workschedule/${id}`;
 
     let res = {};
 
@@ -41,4 +41,5 @@ const get_UserGroup = async (id) => {
     console.error(e);
   }
 };
-export default { get_UserGroups, get_UserGroup };
+
+export default { get_Workschedules, get_Workschedule };

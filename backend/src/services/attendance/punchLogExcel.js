@@ -166,9 +166,11 @@ function fillPunchDaily(items) {
     });
 
     // Write to file.
-    return workbook.toFileAsync(
-      appRoot + "/public/uploads/attendance/punchlog.xlsx"
-    );
+    return workbook
+      .toFileAsync(appRoot + "/public/uploads/attendance/punchlog.xlsx")
+      .then(() => {
+        return "uploads/attendance/punchlog.xlsx";
+      });
   });
 }
 
@@ -257,9 +259,11 @@ function fillPunchCard(items) {
     });
 
     // Write to file.
-    return workbook.toFileAsync(
-      appRoot + "/public/uploads/attendance/punchdaily.xlsx"
-    );
+    return workbook
+      .toFileAsync(appRoot + "/public/uploads/attendance/punchdaily.xlsx")
+      .then(() => {
+        return "uploads/attendance/punchdaily.xlsx";
+      });
   });
 }
 

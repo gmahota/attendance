@@ -36,7 +36,8 @@ const findAll = async function findAll(filter:Filter): Promise<PunchDailyCard[]>
     condations.push({date:filter.date})
   }
 
-  if(filter?.dateBegin && filter?.dateEnd) {
+  if (filter?.dateBegin && filter?.dateEnd) {
+    
     condations.push({date:Between(filter?.dateBegin,filter?.dateEnd)})
   }
   

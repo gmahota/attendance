@@ -34,17 +34,7 @@ const initialState = [
         items: [
           {
             url: "/reports",
-            title: "General",
-            items: [],
-          },
-          {
-            url: "/reports/individual",
-            title: "Individual",
-            items: [],
-          },
-          {
-            url: "/reports/simple",
-            title: "Simple",
+            title: "Daily Report",
             items: [],
           },
         ],
@@ -59,33 +49,18 @@ const initialState = [
         },
         items: [
           {
-            url: "/demo-1",
-            title: "Light background",
+            url: "/workschedule",
+            title: "Workschedules",
             items: [],
           },
           {
-            url: "/demo-2",
-            title: "Dark background",
+            url: "/groups",
+            title: "Groups",
             items: [],
           },
           {
-            url: "/demo-4",
-            title: "Dark sidebar",
-            items: [],
-          },
-          {
-            url: "/demo-3",
-            title: "Small sidebar",
-            items: [],
-          },
-          {
-            url: "/demo-5",
-            title: "Dark small sidebar",
-            items: [],
-          },
-          {
-            url: "/demo-6",
-            title: "Dark navbar",
+            url: "/users",
+            title: "Users",
             items: [],
           },
         ],

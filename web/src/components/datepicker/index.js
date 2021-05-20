@@ -1,12 +1,14 @@
-import React, {useState} from 'react'
-import Datetime from 'react-datetime'
+import React, { useState } from "react";
+import Datetime from "react-datetime";
 
-const Datepicker = ({title}) => {
-  const [value, setValue] = useState(null)
-  const onChange = v => {
-    console.log(v.format())
-    setValue(v)
-  }
+const Datepicker = ({ title, current,onChangeCurrent }) => {
+  const [value, setValue] = useState(current);
+  const onChange = (v) => {
+    
+    setValue(v);
+    
+    onChangeCurrent(v)
+  };
   return (
     <div className="form-element">
       <span className="text-sm text-default">
@@ -18,14 +20,15 @@ const Datepicker = ({title}) => {
         timeFormat={false}
         input={true}
         inputProps={{
-          className: 'form-input',
-          placeholder: 'Select date'
+          className: "form-input",
+          placeholder: "Select date",
         }}
-        viewMode={'days'}
+        value={value}
+        viewMode={"days"}
         onChange={onChange}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Datepicker
+export default Datepicker;

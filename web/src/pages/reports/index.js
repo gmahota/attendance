@@ -14,7 +14,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ReportIndividual({ allGroups }) {
+export default function ReportIndividual({ allGroups, allUsers }) {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -211,19 +211,9 @@ export default function ReportIndividual({ allGroups }) {
       </Transition.Root>
     );
   };
-  const listGroupsOptions = [
-    { label: "A001", value: "A001" },
-    { label: "A002", value: "A002" },
-  ];
-  const listUsersOptions = [
-    { label: "U001", value: "João Bastos" },
-    { label: "U002", value: "Andre Santos" },
-  ];
 
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState("Relatório");
-  const [listGroups, setListGroups] = useState(allGroups);
-  const [listUsers, setListUsers] = useState(listUsersOptions);
+  const [title, setTitle] = useState("Relatório");  
 
   return (
     <>
@@ -232,47 +222,16 @@ export default function ReportIndividual({ allGroups }) {
       <Widget title="Filter" description={<span>Filter Conditions</span>}>
         <div className="w-full flex">
           <div className="w-full lg:w-1/2">
-            <FilterReport />
+            <FilterReport allGroups={allGroups} allUsers={allUsers} />
           </div>
         </div>
       </Widget>
-      <main className={styles.main}>
-        <div className={styles.container}>
-          <h1 className={styles.title}>Gerar Relatorios</h1>
-          <div className={styles.grid}>
-            <button
-              className={styles.card}
-              onClick={() => {
-                setOpen(true);
-                setTitle("Report Individual");
-              }}
-              //href="http://localhost:5000/api/reports/individuals"
-            >
-              <h3>Report 1</h3>
-              <p>Report Individual</p>
-            </button>
-            <a
-              className={styles.card}
-              href="http://localhost:5000/api/reports/simplerep"
-            >
-              <h3>Report 2</h3>
-              <p>Report Simple Report</p>
-            </a>
-          </div>
-          <DialogModal
-            title={title}
-            open={open}
-            listGroups={allGroups}
-            listUsers={listUsers}
-          ></DialogModal>
-        </div>
-      </main>
     </>
   );
 }
 
 export const getStaticProps = async () => {
-  const allGroups = await groupService.get_Groups();
+  const allGroups = await groupService.get_UserGroups();
   const allUsers = await userService.get_Users();
 
   return {

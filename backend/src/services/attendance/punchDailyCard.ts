@@ -41,7 +41,7 @@ const getReport = async (filter: ReportFilter) => {
       
     case "Individual":
       ExcelPunchLog.fillPunchCard(items)
-      return "ExcelPunchLog.fillPunchCard(items)"; 
+      return "uploads/attendance/punchdaily.xlsx"; 
   }
 
 }

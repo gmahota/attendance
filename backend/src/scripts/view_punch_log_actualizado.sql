@@ -5,7 +5,7 @@
 alter View View_PunchCard
 as
 (
-select tab2.*, timeIn, timeOut, description, dayofweek, shift.id shiftId from (
+select tab2.*, timeIn, timeOut, description, dayofweek, shift.id shiftId, minTimeIn, maxTimeOut from (
 select tab1.id, tab1.code, tab1.userId, tab1.userName, tab1.userGroup, tab1.date, weekday(tab1.date) as diaSemanaPunch, tab1.device, tab1.deviceId, tab1.userDefinedSchedulerId, 
 tab1.schedulerId, tab1.userDefinedSchedulerName, tab1.exception, tab1.shiftSupposedTimeIn, tab1.shiftSupposedTimeOut, tab1.shiftSupposedGracePerior
 , tab1.shiftDescription, tab1.json, case when row_num %2 !=0 then 'Entrada' else 'Saida' end AS punchType from (
@@ -13,7 +13,7 @@ tab1.schedulerId, tab1.userDefinedSchedulerName, tab1.exception, tab1.shiftSuppo
 SELECT *,   
     ROW_NUMBER() OVER(PARTITION BY userId) AS row_num  
 FROM punchLog) tab1) tab2
-left outer join shift on tab2.userDefinedSchedulerId = shift.scheduleIdId  and time(date) between time(shift.timeIn) and time(shift.timeOut)
+left outer join shift on tab2.userDefinedSchedulerId = shift.scheduleIdId  and time(date) between time(shift.minTimeIn) and time(shift.maxTimeOut)
 and tab2.diaSemanaPunch = shift.dayofweek);
 
 /*select * from View_PunchCard;

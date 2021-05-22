@@ -14,12 +14,18 @@ export default class shift {
 
     @Column({ length: 50, nullable: false })
     type: string
+
+    @Column()
+    minTimeIn: Date
     
     @Column()
     timeIn: Date
 
     @Column()
     timeOut: Date
+    
+    @Column()
+    maxTimeOut: Date
 
     @Column()
     gracePeriod: Date

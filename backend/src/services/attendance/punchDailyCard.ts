@@ -34,6 +34,8 @@ const getReport = async (filter: ReportFilter) => {
     //date:filter.date
   });
 
+  console.log(items)
+
   switch (filter.type) {
     case "General":
       ExcelPunchLog.fillPunchDaily(items)
@@ -45,7 +47,6 @@ const getReport = async (filter: ReportFilter) => {
   }
 
 }
-
 
 export default {
   getAll,

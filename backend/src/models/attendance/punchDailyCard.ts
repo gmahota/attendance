@@ -48,7 +48,8 @@ export default class PunchDailyCard {
   @ViewColumn()
   delayOut?: Date
 
-  @ViewColumn()
-  totalDelay?: Date
-
+  getTotalDelay() {
+    if( this.delayOut && this.delayEntrance)
+      return new Date(this.delayOut?.getTime() + this.delayEntrance?.getTime())
+  }
 }

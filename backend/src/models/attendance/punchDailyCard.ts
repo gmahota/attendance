@@ -50,8 +50,4 @@ export default class PunchDailyCard {
 
   @ViewColumn()
   delayOut?: Date
-
-  @ViewColumn()
-  departmnet: string;
-
 }

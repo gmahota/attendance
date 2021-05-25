@@ -3,7 +3,7 @@ import Router, { useRouter } from "next/router";
 import SectionTitle from "../../components/section-title";
 import Widget from "../../components/widget";
 import Datatable from "../../components/datatable";
-import departmentService from "../../services/departments";
+import userDepartmentService from "../../services/userDepartments";
 
 export default function Departments({ allDeparments }) {
   const router = useRouter();
@@ -52,11 +52,11 @@ export default function Departments({ allDeparments }) {
 }
 
 export const getStaticProps = async () => {
-  const allDepartments = await departmentService.get_UserGroups();
+  const allUserDepartments = await userDepartmentService.get_UserDepartments();
 
   return {
     props: {
-      allDepartments,
+      allUserDepartments,
     },
   };
 };

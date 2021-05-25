@@ -3,9 +3,10 @@ import getConfig from "next/config";
 // Only holds serverRuntimeConfig and publicRuntimeConfig
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
-const get_Departments = async (filter) => {
+const get_UserDepartments = async (filter) => {
   try {
-    const url = publicRuntimeConfig.SERVER_URI + "api/attendance/department";
+    const url =
+      publicRuntimeConfig.SERVER_URI + "api/attendance/userDepartments";
 
     let res = [];
 
@@ -25,10 +26,10 @@ const get_Departments = async (filter) => {
   }
 };
 
-const get_Department = async (id) => {
+const get_UserDepartment = async (id) => {
   try {
     const url =
-      publicRuntimeConfig.SERVER_URI + `api/attendance/department/${id}`;
+      publicRuntimeConfig.SERVER_URI + `api/attendance/userDepartment/${id}`;
 
     let res = {};
 
@@ -41,4 +42,4 @@ const get_Department = async (id) => {
     console.error(e);
   }
 };
-export default { get_Departments, get_Department };
+export default { get_UserDepartments, get_UserDepartment };

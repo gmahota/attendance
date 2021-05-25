@@ -2,7 +2,7 @@
 import PunchDailyCard from "../../models/attendance/punchDailyCard";
 import { getRepository,getManager,Between } from "typeorm";
 import { FindConditions } from "typeorm/find-options/FindConditions";
-
+import moment from "moment";
 interface Filter {
   group?: string;
   user?: string;
@@ -28,26 +28,34 @@ const findAll = async function findAll(filter:Filter): Promise<PunchDailyCard[]>
 
   let condations:FindConditions<PunchDailyCard>[] = []
 
-  if(filter?.user) {
-    condations.push({userId:filter.user})
+  let str_where = ""
+  if (filter?.user) {
+    str_where += str_where.length === 0 ?
+      `userId = '${filter.user}'` :
+      ` and userId = '${filter.user}'`
   }
 
-  if(filter?.date) {
-    condations.push({date:filter.date})
+  if (filter?.date) {
+    str_where += str_where.length === 0 ?
+      `date = '${filter.date}'` :
+      ` and date = '${filter.date}'`
   }
 
   if (filter?.dateBegin && filter?.dateEnd) {
-    
-    condations.push({date:Between(filter?.dateBegin,filter?.dateEnd)})
+    str_where += str_where.length === 0 ? "" : " and "
+      
+    str_where += `Date(v.date)  BETWEEN  '${moment(filter.dateBegin).format("YYYY-MM-DD")}'
+      and '${moment(filter.dateEnd).format("YYYY-MM-DD")}'`
   }
   
-  const items: PunchDailyCard[] = await entityManager.find(PunchDailyCard,{
-    where:condations,
-    order: {
-      date: "ASC"
-    }
-  })
+  str_where = str_where.length === 0 ? "" : " where " + str_where
 
+const items: PunchDailyCard[] = await entityManager.query(
+  `SELECT
+     ROW_NUMBER() OVER(PARTITION BY userId) as id,
+     v.*
+     FROM view_PunchDaily v ${str_where}`
+  );
   
   return items;
 };

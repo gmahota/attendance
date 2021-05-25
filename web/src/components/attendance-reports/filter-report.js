@@ -77,7 +77,7 @@ const FilterReport = ({ message = null, allUsers, allGroups }) => {
     }
 
     const report = await get_AttendaceReport(data);
-    console.log(report);
+
     window.open(publicRuntimeConfig.SERVER_URI + report.file, "_blank");
   }
 
@@ -99,7 +99,7 @@ const FilterReport = ({ message = null, allUsers, allGroups }) => {
     type: "select",
     placeholder: "Group User",
     options: [{ key: "All", value: "", label: "All" }],
-    onValueChange: handleReportType,
+    onValueChange: handleGroupChange,
   };
 
   let itemsUsers = {
@@ -142,7 +142,11 @@ const FilterReport = ({ message = null, allUsers, allGroups }) => {
             <Radios item={itemsReport} selected={type} />
           </div>
           <div className="w-full lg:w-1/2">
-            <Selects item={itemsGroup} selected={group} />
+            <Selects
+              item={itemsGroup}
+              selected={group}
+              onSelectChange={handleGroupChange}
+            />
           </div>
           <div className="w-full lg:w-1/2">
             <Selects

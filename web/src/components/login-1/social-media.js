@@ -1,8 +1,8 @@
-import {FiTwitter, FiFacebook, FiGithub} from 'react-icons/fi'
+import { FiTwitter, FiFacebook, FiGithub } from "react-icons/fi";
 
 const SocialMedia = () => {
   return (
-    <div className="w-full flex flex-col text-center">
+    <div className="w-full flex flex-row text-center">
       <div className="mb-2">Or sign up with</div>
       <div className="flex w-full flex-row justify-center items-center space-x-2">
         <button className="btn btn-circle bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent">
@@ -16,7 +16,7 @@ const SocialMedia = () => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SocialMedia
+export default SocialMedia;

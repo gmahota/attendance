@@ -9,12 +9,17 @@ import Widget from "../../components/widget";
 import FilterReport from "../../components/attendance-reports/filter-report";
 import groupService from "../../services/userGroup";
 import userService from "../../services/user";
+import userDepartmentService from "../../services/userDepartment";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ReportIndividual({ allGroups, allUsers }) {
+export default function ReportIndividual({
+  allGroups,
+  allUsers,
+  allUserDepartments,
+}) {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -213,7 +218,7 @@ export default function ReportIndividual({ allGroups, allUsers }) {
   };
 
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState("Relatório");  
+  const [title, setTitle] = useState("Relatório");
 
   return (
     <>
@@ -222,7 +227,11 @@ export default function ReportIndividual({ allGroups, allUsers }) {
       <Widget title="Filter" description={<span>Filter Conditions</span>}>
         <div className="w-full flex">
           <div className="w-full lg:w-1/2">
-            <FilterReport allGroups={allGroups} allUsers={allUsers} />
+            <FilterReport
+              allGroups={allGroups}
+              allUsers={allUsers}
+              allUserDepartments={allUserDepartments}
+            />
           </div>
         </div>
       </Widget>
@@ -233,11 +242,12 @@ export default function ReportIndividual({ allGroups, allUsers }) {
 export const getStaticProps = async () => {
   const allGroups = await groupService.get_UserGroups();
   const allUsers = await userService.get_Users();
-
+  const allUserDepartments = await userDepartmentService.get_UserDepartments();
   return {
     props: {
       allGroups,
       allUsers,
+      allUserDepartments,
     },
   };
 };

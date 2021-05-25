@@ -41,6 +41,11 @@ function fillPunchDaily(items) {
       .cell(`I2`)
       .value("Delay Out")
       .style("border", true);
+      workbook
+      .sheet("Sheet1")
+      .cell(`J2`)
+      .value("Total delay")
+      .style("border", true);
 
     // workbook
     //   .sheet("Sheet1")
@@ -160,6 +165,12 @@ function fillPunchDaily(items) {
         .sheet("Sheet1")
         .cell(`I${row}`)
         .value(item.delayOut)
+        .style({ border: true, numberFormat: "hh:mm:ss" });
+
+        workbook
+        .sheet("Sheet1")
+        .cell(`I${row}`)
+        .value(item.totalDelay)
         .style({ border: true, numberFormat: "hh:mm:ss" });
 
       row++;

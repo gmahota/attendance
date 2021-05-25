@@ -20,11 +20,22 @@ and tab2.diaSemanaPunch = shift.dayofweek);
 */
 
 select * from view_PunchDaily;
-    alter view view_PunchDaily
+  alter view view_PunchDaily
 as
-select subtime(time(tab1.entrada), time(entradashift)) delayEntrance, subtime(time(tab1.saidashift), time(saida)) delayOut, 
+select delayEntrance, delayOut, addtime(delayEntrance, delayOut) totalDelay, date, userId, userName, userGroup, shiftId, description, entrada, entradashift,
+saida, saidashift, shiftSupposedGracePerior from 
+(
+select if(delayEntrance < '00:00:00', '00:00:00', delayEntrance) delayEntrance, if(delayOut < '00:00:00', '00:00:00', delayOut) delayOut  , 
+date, userId, userName, userGroup, shiftId, description, entrada, entradashift,
+saida, saidashift, shiftSupposedGracePerior from 
+(
+select subtime(time(tab1.entrada), time(entradashift)) delayEntrance, subtime( time(saida), time(tab1.saidashift)) delayOut, 
     tab1.* from ( select v.date, v.userid, v.userName,userGroup,v.shiftid, v.description, max(v.entrada) entrada, 
     timeIn entradashift,max(v.saida) saida, timeOut saidashift, shiftSupposedGracePerior from   (   SELECT date(v.date) date, 
     v.userName, v.userid,userGroup,v.shiftid, timeIn, timeOut, description, shiftSupposedGracePerior,    
     case when punchtype = 'Entrada' then v.date end entrada,    case when punchtype = 'Saida' then v.date end saida  
-    FROM View_PunchCard as v) as v     group by v.date, v.userid,userGroup,v.shiftid     ) tab1;
+    FROM View_PunchCard as v) as v     group by v.date, v.userid,userGroup,v.shiftid     ) tab1
+    
+    )tab2
+    
+    )tab3;

@@ -48,5 +48,7 @@ export default class PunchDailyCard {
   @ViewColumn()
   delayOut?: Date
 
-
+  @ViewColumn()
+  totalDelay?: Date
+  
 }

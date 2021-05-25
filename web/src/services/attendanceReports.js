@@ -8,7 +8,7 @@ const get_AttendaceReport = async (filter) => {
     const url =
       publicRuntimeConfig.SERVER_URI + "api/attendance/punchDailyCards/report";
 
-    console.log(url);
+  
     let res = {};
     await fetch(url, {
       method: "POST",

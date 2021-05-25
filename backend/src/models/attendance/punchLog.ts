@@ -16,6 +16,9 @@ export default class PunchLog {
   
   @Column({length: 50, nullable:false })  
   userGroup?:string
+
+  @Column({length: 100})  
+  userDepartment?:string
   
   @Column()
   date: Date

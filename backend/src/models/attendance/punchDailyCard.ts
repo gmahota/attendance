@@ -20,6 +20,9 @@ export default class PunchDailyCard {
   
   @ViewColumn()
   userGroup?: string;
+
+  @ViewColumn()
+  userDepartment?: string;
   
   @ViewColumn()
   shiftId?: string;
@@ -47,4 +50,8 @@ export default class PunchDailyCard {
 
   @ViewColumn()
   delayOut?: Date
+
+  @ViewColumn()
+  departmnet: string;
+
 }

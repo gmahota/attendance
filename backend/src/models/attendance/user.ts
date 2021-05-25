@@ -12,9 +12,6 @@ export default class user {
     @Column({length: 50, nullable:false})
     name: string
 
-    @Column()
-    : number
-
     @Column({length: 1, nullable:false})
     scheduleByUserOrGroup: string
 

@@ -75,9 +75,9 @@ const FilterReport = ({ message = null, allUsers, allGroups }) => {
     if (group.length > 0) {
       data.group = group;
     }
-    console.log(data);
-    const report = await get_AttendaceReport(data);
 
+    const report = await get_AttendaceReport(data);
+    console.log(report);
     window.open(publicRuntimeConfig.SERVER_URI + report.file, "_blank");
   }
 

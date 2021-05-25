@@ -13,10 +13,10 @@ export default class PunchDailyCard {
   date?: Date;
   
   @ViewColumn()
-  userId: string;
+  userId?: string;
 
   @ViewColumn()
-  userName: string;
+  userName?: string;
   
   @ViewColumn()
   userGroup?: string;
@@ -50,5 +50,5 @@ export default class PunchDailyCard {
 
   @ViewColumn()
   totalDelay?: Date
-  
+
 }

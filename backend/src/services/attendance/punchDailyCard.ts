@@ -1,4 +1,5 @@
 import PunchDailyCard from '../../models/attendance/punchDailyCard'
+import PunchDailyCard_View from '../../view/attendance/punchDailyCard_View'
 import PunchDailyCardRepository from '../../repository/attendance/punchDailyCardRepository'
 import ExcelPunchLog from '../../services/attendance/punchLogExcel'
 
@@ -34,15 +35,15 @@ const getReport = async (filter: ReportFilter) => {
     //date:filter.date
   });
 
-  console.log(items)
+  let items_render = PunchDailyCard_View.renderMany(items);
 
   switch (filter.type) {
     case "General":
-      ExcelPunchLog.fillPunchDaily(items)
+      ExcelPunchLog.fillPunchDaily(items_render)
       return "uploads/attendance/punchlog.xlsx" ;
       
     case "Individual":
-      ExcelPunchLog.fillPunchCard(items)
+      ExcelPunchLog.fillPunchCard(items_render)
       return "uploads/attendance/punchdaily.xlsx"; 
   }
 

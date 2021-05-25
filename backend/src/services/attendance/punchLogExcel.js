@@ -169,7 +169,7 @@ function fillPunchDaily(items) {
 
         workbook
         .sheet("Sheet1")
-        .cell(`I${row}`)
+        .cell(`J${row}`)
         .value(item.totalDelay)
         .style({ border: true, numberFormat: "hh:mm:ss" });
 

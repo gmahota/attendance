@@ -49,8 +49,8 @@ const initialState = [
         },
         items: [
           {
-            url: "/workschedule",
-            title: "Workschedules",
+            url: "/departments",
+            title: "Departments",
             items: [],
           },
           {
@@ -61,6 +61,11 @@ const initialState = [
           {
             url: "/users",
             title: "Users",
+            items: [],
+          },
+          {
+            url: "/workschedule",
+            title: "Workschedules",
             items: [],
           },
         ],

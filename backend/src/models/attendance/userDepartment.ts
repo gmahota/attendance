@@ -1,15 +1,13 @@
 import { Entity, Column,PrimaryColumn, PrimaryGeneratedColumn, ManyToOne, OneToOne, JoinColumn, OneToMany } from "typeorm";
-import WorkSchedule from "./workSchedule";
+import user from "./user";
 
-@Entity("userGroup")
-export default class user {
+
+@Entity("userDepartment")
+export default class userDepartment {
     @PrimaryColumn()
     id: number
     
     @Column({length: 50, nullable:false})
-    name: string    
-
-    @ManyToOne(() => WorkSchedule, (item) => item.id)
-    scheduleId?: WorkSchedule;
+    name: string   
 
 }

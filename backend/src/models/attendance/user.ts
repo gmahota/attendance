@@ -1,5 +1,7 @@
 import { Entity, Column,PrimaryColumn, PrimaryGeneratedColumn, ManyToOne, OneToOne, JoinColumn, OneToMany } from "typeorm";
 import WorkSchedule from "./workSchedule";
+import userDepartment from "./userDepartment";
+import userGroup from "./userGroup";
 
 
 @Entity("user")
@@ -11,11 +13,17 @@ export default class user {
     name: string
 
     @Column()
-    scheduleId?: number
+    : number
 
     @Column({length: 1, nullable:false})
     scheduleByUserOrGroup: string
 
+    @ManyToOne(() => userGroup, (item) => item.id)
+    userGroupId?: userGroup;
+
     @ManyToOne(() => WorkSchedule, (item) => item.id)
-    groupId?: WorkSchedule;
+    scheduleId?: WorkSchedule;
+
+    @ManyToOne(() => userDepartment, (item) => item.id)
+    departmentId?: userDepartment;
 }

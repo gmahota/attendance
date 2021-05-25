@@ -46,6 +46,16 @@ function fillPunchDaily(items) {
       .cell(`J2`)
       .value("Total delay")
       .style("border", true);
+      workbook
+      .sheet("Sheet1")
+      .cell(`K2`)
+      .value("User Department")
+      .style("border", true);
+      workbook
+      .sheet("Sheet1")
+      .cell(`L2`)
+      .value("User Group")
+      .style("border", true);
 
     // workbook
     //   .sheet("Sheet1")
@@ -172,6 +182,18 @@ function fillPunchDaily(items) {
         .cell(`J${row}`)
         .value(item.totalDelay)
         .style({ border: true, numberFormat: "hh:mm:ss" });
+
+        workbook
+        .sheet("Sheet1")
+        .cell(`K${row}`)
+        .value(item.userDepartment)
+        .style({ border: true});
+
+        workbook
+        .sheet("Sheet1")
+        .cell(`K${row}`)
+        .value(item.userGroup)
+        .style({ border: true});
 
       row++;
     });

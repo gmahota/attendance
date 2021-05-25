@@ -1,3 +1,4 @@
+
 import { Router } from "express";
 
 import {
@@ -37,6 +38,13 @@ import {
   create_WorkSchedule
 } from "../controllers/attendance/workScheduleController";
 
+import {
+  get_all_UserDepartments,
+  get_UserDepartment,
+  create_UserDepartment
+} from "../controllers/attendance/userDepartmentController"
+  ;
+
 const attendanceRouter = Router();
 
 attendanceRouter
@@ -68,5 +76,11 @@ attendanceRouter
   .get("/punchDailyCards", get_all_PunchDailyCards)
   .get("/punchDailyCard/:id", get_PunchDailyCard)
   .post("/punchDailyCards/report", get_Report);
+
+  attendanceRouter
+  .get("/userDepartments", get_all_UserDepartments)
+  .get("/userDepartment/:id", get_UserDepartment)
+  .post("/userDepartment/", create_UserDepartment);
+
 
 export default attendanceRouter;

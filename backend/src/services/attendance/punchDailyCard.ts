@@ -4,6 +4,7 @@ import PunchDailyCardRepository from '../../repository/attendance/punchDailyCard
 import ExcelPunchLog from '../../services/attendance/punchLogExcel'
 
 interface ReportFilter {
+  department?:string,
   name?: string;
   type?: string;
   group?: string;
@@ -13,6 +14,7 @@ interface ReportFilter {
 }
 
 interface Filter {
+  department?:string,
   group?: string;
   user?: string;
   dateBegin?: Date;
@@ -27,23 +29,35 @@ const getByDate = (date: Date) =>
 
 const getReport = async (filter: ReportFilter) => {
 
-  const items: PunchDailyCard[] = await PunchDailyCardRepository.findAll({
-    group: filter.group,
-    user: filter.user,
-    dateBegin: filter.dateBegin,
-    dateEnd: filter.dateEnd,
-    //date:filter.date
-  });
-
-  let items_render = PunchDailyCard_View.renderMany(items);
-
+  
   switch (filter.type) {
-    case "General":
+    case "Punchdaily":
+        const items: PunchDailyCard[] = await PunchDailyCardRepository.findAll({
+        department:filter.department,
+        group: filter.group,
+        user: filter.user,
+        dateBegin: filter.dateBegin,
+        dateEnd: filter.dateEnd,
+        //date:filter.date
+      });
+
+      let items_render = PunchDailyCard_View.renderMany(items);
+
       ExcelPunchLog.fillPunchDaily(items_render)
       return "uploads/attendance/punchlog.xlsx" ;
       
-    case "Individual":
-      ExcelPunchLog.fillPunchCard(items_render)
+    case "Punchlog":
+      
+      const punchs: any = await PunchDailyCardRepository.findAll_Punchlog({
+        department:filter.department,
+        group: filter.group,
+        user: filter.user,
+        dateBegin: filter.dateBegin,
+        dateEnd: filter.dateEnd,
+        //date:filter.date
+      });
+
+      ExcelPunchLog.fillPunchCard(punchs)
       return "uploads/attendance/punchdaily.xlsx"; 
   }
 

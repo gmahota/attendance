@@ -7,12 +7,14 @@ export const get_all_PunchDailyCards = async (request: Request, response: Respon
   const {
     group,
     user,
+    department,
     dateBegin,
     dateEnd,
     date
   } = request.body;
 
   const PunchDailyCards = await PunchDailyCardService.getAll({
+    department,
     group,
     user,
     dateBegin,

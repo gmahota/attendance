@@ -46,12 +46,12 @@ function fillPunchDaily(items) {
       .cell(`J2`)
       .value("Total delay")
       .style("border", true);
-      workbook
+    workbook
       .sheet("Sheet1")
       .cell(`K2`)
       .value("User Department")
       .style("border", true);
-      workbook
+    workbook
       .sheet("Sheet1")
       .cell(`L2`)
       .value("User Group")
@@ -183,17 +183,17 @@ function fillPunchDaily(items) {
         .value(item.totalDelay)
         .style({ border: true, numberFormat: "hh:mm:ss" });
 
-        workbook
+      workbook
         .sheet("Sheet1")
         .cell(`K${row}`)
         .value(item.userDepartment)
-        .style({ border: true});
+        .style({ border: true });
 
-        workbook
+      workbook
         .sheet("Sheet1")
         .cell(`K${row}`)
         .value(item.userGroup)
-        .style({ border: true});
+        .style({ border: true });
 
       row++;
     });
@@ -292,11 +292,9 @@ function fillPunchCard(items) {
     });
 
     // Write to file.
-    return workbook
-      .toFileAsync(appRoot + "/public/uploads/attendance/punchdaily.xlsx")
-      .then(() => {
-        return "uploads/attendance/punchdaily.xlsx";
-      });
+    return workbook.toFileAsync(
+      appRoot + "/public/uploads/attendance/punchdaily.xlsx"
+    );
   });
 }
 

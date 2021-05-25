@@ -87,8 +87,8 @@ const FilterReport = ({ message = null, allUsers, allGroups }) => {
     type: "radio",
     placeholder: "Report Type",
     options: [
-      { value: "General", name: "General", label: "General" },
-      { value: "Individual", name: "Individual", label: "Individual" },
+      { value: "Punchdaily", name: "PunchDaily", label: "Punch Daily" },
+      { value: "Punchlog", name: "Punchlog", label: "Punch Log" },
     ],
     onValueChange: handleReportType,
   };

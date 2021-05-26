@@ -30,16 +30,23 @@ const findAll = async function findAll(filter:Filter): Promise<PunchDailyCard[]>
   let condations:FindConditions<PunchDailyCard>[] = []
 
   let str_where = ""
+
   if (filter?.user) {
-    str_where += str_where.length === 0 ?
-      `userId = '${filter.user}'` :
-      ` and userId = '${filter.user}'`
+    str_where += str_where.length === 0 ? "" : " and "
+
+    str_where += `userId = '${filter.user}'` 
   }
 
-  if (filter?.date) {
-    str_where += str_where.length === 0 ?
-      `date = '${filter.date}'` :
-      ` and date = '${filter.date}'`
+  if (filter?.department) {
+    str_where += str_where.length === 0 ? "" : " and "
+
+    str_where += `userDepartment = '${filter.department}'` 
+  }
+  
+  if (filter?.group) {
+    str_where += str_where.length === 0 ? "" : " and "
+
+    str_where += `userGroup = '${filter.group}'` 
   }
 
   if (filter?.dateBegin && filter?.dateEnd) {
@@ -47,6 +54,12 @@ const findAll = async function findAll(filter:Filter): Promise<PunchDailyCard[]>
       
     str_where += `Date(v.date)  BETWEEN  '${moment(filter.dateBegin).format("YYYY-MM-DD")}'
       and '${moment(filter.dateEnd).format("YYYY-MM-DD")}'`
+  }
+
+  if (filter?.date) {
+    str_where += str_where.length === 0 ? "" : " and "
+
+    str_where += `date = '${filter.date}'`
   }
   
   str_where = str_where.length === 0 ? "" : " where " + str_where

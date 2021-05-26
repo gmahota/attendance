@@ -11,6 +11,7 @@ interface ReportFilter {
   user?: string;
   dateBegin?: Date;
   dateEnd?: Date;
+  date?: Date;
 }
 
 interface Filter {
@@ -38,7 +39,7 @@ const getReport = async (filter: ReportFilter) => {
         user: filter.user,
         dateBegin: filter.dateBegin,
         dateEnd: filter.dateEnd,
-        //date:filter.date
+        date:filter.date
       });
 
       let items_render = PunchDailyCard_View.renderMany(items);
@@ -54,7 +55,7 @@ const getReport = async (filter: ReportFilter) => {
         user: filter.user,
         dateBegin: filter.dateBegin,
         dateEnd: filter.dateEnd,
-        //date:filter.date
+        date:filter.date
       });
 
       ExcelPunchLog.fillPunchCard(punchs)

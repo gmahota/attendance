@@ -111,6 +111,8 @@ const FilterReport = ({
       data.department = userDepartment;
     }
 
+    console.log(data);
+
     const report = await get_AttendaceReport(data);
 
     window.open(publicRuntimeConfig.SERVER_URI + report.file, "_blank");

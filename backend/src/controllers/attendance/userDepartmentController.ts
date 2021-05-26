@@ -22,13 +22,14 @@ export const get_UserDepartment = async (request: Request, response: Response) =
 
 export const create_UserDepartment = async (request: Request, response: Response) => {
   const {
+    id,
     name,
     scheduleId
   } = await request.body;
 
   try {
     let item: UserDepartment = {
-      id:0,
+      id,
       name,
       
     };

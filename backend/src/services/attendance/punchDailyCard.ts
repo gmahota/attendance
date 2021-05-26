@@ -44,7 +44,7 @@ const getReport = async (filter: ReportFilter) => {
       let items_render = PunchDailyCard_View.renderMany(items);
 
       ExcelPunchLog.fillPunchDaily(items_render)
-      return "uploads/attendance/punchlog.xlsx" ;
+      return "uploads/attendance/punchdaily.xlsx" ;
       
     case "Punchlog":
       
@@ -58,7 +58,7 @@ const getReport = async (filter: ReportFilter) => {
       });
 
       ExcelPunchLog.fillPunchCard(punchs)
-      return "uploads/attendance/punchdaily.xlsx"; 
+      return "uploads/attendance/punchlog.xlsx"; 
   }
 
 }

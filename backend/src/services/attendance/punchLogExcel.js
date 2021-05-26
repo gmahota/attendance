@@ -57,65 +57,6 @@ function fillPunchDaily(items) {
       .value("User Group")
       .style("border", true);
 
-    // workbook
-    //   .sheet("Sheet1")
-    //   .cell(`H2`)
-    //   .value("Hora Planeada de Saida 1")
-    //   .style("border", true);
-    // workbook
-    //   .sheet("Sheet1")
-    //   .cell(`I2`)
-    //   .value("Hora de Saida")
-    //   .style("border", true);
-
-    // workbook
-    //   .sheet("Sheet1")
-    //   .cell(`J1`)
-    //   .value("First Out Time")
-    //   .style("border", true);
-    // workbook
-    //   .sheet("Sheet1")
-    //   .cell(`J2`)
-    //   .value("Hora de Chegada Planeada")
-    //   .style("border", true);
-    // workbook.sheet("Sheet1").cell(`K2`).value("Hora de Chegada").style({
-    //   leftBorder: true,
-    //   topBorder: true,
-    //   rightBorder: true,
-    //   bottomBorder: true,
-    // });
-    // workbook
-    //   .sheet("Sheet1")
-    //   .cell(`L2`)
-    //   .value("Tempo de Atraso")
-    //   .style("border", true);
-
-    // workbook
-    //   .sheet("Sheet1")
-    //   .cell(`M1`)
-    //   .value("Second In Time")
-    //   .style("border", true);
-    // workbook
-    //   .sheet("Sheet1")
-    //   .cell(`M2`)
-    //   .value("Hora de Chegada Planeada")
-    //   .style({
-    //     leftBorder: true,
-    //     topBorder: true,
-    //     rightBorder: true,
-    //     bottomBorder: true,
-    //   });
-    // workbook
-    //   .sheet("Sheet1")
-    //   .cell(`N2`)
-    //   .value("Hora de Chegada")
-    //   .style("border", true);
-    // workbook
-    //   .sheet("Sheet1")
-    //   .cell(`O2`)
-    //   .value("Tempo de Atraso")
-    //   .style("border", true);
-
     items.forEach((item) => {
       workbook.sheet("Sheet1").cell(`A${row}`).value(item.date).style({
         leftBorder: true,
@@ -129,19 +70,14 @@ function fillPunchDaily(items) {
         .cell(`B${row}`)
         .value(item.userName)
         .style("border", true);
-      // workbook.sheet("Sheet1").cell(`C${row}`).value(item.userId).style({
-      //   leftBorder: true,
-      //   topBorder: true,
-      //   rightBorder: true,
-      //   bottomBorder: true,
-      // });
+
       workbook.sheet("Sheet1").cell(`C${row}`).value(item.description).style({
         leftBorder: true,
         topBorder: true,
         rightBorder: true,
         bottomBorder: true,
       });
-      //let atraso = item.saida - item.saidashift + item.shiftSupposedGracePerior <0? 0: item.saida+ item.shiftSupposedGracePerior - item.saidashift;
+
       workbook
         .sheet("Sheet1")
         .cell(`D${row}`)
@@ -152,7 +88,6 @@ function fillPunchDaily(items) {
         .cell(`E${row}`)
         .value(item.entradashift)
         .style({ border: true, numberFormat: "hh:mm:ss" });
-      // .style("border", true);
 
       workbook
         .sheet("Sheet1")
@@ -191,7 +126,7 @@ function fillPunchDaily(items) {
 
       workbook
         .sheet("Sheet1")
-        .cell(`K${row}`)
+        .cell(`L${row}`)
         .value(item.userGroup)
         .style({ border: true });
 
@@ -199,11 +134,9 @@ function fillPunchDaily(items) {
     });
 
     // Write to file.
-    return workbook
-      .toFileAsync(appRoot + "/public/uploads/attendance/punchlog.xlsx")
-      .then(() => {
-        return "uploads/attendance/punchlog.xlsx";
-      });
+    return workbook.toFileAsync(
+      appRoot + "/public/uploads/attendance/punchdaily.xlsx"
+    );
   });
 }
 
@@ -251,7 +184,7 @@ function fillPunchCard(items) {
         .sheet("Sheet1")
         .cell(`A${row}`)
         .value(item.date)
-        .style("border", true);
+        .style({ border: true, numberFormat: "yyyy-mm-dd hh:mm:ss" });
       workbook
         .sheet("Sheet1")
         .cell(`B${row}`)
@@ -281,19 +214,19 @@ function fillPunchCard(items) {
         .sheet("Sheet1")
         .cell(`G${row}`)
         .value(item.timeIn)
-        .style("border", true);
+        .style({ border: true, numberFormat: "hh:mm:ss" });
       workbook
         .sheet("Sheet1")
         .cell(`H${row}`)
         .value(item.timeOut)
-        .style("border", true);
+        .style({ border: true, numberFormat: "hh:mm:ss" });
 
       row++;
     });
 
     // Write to file.
     return workbook.toFileAsync(
-      appRoot + "/public/uploads/attendance/punchdaily.xlsx"
+      appRoot + "/public/uploads/attendance/punchlog.xlsx"
     );
   });
 }

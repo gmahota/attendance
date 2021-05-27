@@ -49,7 +49,7 @@ const initialState = [
         },
         items: [
           {
-            url: "/departments",
+            url: "/usersDepartments",
             title: "Departments",
             items: [],
           },

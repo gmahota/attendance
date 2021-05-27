@@ -46,6 +46,7 @@ const FilterReport = ({
   function handlerName(value) {
     setName(value);
   }
+
   function handleReportType(value) {
     setType(value);
     setName(value);
@@ -54,6 +55,7 @@ const FilterReport = ({
   function handleUserDepartmentsChange(value) {
     setUserDepartment(value);
   }
+
   function handleGroupChange(value) {
     setGroup(value);
   }

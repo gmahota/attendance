@@ -32,7 +32,7 @@ export const create_User = async (request: Request, response: Response) => {
     name,
     scheduleId,
     scheduleByUserOrGroup,
-    groupId
+    userGroupId
   } = await request.body;
 
   try {
@@ -41,7 +41,7 @@ export const create_User = async (request: Request, response: Response) => {
       name,
       scheduleId,
       scheduleByUserOrGroup,
-      groupId
+      userGroupId
     };
 
     item = await UserService.create(item);

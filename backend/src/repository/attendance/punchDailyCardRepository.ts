@@ -27,8 +27,6 @@ const findByDate = async function findByDate(date: Date): Promise<PunchDailyCard
 const findAll = async function findAll(filter:Filter): Promise<PunchDailyCard[]> {
   const entityManager = getManager();
 
-  let condations:FindConditions<PunchDailyCard>[] = []
-
   let str_where = ""
 
   if (filter?.user) {
@@ -64,14 +62,13 @@ const findAll = async function findAll(filter:Filter): Promise<PunchDailyCard[]>
 
   str_where = str_where.length === 0 ? "" : " where " + str_where
 
-const items: PunchDailyCard[] = await entityManager.query(
-  `SELECT
-     ROW_NUMBER() OVER(PARTITION BY userId) as id,
-     v.*
-     FROM view_PunchDaily v ${str_where}
-     order by v.date asc, v.username asc
-     `
-  );
+  const str_query = `SELECT
+  ROW_NUMBER() OVER(PARTITION BY userId) as id,
+  v.*
+  FROM view_PunchDaily v ${str_where}
+  order by v.date asc, v.username asc
+  `
+const items: PunchDailyCard[] = await entityManager.query(str_query);
 
   return items;
 };

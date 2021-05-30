@@ -6,19 +6,17 @@ export const get_all_PunchDailyCards = async (request: Request, response: Respon
   const {
     group,
     user,
-    department,
     dateBegin,
     dateEnd,
-    date
+    department
   } = request.body;
 
   const PunchDailyCards = await PunchDailyCardService.getAll({
-    department,
     group,
     user,
     dateBegin,
     dateEnd,
-    date
+    department
   });
 
   return response.status(200).json(PunchDailyCards);
@@ -54,7 +52,7 @@ export const get_Report = async (request: Request, response: Response) => {
     user,
     dateBegin,
     dateEnd,
-    
-  }); 
+
+  });
   response.status(202).json({file});
 }

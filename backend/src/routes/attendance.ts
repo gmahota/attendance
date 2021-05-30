@@ -73,7 +73,7 @@ attendanceRouter
   .post("/punchLog/", create_PunchLog);
 
 attendanceRouter
-  .get("/punchDailyCards", get_all_PunchDailyCards)
+  .post("/punchDailyCards", get_all_PunchDailyCards)
   .get("/punchDailyCard/:id", get_PunchDailyCard)
   .post("/punchDailyCards/report", get_Report);
 

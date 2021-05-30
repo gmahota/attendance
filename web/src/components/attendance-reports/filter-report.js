@@ -20,6 +20,9 @@ import { AiFillFileExcel } from "react-icons/ai";
 
 import { get_AttendaceReport } from "../../services/attendanceReports";
 
+import { get_PunchDailyCards } from "../../services/attendancePunchLog";
+
+import AttendancePunchLog from "../attendance-punch-log/list";
 // Only holds serverRuntimeConfig and publicRuntimeConfig
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
@@ -35,6 +38,7 @@ const FilterReport = ({
   const [group, setGroup] = useState("");
   const [user, setUser] = useState("");
   const [userDepartment, setUserDepartment] = useState("");
+  const [items, setItems] = useState([]);
 
   var date = new Date();
   var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -42,6 +46,8 @@ const FilterReport = ({
 
   const [dateBegin, setDateBegin] = useState(firstDay);
   const [dateEnd, setDateEnd] = useState(lastDay);
+  const [columns, setColumns] = useState([]);
+  const [data, setData] = useState();
 
   function handlerName(value) {
     setName(value);
@@ -73,7 +79,7 @@ const FilterReport = ({
   }
 
   async function handlerSearch() {
-    let data = {
+    let dataF = {
       name,
       type,
       dateBegin: dateBegin,
@@ -81,16 +87,16 @@ const FilterReport = ({
     };
 
     if (user.length > 0) {
-      data.user = user;
+      dataF.user = user;
     }
 
     if (group.length > 0) {
-      data.group = group;
+      dataF.group = group;
     }
 
-    const report = await get_AttendaceReport(data);
+    const itemPunch = await get_PunchDailyCards(dataF);
 
-    window.open(publicRuntimeConfig.SERVER_URI + report.file, "_blank");
+    setItems(itemPunch);
   }
 
   async function handlerDownloadExcel() {
@@ -257,6 +263,15 @@ const FilterReport = ({
               </button>
             </div>
           </div>
+        </div>
+        <div className="w-full">
+          {items.length > 0 ? (
+            <AttendancePunchLog
+              allPunchLog={items}
+            />
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </>

@@ -3,12 +3,13 @@ import getConfig from "next/config";
 // Only holds serverRuntimeConfig and publicRuntimeConfig
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
-const get_AttendaceReport = async (filter) => {
+const get_PunchDailyCards = async (filter) => {
   try {
+    console.log(filter)
     const url =
-      publicRuntimeConfig.SERVER_URI + "api/attendance/punchDailyCards/report";
+      publicRuntimeConfig.SERVER_URI + "api/attendance/punchDailyCards";
 
-  
+
     let res = {};
     await fetch(url, {
       method: "POST",
@@ -26,4 +27,4 @@ const get_AttendaceReport = async (filter) => {
   }
 };
 
-export { get_AttendaceReport };
+export { get_PunchDailyCards };

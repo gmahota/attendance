@@ -16,9 +16,9 @@ const findByDate = async function findByDate(date: Date): Promise<PunchDailyCard
   const PunchDailyCardRepository = getRepository(PunchDailyCard);
 
   const item: PunchDailyCard = await PunchDailyCardRepository.findOneOrFail(
-    { 
+    {
       where: { date: Date }
-    }    
+    }
   );
 
   return item;
@@ -34,24 +34,24 @@ const findAll = async function findAll(filter:Filter): Promise<PunchDailyCard[]>
   if (filter?.user) {
     str_where += str_where.length === 0 ? "" : " and "
 
-    str_where += `userId = '${filter.user}'` 
+    str_where += `userId = '${filter.user}'`
   }
 
   if (filter?.department) {
     str_where += str_where.length === 0 ? "" : " and "
 
-    str_where += `userDepartment = '${filter.department}'` 
+    str_where += `userDepartment = '${filter.department}'`
   }
-  
+
   if (filter?.group) {
     str_where += str_where.length === 0 ? "" : " and "
 
-    str_where += `userGroup = '${filter.group}'` 
+    str_where += `userGroup = '${filter.group}'`
   }
 
   if (filter?.dateBegin && filter?.dateEnd) {
     str_where += str_where.length === 0 ? "" : " and "
-      
+
     str_where += `Date(v.date)  BETWEEN  '${moment(filter.dateBegin).format("YYYY-MM-DD")}'
       and '${moment(filter.dateEnd).format("YYYY-MM-DD")}'`
   }
@@ -61,16 +61,18 @@ const findAll = async function findAll(filter:Filter): Promise<PunchDailyCard[]>
 
     str_where += `date = '${filter.date}'`
   }
-  
+
   str_where = str_where.length === 0 ? "" : " where " + str_where
 
 const items: PunchDailyCard[] = await entityManager.query(
   `SELECT
      ROW_NUMBER() OVER(PARTITION BY userId) as id,
      v.*
-     FROM view_PunchDaily v ${str_where}`
+     FROM view_PunchDaily v ${str_where}
+     order by v.date asc, v.username asc
+     `
   );
-  
+
   return items;
 };
 
@@ -92,11 +94,11 @@ const findAll_Punchlog = async function findAll_Punchlog(filter:Filter): Promise
 
   if (filter?.dateBegin && filter?.dateEnd) {
     str_where += str_where.length === 0 ? "" : " and "
-      
+
     str_where += `Date(v.date)  BETWEEN  '${moment(filter.dateBegin).format("YYYY-MM-DD")}'
       and '${moment(filter.dateEnd).format("YYYY-MM-DD")}'`
   }
-  
+
   str_where = str_where.length === 0 ? "" : " where " + str_where
 
   const items: any = await entityManager.query(
@@ -105,7 +107,7 @@ const findAll_Punchlog = async function findAll_Punchlog(filter:Filter): Promise
      v.*
      FROM View_PunchCard v ${str_where}`
   );
-  
+
   return items;
 };
 

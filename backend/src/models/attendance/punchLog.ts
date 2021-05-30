@@ -5,30 +5,30 @@ export default class PunchLog {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({length: 50, nullable:false })  
+  @Column({length: 50, nullable:false })
   code?:string;
 
-  @Column({length: 50, nullable:false })  
+  @Column({length: 50, nullable:false })
   userId?: string
 
-  @Column({length: 50, nullable:false })  
+  @Column({length: 50, nullable:false })
   userName?: string
-  
-  @Column({length: 50, nullable:false })  
+
+  @Column({length: 50, nullable:false })
   userGroup?:string
 
-  @Column({length: 100})  
+  @Column({length: 100})
   userDepartment?:string
-  
+
   @Column()
   date: Date
-  
-  @Column({ length: 20, nullable: false })
+
+  @Column({ length: 100, nullable: false })
   device?: string
 
-  @Column({ length: 20, nullable: false })
+  @Column({ length: 100, nullable: false })
   deviceId?: string
-  
+
   @Column({ length: 20, nullable: false })
   userDefinedSchedulerId: string
 
@@ -55,7 +55,7 @@ export default class PunchLog {
 
   @Column({ length: 50, nullable: false })
   shiftDescription: string
-       
+
   @Column()
   json: string
 }

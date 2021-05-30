@@ -2,10 +2,7 @@
 */
 /**/
 
-alter View View_PunchCard
-as
-(
-alter View View_PunchCard
+create View View_PunchCard
 as
   (
   select tab2.*, timeIn, timeOut, description, dayofweek, shift.id shiftId, minTimeIn, maxTimeOut
@@ -28,14 +25,15 @@ SELECT punchLog.*, userGroup.name as userGroupName,
 
 select *
 from view_PunchDaily;
-alter view view_PunchDaily
+
+create view view_PunchDaily
 as
   select delayEntrance, delayOut, addtime(delayEntrance, delayOut) totalDelay, date, userId, userName, userGroup, shiftId, description, entrada, entradashift,
     saida, saidashift, shiftSupposedGracePerior
   from
     (
-select if(delayEntrance < '00:00:00', '00:00:00', delayEntrance) delayEntrance, 
-if(delayOut < '00:00:00', '00:00:00', delayOut) delayOut  , 
+select if(delayEntrance < '00:00:00', '00:00:00', delayEntrance) delayEntrance,
+if(delayOut < '00:00:00', '00:00:00', delayOut) delayOut  ,
 date, userId, userName, userGroup, shiftId, description, entrada, entradashift,
 saida, saidashift, shiftSupposedGracePerior from
 (
@@ -48,8 +46,8 @@ from ( select v.date, v.userid, v.userName, userGroup, v.shiftid, v.description,
       case when punchtype = 'Entrada' then v.date end entrada, case when punchtype = 'Saida' then v.date end saida
     FROM View_PunchCard as v) as v
   group by v.date, v.userid,userGroup,v.shiftid     ) tab1
-    
+
     )
 tab2
-    
+
     )tab3;

@@ -5,9 +5,18 @@ import WorkSchedule from "./workSchedule";
 export default class user {
     @PrimaryColumn()
     id: number
-    
+
     @Column({length: 50, nullable:false})
-    name: string    
+    name: string
+
+    @Column()
+    createdAt?:Date
+
+    @Column()
+    updatedAt?:Date
+
+    @Column()
+    parent_id?:number
 
     @ManyToOne(() => WorkSchedule, (item) => item.id)
     scheduleId?: WorkSchedule;

@@ -12,6 +12,8 @@ export const get_all_UserDepartments = async (request: Request, response: Respon
 export const get_UserDepartment = async (request: Request, response: Response) => {
   const { id } = request.params;
 
+  console.log(id)
+
   const UserDepartment = await UserDepartmentService.getById(id);
 
   if (UserDepartment) {
@@ -22,21 +24,22 @@ export const get_UserDepartment = async (request: Request, response: Response) =
 
 export const create_UserDepartment = async (request: Request, response: Response) => {
   const {
+    id,
     name,
     scheduleId
   } = await request.body;
 
   try {
     let item: UserDepartment = {
-      id:0,
+      id,
       name,
-      
+
     };
 
     item = await UserDepartmentService.create(item);
 
     return response.status(200).json(item);
-    
+
   } catch (e) {
     return response.status(404).json(
       { msg: "error to create a product with that i", error: e },

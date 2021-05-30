@@ -20,8 +20,7 @@ const findAll = async function findAll(): Promise<UserGroup[]> {
 
   const data: UserGroup[] = await UserRepository.find({
     order: {
-      name: "ASC",
-      id: "DESC",
+      id: "ASC",
     },
   });
 

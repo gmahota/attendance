@@ -3,8 +3,15 @@ import UserService from "../../services/attendance/users";
 import User from "../../models/attendance/user";
 
 export const get_all_Users = async (request: Request, response: Response) => {
+  const {
+    group,
+    department
+  } = request.body;
 
-  const Users = await UserService.getAll();
+  const Users = await UserService.getAll({
+    group,
+    department
+  });
 
   return response.status(200).json(Users);
 };

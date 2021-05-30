@@ -2,8 +2,8 @@
 import PunchLog  from '../../models/attendance/punchLog'
 import PunchLogRepository  from '../../repository/attendance/punchLogRepository'
 
-const getById = (id:string) =>
-    PunchLogRepository.findById(id)
+const getById = (id: string) =>
+  PunchLogRepository.findById(id)
 
 const getAll = () =>
     PunchLogRepository.findAll()

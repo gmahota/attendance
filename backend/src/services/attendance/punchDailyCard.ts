@@ -11,6 +11,7 @@ interface ReportFilter {
   user?: string;
   dateBegin?: Date;
   dateEnd?: Date;
+  date?: Date;
 }
 
 interface Filter {
@@ -38,13 +39,13 @@ const getReport = async (filter: ReportFilter) => {
         user: filter.user,
         dateBegin: filter.dateBegin,
         dateEnd: filter.dateEnd,
-        //date:filter.date
+        date:filter.date
       });
 
       let items_render = PunchDailyCard_View.renderMany(items);
 
       ExcelPunchLog.fillPunchDaily(items_render)
-      return "uploads/attendance/punchlog.xlsx" ;
+      return "uploads/attendance/punchdaily.xlsx" ;
       
     case "Punchlog":
       
@@ -54,11 +55,11 @@ const getReport = async (filter: ReportFilter) => {
         user: filter.user,
         dateBegin: filter.dateBegin,
         dateEnd: filter.dateEnd,
-        //date:filter.date
+        date:filter.date
       });
 
       ExcelPunchLog.fillPunchCard(punchs)
-      return "uploads/attendance/punchdaily.xlsx"; 
+      return "uploads/attendance/punchlog.xlsx"; 
   }
 
 }

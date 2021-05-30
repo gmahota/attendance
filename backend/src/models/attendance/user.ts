@@ -16,11 +16,14 @@ export default class user {
     scheduleByUserOrGroup: string
 
     @ManyToOne(() => userGroup, (item) => item.id)
-    userGroupId?: userGroup;
+    @JoinColumn({name:'userGroupId'})
+    userGroup?: userGroup;
 
     @ManyToOne(() => WorkSchedule, (item) => item.id)
-    scheduleId?: WorkSchedule;
+    @JoinColumn({name:'scheduleId'})
+    schedule?: WorkSchedule;
 
     @ManyToOne(() => userDepartment, (item) => item.id)
-    departmentId?: userDepartment;
+    @JoinColumn({name:'departmentId'})
+    department?: userDepartment;
 }

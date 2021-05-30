@@ -1,4 +1,10 @@
-export const Selects = ({ inline = false, item, selected, onSelectChange }) => (
+export const Selects = ({
+  inline = false,
+  item,
+  selected,
+  filter,
+  onSelectChange,
+}) => (
   <div className="form-element">
     {item.label && <div className="form-label">{item.label}</div>}
     <select
@@ -9,9 +15,38 @@ export const Selects = ({ inline = false, item, selected, onSelectChange }) => (
     >
       {item.options.map((option, j) => (
         <option key={j} value={option.value}>
-          {option.label}
-        </option>
+            {option.label}
+          </option>
       ))}
+    </select>
+  </div>
+);
+
+export const Selects_Filter = ({
+  inline = false,
+  item,
+  selected,
+  filter,
+  onSelectChange,
+}) => (
+  <div className="form-element">
+    {item.label && <div className="form-label">{item.label}</div>}
+    <select
+      ref={item.ref}
+      name={item.name}
+      className="form-select"
+      onChange={(event) => onSelectChange(event.target.value)}
+    >
+      {item.options.map((option, j) => {
+        if (
+          (filter.group === "" || filter.group === item.group) &&
+          (filter.department === "" || filter.department === item.department)
+        ) {
+          <option key={j} value={option.value}>
+            {option.label}
+          </option>;
+        }
+      })}
     </select>
   </div>
 );

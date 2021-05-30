@@ -28,6 +28,7 @@ const get_UserDepartments = async (filter) => {
 
 const get_UserDepartment = async (id) => {
   try {
+
     const url =
       publicRuntimeConfig.SERVER_URI + `api/attendance/userDepartment/${id}`;
 
@@ -41,5 +42,7 @@ const get_UserDepartment = async (id) => {
   } catch (e) {
     console.error(e);
   }
+
+  return {};
 };
 export default { get_UserDepartments, get_UserDepartment };

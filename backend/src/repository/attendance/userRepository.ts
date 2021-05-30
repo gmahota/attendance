@@ -1,8 +1,9 @@
 import User from "../../models/attendance/user";
-import { getRepository,getConnection } from "typeorm";
+import { getRepository,getConnection,FindConditions } from "typeorm";
 
-interface Key {
-  id?: any;
+interface Filter {
+  department?:string,
+  group?: string;
 }
 
 const findById = async function findById(id: string): Promise<User> {
@@ -15,10 +16,11 @@ const findById = async function findById(id: string): Promise<User> {
   return data;
 };
 
-const findAll = async function findAll(): Promise<User[]> {
+const findAll = async function findAll(filter:Filter): Promise<User[]> {
   const UserRepository = getRepository(User);
-
+  
   const data: User[] = await UserRepository.find({
+    where: "",
     order: {
       name: "ASC",
       id: "DESC",

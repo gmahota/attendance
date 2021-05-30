@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import PunchDailyCardService from "../../services/attendance/punchDailyCard";
-import PunchDailyCard from "../../models/attendance/punchDailyCard";
 
 export const get_all_PunchDailyCards = async (request: Request, response: Response) => {
 
@@ -43,16 +42,19 @@ export const get_Report = async (request: Request, response: Response) => {
     group,
     user,
     dateBegin,
-    dateEnd
+    dateEnd,
+    department
   } = request.body;
 
   const file = await PunchDailyCardService.getReport({
+    department,
     name,
     type,
     group,
     user,
     dateBegin,
-    dateEnd
+    dateEnd,
+    
   }); 
   response.status(202).json({file});
 }

@@ -49,11 +49,6 @@ const initialState = [
         },
         items: [
           {
-            url: "/usersDepartments",
-            title: "Departments",
-            items: [],
-          },
-          {
             url: "/groups",
             title: "Groups",
             items: [],

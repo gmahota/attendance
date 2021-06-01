@@ -212,14 +212,6 @@ const FilterReport = ({
           </div>
           <div className="w-full lg:w-1/2">
             <Selects
-              item={itemsUserDepartments}
-              selected={userDepartment}
-              onSelectChange={handleUserDepartmentsChange}
-            />
-          </div>
-
-          <div className="w-full lg:w-1/2">
-            <Selects
               item={itemsUsers}
               selected={user}
               onSelectChange={handleUserChange}

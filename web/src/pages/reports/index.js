@@ -240,19 +240,6 @@ export default function ReportIndividual({
   );
 }
 
-export const getStaticProps = async () => {
-  const allGroups = await groupService.get_UserGroups();
-  const allUsers = await userService.get_Users();
-  const allUserDepartments = await userDepartmentService.get_UserDepartments();
-  return {
-    props: {
-      allGroups,
-      allUsers,
-      allUserDepartments,
-    },
-  };
-};
-
 export const getServerSideProps= async (ctx) => {
   const { ['nextauth.token']: token } = parseCookies(ctx)
 
@@ -266,7 +253,14 @@ export const getServerSideProps= async (ctx) => {
   }
   //await apiClient.get('/users')
 
+  const allGroups = await groupService.get_UserGroups();
+  const allUsers = await userService.get_Users();
+  const allUserDepartments = await userDepartmentService.get_UserDepartments();
   return {
-    props: {}
-  }
+    props: {
+      allGroups,
+      allUsers,
+      allUserDepartments,
+    },
+  };
 }

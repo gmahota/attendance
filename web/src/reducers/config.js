@@ -1,6 +1,6 @@
 export default function config(
   state = {
-    name: "R-Attendance",
+    name: "",
     description: "Next.js Tailwind CSS admin template",
     url: "https://d-board-nextjs.mobifica.com",
     layout: "layout-1",

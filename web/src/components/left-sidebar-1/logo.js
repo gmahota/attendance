@@ -19,7 +19,11 @@ const Logo = () => {
       <div className="logo truncate">
         <Link href="/">
           <a className="flex flex-row items-center justify-start space-x-2">
-            <GiTimeBomb size={28} />
+          <img
+              className="mx-auto h-12 w-auto"
+              src="images/rainbow-logo.png"
+              alt="Workflow"
+            />
             <span>{name}</span>
           </a>
         </Link>

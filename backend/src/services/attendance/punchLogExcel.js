@@ -14,22 +14,22 @@ function fillPunchDaily(items) {
 
     workbook.sheet("Sheet1").cell(`B2`).value("User").style("border", true);
     workbook.sheet("Sheet1").cell(`C2`).value("Shift").style("border", true);
-    workbook.sheet("Sheet1").cell(`D2`).value("Check-in").style("border", true);
+    workbook.sheet("Sheet1").cell(`D2`).value("Shift Check-in").style("border", true);
 
     workbook
       .sheet("Sheet1")
       .cell(`E2`)
-      .value("Shift Check-in")
+      .value("Check-in")
       .style("border", true);
     workbook
       .sheet("Sheet1")
       .cell(`F2`)
-      .value("Check-out")
+      .value("Shift Check-out")
       .style("border", true);
     workbook
       .sheet("Sheet1")
       .cell(`G2`)
-      .value("Shift Check-out")
+      .value("Check-out")
       .style("border", true);
     workbook
       .sheet("Sheet1")
@@ -46,14 +46,10 @@ function fillPunchDaily(items) {
       .cell(`J2`)
       .value("Total delay")
       .style("border", true);
+    
     workbook
       .sheet("Sheet1")
       .cell(`K2`)
-      .value("User Department")
-      .style("border", true);
-    workbook
-      .sheet("Sheet1")
-      .cell(`L2`)
       .value("User Group")
       .style("border", true);
 
@@ -81,23 +77,23 @@ function fillPunchDaily(items) {
       workbook
         .sheet("Sheet1")
         .cell(`D${row}`)
-        .value(item.entrada)
+        .value(item.entradashift)
         .style({ border: true, numberFormat: "hh:mm:ss" });
       workbook
         .sheet("Sheet1")
         .cell(`E${row}`)
-        .value(item.entradashift)
+        .value(item.entrada)
         .style({ border: true, numberFormat: "hh:mm:ss" });
 
       workbook
         .sheet("Sheet1")
         .cell(`F${row}`)
-        .value(item.saida)
+        .value(item.saidashift)
         .style({ border: true, numberFormat: "hh:mm:ss" });
       workbook
         .sheet("Sheet1")
         .cell(`G${row}`)
-        .value(item.saidashift)
+        .value(item.saida)
         .style({ border: true, numberFormat: "hh:mm:ss" });
 
       workbook
@@ -121,12 +117,6 @@ function fillPunchDaily(items) {
       workbook
         .sheet("Sheet1")
         .cell(`K${row}`)
-        .value(item.userDepartment)
-        .style({ border: true });
-
-      workbook
-        .sheet("Sheet1")
-        .cell(`L${row}`)
         .value(item.userGroup)
         .style({ border: true });
 
@@ -198,7 +188,7 @@ function fillPunchCard(items) {
       workbook
         .sheet("Sheet1")
         .cell(`D${row}`)
-        .value(item.deviceId)
+        .value(item.device)//deviceId)
         .style("border", true);
       workbook
         .sheet("Sheet1")

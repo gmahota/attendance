@@ -10,7 +10,6 @@ import FilterReport from "../../components/attendance-reports/filter-report";
 import groupService from "../../services/userGroup";
 import userService from "../../services/user";
 import userDepartmentService from "../../services/userDepartment";
-import { parseCookies } from 'nookies'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -252,21 +251,3 @@ export const getStaticProps = async () => {
     },
   };
 };
-
-export const getServerSideProps= async (ctx) => {
-  const { ['nextauth.token']: token } = parseCookies(ctx)
-
-  if (!token) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      }
-    }
-  }
-  //await apiClient.get('/users')
-
-  return {
-    props: {}
-  }
-}

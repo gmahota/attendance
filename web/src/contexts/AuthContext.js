@@ -2,6 +2,7 @@ import {createContext,useState,useEffect} from 'react'
 import {setCookie, parseCookies} from 'nookies'
 import {signInRequest,recoverUserInformation} from '../services/auth'
 import Router from 'next/router'
+import { api } from '../services/api'
 
 
 export const AuthContext = createContext({})
@@ -31,6 +32,8 @@ export function AuthProvider({children}){
     setCookie(undefined,'attendance.token',token,{
       maxAge:60 *60*1,// 1 hour
     })
+
+    api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
     setUser(user)
 

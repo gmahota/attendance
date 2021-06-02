@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef,useContext } from "react";
+import { parseCookies } from 'nookies'
+import { AuthContext } from '../../contexts/AuthContext'
 import AccountLinks from "./account-links";
 
 const Dropdown = () => {
@@ -6,6 +8,8 @@ const Dropdown = () => {
 
   const buttonRef = useRef(null);
   const dropdownRef = useRef(null);
+
+  const { user } = useContext(AuthContext)
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -38,7 +42,7 @@ const Dropdown = () => {
         <span className="absolute top-0 left-0 pt-4">
           <img
             className="h-8 w-8 rounded-full shadow"
-            src={`/images/faces/profileIcon.png`}
+            src={user?.avatar_url}
             alt="avatar"
           />
         </span>

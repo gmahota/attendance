@@ -9,8 +9,8 @@ export async  function signInRequest(data){
   return{
     token:uuid(),
     user:{
-      email:'guimaraesmahota@gmail.com',
-      avatar_url:'https://github.com/gmahota.png'
+      email:'turaymelo@gmail.com',
+      avatar_url:'https://github.com/turaymelo.png'
     }
     
   }
@@ -18,10 +18,11 @@ export async  function signInRequest(data){
 
 export async function recoverUserInformation(){
   await delay()
+  ///images/faces/profileIcon.png
   return{
     user:{
-      email:'guimaraesmahota@gmail.com',
-      avatar_url:'https://github.com/gmahota.png'
+      email:'turaymelo@gmail.com',
+      avatar_url:'https://github.com/turaymelo.png'
     }
   }
 }

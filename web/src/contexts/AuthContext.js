@@ -1,15 +1,26 @@
-import {createContext,useState} from 'react'
-import {signInRequest} from '../services/auth'
+import {createContext,useState,useEffect} from 'react'
+import {setCookie, parseCookies} from 'nookies'
+import {signInRequest,recoverUserInformation} from '../services/auth'
 import Router from 'next/router'
-import {setCookie} from 'nookies'
+
 
 export const AuthContext = createContext({})
 
 export function AuthProvider({children}){
 
-  const [user,setUser] = useState()
+  const [user,setUser] = useState(null)
 
   const isAuthenticated = !!user;
+
+  useEffect(() => {
+    const {['attendance.token']: token} = parseCookies()
+
+    if(token){
+      recoverUserInformation().then(response=> {
+        setUser(response.user)
+      })
+    }
+  },[])
 
   async function signIn({email,password}){
     const { token,user } = await signInRequest({

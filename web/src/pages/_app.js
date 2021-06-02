@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import {AuthProvider} from '../contexts/AuthContext'
 import {Provider} from 'react-redux'
 import Layout from '../layouts'
 import {useStore} from '../store'
@@ -34,7 +35,7 @@ export default function App({Component, pageProps}) {
   const store = useStore(pageProps.initialReduxState)
 
   return (
-    <>
+    <AuthProvider>
       <Head>
         <meta
           name="viewport"
@@ -46,6 +47,6 @@ export default function App({Component, pageProps}) {
           <Component {...pageProps} />
         </Layout>
       </Provider>
-    </>
+    </AuthProvider>
   )
 }

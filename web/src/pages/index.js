@@ -10,6 +10,7 @@ import Markets from "../components/dashboard/markets";
 import { List } from "../components/dashboard/list";
 import Tasks from "../components/tasks";
 import { Timeline1 } from "../components/timelines";
+import { parseCookies } from 'nookies'
 
 const Index = () => {
   return (
@@ -88,4 +89,23 @@ const Index = () => {
     </>
   );
 };
+
+export const getServerSideProps= async (ctx) => {
+  const { ['nextauth.token']: token } = parseCookies(ctx)
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      }
+    }
+  }
+  //await apiClient.get('/users')
+
+  return {
+    props: {}
+  }
+}
+
 export default Index;

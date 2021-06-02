@@ -1,8 +1,10 @@
 
-const delay = (amount=758) => new Promise((resolve, reject) => setTimeout(resolve,amout))
+import { v4 as uuid } from 'uuid'
 
-export async function signInRequest(data){
-  await delay
+const delay = (amount=758) => new Promise((resolve, reject) => setTimeout(resolve,amount))
+
+export async  function signInRequest(data){
+  await delay()
 
   return{
     token:uuid(),

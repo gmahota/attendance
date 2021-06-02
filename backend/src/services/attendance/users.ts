@@ -15,7 +15,7 @@ const getAll = (filter:Filter) =>
 
 const create = (item:User) =>
   UserRepository.create(item)
-  
+
 export default {
   getAll,
   getById,

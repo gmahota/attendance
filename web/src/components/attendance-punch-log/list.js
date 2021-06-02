@@ -7,12 +7,13 @@ import { FiEye } from "react-icons/fi";
 import moment from "moment";
 
 export default function AttendancePunchLog ({ allPunchLog }) {
-  
+
   const columns = React.useMemo(
     () => [
       {
         Header: "Date",
         accessor: "date",
+        Cell:(props) => <span>{moment(props.value).format('DD-MM-YYYY')}</span>
       },
       {
         Header: "Name",
@@ -25,23 +26,26 @@ export default function AttendancePunchLog ({ allPunchLog }) {
       {
         Header: "Entrada Shift",
         accessor: "entradashift",
-        Cell:(props) => <span>{moment(props.value).format()}</span>
+        Cell:(props) => <span>{moment(props.value).format('HH:mm:ss')}</span>
       },
       {
         Header: "Entrada",
         accessor: "entrada",
+        Cell:(props) => <span>{moment(props.value).format('HH:mm:ss')}</span>
       },
       {
         Header: "Saida Shift",
         accessor: "saidashift",
+        Cell:(props) => <span>{moment(props.value).format('HH:mm:ss')}</span>
       },
       {
         Header: "Saida",
         accessor: "saida",
+        Cell:(props) => <span>{moment(props.value).format('HH:mm:ss')}</span>
       },
       {
         Header: "Total Delay",
-        accessor: "totalDelay",
+        accessor: "totalDelay"
       },
       {
         Header: "",

@@ -11,19 +11,22 @@ export default class PunchDailyCard {
 
   @ViewColumn()
   date?: Date;
-  
+
   @ViewColumn()
   userId?: string;
 
   @ViewColumn()
   userName?: string;
-  
+
   @ViewColumn()
   userGroup?: string;
 
   @ViewColumn()
+  userGroupName?: string;
+
+  @ViewColumn()
   userDepartment?: string;
-  
+
   @ViewColumn()
   shiftId?: string;
 

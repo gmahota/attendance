@@ -1,9 +1,11 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
+import moment from "moment";
 import SectionTitle from "../../components/section-title";
 import Widget from "../../components/widget";
 import Datatable from "../../components/datatable";
 import userDepartmentService from "../../services/userDepartment";
+import { parseCookies } from 'nookies'
 
 export default function UserDepartments({ allUserDepartments }) {
   const router = useRouter();
@@ -25,7 +27,7 @@ export default function UserDepartments({ allUserDepartments }) {
         {
           Header: "Name",
           accessor: "name",
-        },
+        }
       ],
       []
     );
@@ -35,14 +37,11 @@ export default function UserDepartments({ allUserDepartments }) {
 
   return (
     <>
-      <SectionTitle title="Tables" subtitle="Workschedules" />
+      <SectionTitle title="Tables" subtitle="User's Groups" />
       <Widget
-        title="List Of Workschedule"
+        title=""
         description={
-          <span>
-            Use the <code>&lt;Datatable /&gt;</code> component to create a data
-            table
-          </span>
+          
         }
       >
         <Simple />
@@ -51,7 +50,18 @@ export default function UserDepartments({ allUserDepartments }) {
   );
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async (ctx) => {
+  const { ['attendance.token']: token } = parseCookies(ctx)
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      }
+    }
+  }
+
   const allUserDepartments = await userDepartmentService.get_UserDepartments();
 
   return {

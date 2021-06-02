@@ -66,7 +66,7 @@ export default function Workschedules({ user }) {
 
   return (
     <>
-      <SectionTitle title="Tables" subtitle={`Workschedule - ${user.id}`} />
+      <SectionTitle title="Tables" subtitle={`User - ${user.name}`} />
       <Widget
         title="Details"
         description={

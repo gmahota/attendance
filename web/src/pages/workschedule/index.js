@@ -37,13 +37,8 @@ export default function Workschedules({ allWorkschedules }) {
     <>
       <SectionTitle title="Tables" subtitle="Workschedules" />
       <Widget
-        title="List Of Workschedule"
-        description={
-          <span>
-            Use the <code>&lt;Datatable /&gt;</code> component to create a data
-            table
-          </span>
-        }
+        title=""
+        description=""
       >
         <Simple />
       </Widget>

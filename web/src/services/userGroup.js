@@ -18,7 +18,7 @@ const get_UserGroups = async (filter) => {
     })
       .then((response) => response.json())
       .then((data) => (res = data));
-    console.log(res)
+
     return res;
   } catch (e) {
     console.error(e);

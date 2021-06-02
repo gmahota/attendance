@@ -49,11 +49,6 @@ function fillPunchDaily(items) {
     workbook
       .sheet("Sheet1")
       .cell(`K2`)
-      .value("User Department")
-      .style("border", true);
-    workbook
-      .sheet("Sheet1")
-      .cell(`L2`)
       .value("User Group")
       .style("border", true);
 
@@ -121,13 +116,7 @@ function fillPunchDaily(items) {
       workbook
         .sheet("Sheet1")
         .cell(`K${row}`)
-        .value(item.userDepartment)
-        .style({ border: true });
-
-      workbook
-        .sheet("Sheet1")
-        .cell(`L${row}`)
-        .value(item.userGroup)
+        .value(item.userGroupName)
         .style({ border: true });
 
       row++;
@@ -193,7 +182,7 @@ function fillPunchCard(items) {
       workbook
         .sheet("Sheet1")
         .cell(`C${row}`)
-        .value(item.userGroup)
+        .value(item.userGroupName)
         .style("border", true);
       workbook
         .sheet("Sheet1")

@@ -14,9 +14,6 @@ export default function Workschedules({ workschedule }) {
 
   function getDateTime(value) {
     var a = moment(value);
-    console.log(a.format("HH:mm"));
-    var d = new Date(value);
-    var n = d.getMinutes();
 
     return a.format("HH:mm");
   }

@@ -145,17 +145,6 @@ const Datatable = ({ columns, data }) => {
           ))}
         </select>
       </div>
-      <pre>
-        {JSON.stringify(
-          data.filter((item, index) =>
-            Object.keys(selectedRowIds)
-              .map((i) => parseInt(i, 10))
-              .includes(index)
-          ),
-          null,
-          2
-        )}
-      </pre>
     </>
   );
 };

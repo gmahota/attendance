@@ -1,15 +1,27 @@
-import {createContext,useState} from 'react'
-import {signInRequest} from '../services/auth'
+import {createContext,useState,useEffect} from 'react'
+import {setCookie, parseCookies} from 'nookies'
+import {signInRequest,recoverUserInformation} from '../services/auth'
 import Router from 'next/router'
-import {setCookie} from 'nookies'
+import { api } from '../services/api'
+
 
 export const AuthContext = createContext({})
 
 export function AuthProvider({children}){
 
-  const [user,setUser] = useState()
+  const [user,setUser] = useState(null)
 
   const isAuthenticated = !!user;
+
+  useEffect(() => {
+    const {['attendance.token']: token} = parseCookies()
+
+    if(token){
+      recoverUserInformation().then(response=> {
+        setUser(response.user)
+      })
+    }
+  },[])
 
   async function signIn({email,password}){
     const { token,user } = await signInRequest({
@@ -20,6 +32,8 @@ export function AuthProvider({children}){
     setCookie(undefined,'attendance.token',token,{
       maxAge:60 *60*1,// 1 hour
     })
+
+    api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
     setUser(user)
 

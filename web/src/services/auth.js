@@ -8,7 +8,21 @@ export async  function signInRequest(data){
 
   return{
     token:uuid(),
-    email:'guimaraesmahota@gmail.com',
-    avatar_url:'https://github.com/gmahota.png'
+    user:{
+      email:'turaymelo@gmail.com',
+      avatar_url:'https://github.com/turaymelo.png'
+    }
+    
+  }
+}
+
+export async function recoverUserInformation(){
+  await delay()
+  ///images/faces/profileIcon.png
+  return{
+    user:{
+      email:'turaymelo@gmail.com',
+      avatar_url:'https://github.com/turaymelo.png'
+    }
   }
 }

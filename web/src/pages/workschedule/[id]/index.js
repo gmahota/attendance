@@ -1,10 +1,19 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
+import moment from "moment";
 import SectionTitle from "../../../components/section-title";
 import Widget from "../../../components/widget";
 import workService from "../../../services/workschedule";
 import Datatable from "../../../components/datatable";
-import moment from "moment";
+import {
+  DefaultTabs,
+  UnderlinedTabs,
+  IconTabs,
+  Pills,
+  VerticalTabs
+} from '../../../components/tabs'
+
+
 
 export default function Workschedules({ workschedule }) {
   const router = useRouter();
@@ -12,13 +21,38 @@ export default function Workschedules({ workschedule }) {
     return <p>Carregando...</p>;
   }
 
-  function getDateTime(value) {
-    var a = moment(value);
+  
 
-    return a.format("HH:mm");
+  function getDateTime(value) {
+    try{
+      var a = moment(value);
+
+      return a.format("HH:mm");
+    }catch(e){
+      return ""
+    }
+    
   }
 
-  const Simple = () => {
+  const TabShifts = ({shifts}) => (
+    <SimpleShifts />
+  )  
+  
+  const TabUsers = ({allUsers}) => (
+    <SimpleUsers allUsers={allUsers}/>
+  )
+
+  const TabGroupUsers = ({allUsersGroups}) => (
+    <SimpleTabGroupUsers allUsersGroups={allUsersGroups}/>
+  )
+
+  const tabs = [
+    {index: 0, title: 'Shifts', active: true, content: <TabShifts shifts={workschedule.Shifts}/>},
+    {index: 1, title: 'Users', active: false, content: <TabUsers allUsers={workschedule.users}/>},
+    {index: 2, title: 'Groups',active: false, content: <TabGroupUsers allUsersGroups={workschedule.groups}/>}
+  ]
+  
+  const SimpleShifts = () => {
     const columns = React.useMemo(
       () => [
         {
@@ -47,6 +81,16 @@ export default function Workschedules({ workschedule }) {
           Cell: (props) => <span>{getDateTime(props.value)}</span>,
         },
         {
+          Header: "Min Time In",
+          accessor: "minTimeIn",
+          Cell: (props) => <span>{getDateTime(props.value)}</span>,
+        },
+        {
+          Header: "Max Time Out",
+          accessor: "maxTimeOut",
+          Cell: (props) => <span>{getDateTime(props.value)}</span>,
+        },
+        {
           Header: "Grace Period",
           accessor: "gracePeriod",
         },
@@ -61,21 +105,100 @@ export default function Workschedules({ workschedule }) {
     return <Datatable columns={columns} data={data} />;
   };
 
+  const SimpleUsers = ({allUsers}) => {
+    const columns = React.useMemo(
+      () => [
+        {
+          Header: "Code",
+          accessor: "id",
+          Cell: (props) => <a href={`/users/${props.value}`}>{props.value}</a>,
+        },
+        {
+          Header: "Name",
+          accessor: "name",
+        },
+        {
+          Header: "User Group",
+          accessor: "userGroup",
+          Cell: (props) => <a href={`/groups/${props.value?.name}`}>{props.value?.name}</a>,
+        },
+        {
+          Header: "Schedule",
+          accessor: "schedule",
+          Cell: (props) => <a href={`/workschedule/${props.value?.name}`}>{props.value?.name}</a>,
+        }
+      ],
+      []
+    );
+    const data = React.useMemo(() => allUsers, []);
+    return <Datatable columns={columns} data={data} />;
+  };
+
+  const SimpleTabGroupUsers = ({allUsersGroups}) => {
+    const columns = React.useMemo(
+      () => [
+        {
+          Header: "Code",
+          accessor: "id",
+          Cell: (props) => <a href={`/groups/${props.value}`}>{props.value}</a>,
+        },
+        {
+          Header: "Name",
+          accessor: "name",
+        },
+        ,
+        {
+          Header: "Created Att",
+          accessor: "createdAt",
+          Cell:(props) => <span>{moment(props.value).format('DD-MM-YYYY HH:mm:ss')}</span>
+        },
+        {
+          Header: "Update Att",
+          accessor: "updatedAt",
+          Cell:(props) => <span>{moment(props.value).format('DD-MM-YYYY HH:mm:ss')}</span>
+        },
+        {
+          Header: "Parent Id",
+          accessor: "parent_id",
+          Cell: (props) => (
+            <a href={`/usersDepartments/${props.value}`}>{props.value}</a>
+          ),
+        }
+      ],
+      []
+    );
+    const data = React.useMemo(() => allUsersGroups, []);
+    return <Datatable columns={columns} data={data} />;
+  };
+
   return (
     <>
       <SectionTitle
         title="Tables"
-        subtitle={`Workschedule - ${workschedule.id}`}
+        subtitle={`Workschedule - ${workschedule.id}. ${workschedule.name}`}
       />
       <Widget
-        title="Details"
-        description={
-          <span>
-            {workschedule.name} <code>&lt;Shifts, assign... /&gt;</code>
-          </span>
-        }
+        title=""
+        description=""
       >
-        <Simple />
+
+      <Widget
+      title="Underlined tabs"
+      description={
+        <span>
+          Use the <code>&lt;UnderlinedTabs /&gt;</code> component for underlined
+          tabs
+        </span>
+      }>
+      <div className="flex flex-wrap">
+        <div className="w-full">
+          <UnderlinedTabs tabs={tabs} />
+        </div>
+      </div>
+    </Widget>
+
+
+        
       </Widget>
     </>
   );

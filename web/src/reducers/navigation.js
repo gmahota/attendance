@@ -49,15 +49,15 @@ const initialState = [
         },
         items: [
           {
-            url: "/groups",
-            title: "Groups",
-            items: [],
-          },
-          {
             url: "/users",
             title: "Users",
             items: [],
           },
+          {
+            url: "/groups",
+            title: "Groups",
+            items: [],
+          },          
           {
             url: "/workschedule",
             title: "Workschedules",

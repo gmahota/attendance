@@ -24,6 +24,16 @@ export default function Workschedules({ allUsers }) {
           Header: "Name",
           accessor: "name",
         },
+        {
+          Header: "User Group",
+          accessor: "userGroup",
+          Cell: (props) => <a href={`/groups/${props.value?.name}`}>{props.value?.name}</a>,
+        },
+        {
+          Header: "Schedule",
+          accessor: "schedule",
+          Cell: (props) => <a href={`/workschedule/${props.value?.name}`}>{props.value?.name}</a>,
+        }
       ],
       []
     );

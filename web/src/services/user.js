@@ -18,7 +18,7 @@ const get_Users = async (filter) => {
     })
       .then((response) => response.json())
       .then((data) => (res = data));
-
+      
     return res;
   } catch (e) {
     console.error(e);

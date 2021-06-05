@@ -46,7 +46,7 @@ function fillPunchDaily(items) {
       .cell(`J2`)
       .value("Total delay")
       .style("border", true);
-    
+
     workbook
       .sheet("Sheet1")
       .cell(`K2`)
@@ -117,7 +117,8 @@ function fillPunchDaily(items) {
       workbook
         .sheet("Sheet1")
         .cell(`K${row}`)
-        .value(item.userGroup)
+
+        .value(item.userGroupName)
         .style({ border: true });
 
       row++;
@@ -183,7 +184,7 @@ function fillPunchCard(items) {
       workbook
         .sheet("Sheet1")
         .cell(`C${row}`)
-        .value(item.userGroup)
+        .value(item.userGroupName)
         .style("border", true);
       workbook
         .sheet("Sheet1")
@@ -238,14 +239,14 @@ function fillTotalHours(items) {
     workbook.sheet("Sheet1").cell(`D2`).value("Total Working hours").style("border", true);
     workbook.sheet("Sheet1").cell(`E2`).value("Total Delay hours").style("border", true);
 
-    
+
     items.forEach((item) => {
       workbook.sheet("Sheet1").cell(`A${row}`).value(item.userName).style("border", true);
       workbook.sheet("Sheet1").cell(`B${row}`).value(item.userGroup).style("border", true);
       workbook.sheet("Sheet1").cell(`C${row}`).value(item.workingDays).style("border", true);
       workbook.sheet("Sheet1").cell(`D${row}`).value(item.totalWorkingHours).style({"border": true, numberFormat: "hh:mm:ss"}) ;
       workbook.sheet("Sheet1").cell(`E${row}`).value(item.totalDelay).style({"border": true, numberFormat: "hh:mm:ss" });
-      
+
       row++;
     });
 

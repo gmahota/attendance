@@ -63,12 +63,17 @@ const findAll = async function findAll(filter:Filter): Promise<PunchDailyCard[]>
   str_where = str_where.length === 0 ? "" : " where " + str_where
 
   const str_query = `SELECT
-  ROW_NUMBER() OVER(PARTITION BY userId) as id,
-  v.*
-  FROM view_PunchDaily v ${str_where}
+    ROW_NUMBER() OVER(PARTITION BY userId) as id,
+    v.*,g.name as userGroupName
+    FROM view_PunchDaily v
+    left join userGroup g on g.id = v.userGroup
+    ${str_where}
+
   order by v.date asc, v.username asc
   `
-const items: PunchDailyCard[] = await entityManager.query(str_query);
+  console.log(str_query)
+
+  const items: PunchDailyCard[] = await entityManager.query(str_query);
 
   return items;
 };
@@ -98,11 +103,16 @@ const findAll_Punchlog = async function findAll_Punchlog(filter:Filter): Promise
 
   str_where = str_where.length === 0 ? "" : " where " + str_where
 
+  const str_query =`SELECT
+    ROW_NUMBER() OVER(PARTITION BY userId) as id,
+    v.*,g.name as userGroupName
+    FROM View_PunchCard v
+    left join userGroup g on g.id = v.userGroup
+    ${str_where}
+  `
+
   const items: any = await entityManager.query(
-  `SELECT
-     ROW_NUMBER() OVER(PARTITION BY userId) as id,
-     v.*
-     FROM View_PunchCard v ${str_where}`
+    str_query
   );
 
   return items;

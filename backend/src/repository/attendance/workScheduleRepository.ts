@@ -1,5 +1,5 @@
 import WorkSchedule from "../../models/attendance/workSchedule";
-import { getRepository,getConnection } from "typeorm";
+import { getRepository, getConnection } from "typeorm";
 
 interface Key {
   id?: any;
@@ -10,8 +10,13 @@ const findById = async function findById(id: string): Promise<WorkSchedule> {
 
   const data: WorkSchedule = await WorkScheduleRepository.findOneOrFail({
     where: { id: id },
-    relations:["Shifts"]
-    });
+    relations: ["Shifts", "users",
+      "users.userGroup",
+      "users.schedule",
+      "users.department",
+      "groups"
+    ]
+  });
 
   return data;
 };
@@ -21,8 +26,7 @@ const findAll = async function findAll(): Promise<WorkSchedule[]> {
 
   const data: WorkSchedule[] = await WorkScheduleRepository.find({
     order: {
-      name: "ASC",
-      id: "DESC",
+      id: "ASC",
     },
   });
 

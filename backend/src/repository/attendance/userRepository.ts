@@ -10,7 +10,8 @@ const findById = async function findById(id: string): Promise<User> {
   const UserRepository = getRepository(User);
 
   const data: User = await UserRepository.findOneOrFail({
-      where: {id: id }
+      where: {id: id },
+      relations: ["userGroup","schedule","department"]
     });
 
   return data;
@@ -18,9 +19,10 @@ const findById = async function findById(id: string): Promise<User> {
 
 const findAll = async function findAll(filter:Filter): Promise<User[]> {
   const UserRepository = getRepository(User);
-  
+
   const data: User[] = await UserRepository.find({
     where: "",
+    relations: ["userGroup","schedule","department"],
     order: {
       name: "ASC",
       id: "DESC",

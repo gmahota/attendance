@@ -11,7 +11,7 @@ tab1.schedulerId, tab1.userDefinedSchedulerName, tab1.exception, tab1.shiftSuppo
 , tab1.shiftDescription, tab1.json, case when row_num %2 !=0 then 'Entrada' else 'Saida' end AS punchType from (
 
 SELECT *,   
-    ROW_NUMBER() OVER(PARTITION BY userId, date(date)) AS row_num  
+    ROW_NUMBER() OVER(PARTITION BY userId, date(date) order by date) AS row_num  
 FROM punchLog) tab1) tab2
 left outer join shift on tab2.userDefinedSchedulerId = shift.scheduleIdId  and time(date) between time(shift.minTimeIn) and time(shift.maxTimeOut)
 and tab2.diaSemanaPunch = shift.dayofweek);
@@ -23,14 +23,14 @@ select * from view_PunchDaily;
   alter view view_PunchDaily
 as
 select delayEntrance, delayOut, addtime(delayEntrance, delayOut) totalDelay, date, userId, userName, userGroup, shiftId, description, entrada, entradashift,
-saida, saidashift, shiftSupposedGracePerior from 
+saida, saidashift, shiftSupposedGracePerior, totalHorasEntrada, totalHorasSaida, totalHorasTrabalho from 
 (
 select if(delayEntrance < '00:00:00', '00:00:00', delayEntrance) delayEntrance, if(delayOut < '00:00:00', '00:00:00', delayOut) delayOut  , 
-date, userId, userName, userGroup, shiftId, description, entrada, entradashift,
+date, userId, userName, userGroup, shiftId, description, entrada, entradashift, totalHorasEntrada, totalHorasSaida, SEC_TO_TIME(totalHorasSaida - totalHorasEntrada) totalHorasTrabalho,
 saida, saidashift, shiftSupposedGracePerior from 
 (
-select subtime(time(tab1.entrada), time(entradashift)) delayEntrance, subtime( time(saida), time(tab1.saidashift)) delayOut, 
-    tab1.* from ( select v.date, v.userid, v.userName,userGroup,v.shiftid, v.description, max(v.entrada) entrada, 
+select subtime(time(tab1.entrada), time(entradashift)) delayEntrance, subtime( time(saida), time(tab1.saidashift)) delayOut,     
+    tab1.* from ( select v.date, v.userid, v.userName,userGroup,v.shiftid, v.description, min(v.entrada) entrada, Sum(Time_to_sec(time(v.entrada))) totalHorasEntrada, Sum(Time_to_sec(time(v.saida))) totalHorasSaida, 
     timeIn entradashift,max(v.saida) saida, timeOut saidashift, shiftSupposedGracePerior from   (   SELECT date(v.date) date, 
     v.userName, v.userid,userGroup,v.shiftid, timeIn, timeOut, description, shiftSupposedGracePerior,    
     case when punchtype = 'Entrada' then v.date end entrada,    case when punchtype = 'Saida' then v.date end saida  
@@ -39,3 +39,9 @@ select subtime(time(tab1.entrada), time(entradashift)) delayEntrance, subtime( t
     )tab2
     
     )tab3;
+
+
+        create view view_totalWHours
+    as
+    select userId, userName, SEC_TO_TIME(Sum(Time_to_sec(totalDelay))) totalDelay, SEC_TO_TIME(Sum(Time_to_sec(totalHorasTrabalho))) totalHorasTrabalho from view_PunchDaily
+    group by userId, userName;

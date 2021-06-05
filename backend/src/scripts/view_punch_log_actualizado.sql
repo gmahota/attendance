@@ -43,5 +43,25 @@ select subtime(time(tab1.entrada), time(entradashift)) delayEntrance, subtime( t
 
         create view view_totalWHours
     as
-    select userId, userName, SEC_TO_TIME(Sum(Time_to_sec(totalDelay))) totalDelay, SEC_TO_TIME(Sum(Time_to_sec(totalHorasTrabalho))) totalHorasTrabalho from view_PunchDaily
-    group by userId, userName;
+    select tab1.*, userGroup.name userGroup from (
+    select userId, min(userName) userName, max(userGroup) userGroupId, count(date) workingDays, SEC_TO_TIME(Sum(Time_to_sec(totalDelay))) totalDelay, SEC_TO_TIME(Sum(Time_to_sec(totalHorasTrabalho))) totalWorkingHours from view_PunchDaily
+    group by userId) tab1 left join userGroup on tab1.userGroupId = userGroup.id ; 
+
+
+     DELIMITER $$
+create PROCEDURE getTotalWorkingHours 
+(
+   IN theUserId int,
+   IN userGroup varchar(50),
+   IN dateBegin date,
+   IN dateEnd date
+) 
+BEGIN 
+    select ROW_NUMBER() OVER(PARTITION BY userId) as id, tab2.* from (select tab1.*, userGroup.name userGroup from (
+    select userId, min(userName) userName, max(userGroup) userGroupId, count(date) workingDays, 
+    SEC_TO_TIME(Sum(Time_to_sec(totalDelay))) totalDelay, SEC_TO_TIME(Sum(Time_to_sec(totalHorasTrabalho))) totalWorkingHours from view_PunchDaily
+    where date between dateBegin and dateEnd
+    group by userId) tab1 left join userGroup on tab1.userGroupId = userGroup.id ) tab2; 
+    
+END $$
+DELIMITER ;

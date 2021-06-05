@@ -221,7 +221,45 @@ function fillPunchCard(items) {
   });
 }
 
+function fillTotalHours(items) {
+  XlsxPopulate.fromBlankAsync().then((workbook) => {
+    // Modify the workbook.
+    let row = 3;
+
+    workbook
+      // .sheet("Sheet1")
+      // .cell(`A2`)
+      // .value("Date")
+      // .style({ leftBorder: true, topBorder: true });
+
+    workbook.sheet("Sheet1").cell(`A2`).value("User").style("border", true);
+    workbook.sheet("Sheet1").cell(`B2`).value("User Group").style("border", true);
+    workbook.sheet("Sheet1").cell(`C2`).value("Working Days").style("border", true);
+    workbook.sheet("Sheet1").cell(`D2`).value("Total Working hours").style("border", true);
+    workbook.sheet("Sheet1").cell(`E2`).value("Total Delay hours").style("border", true);
+
+    
+    items.forEach((item) => {
+      workbook.sheet("Sheet1").cell(`A${row}`).value(item.userName).style("border", true);
+      workbook.sheet("Sheet1").cell(`B${row}`).value(item.userGroup).style("border", true);
+      workbook.sheet("Sheet1").cell(`C${row}`).value(item.workingDays).style("border", true);
+      workbook.sheet("Sheet1").cell(`D${row}`).value(item.totalWorkingHours).style({"border": true, numberFormat: "hh:mm:ss"}) ;
+      workbook.sheet("Sheet1").cell(`E${row}`).value(item.totalDelay).style({"border": true, numberFormat: "hh:mm:ss" });
+      
+      row++;
+    });
+
+    // Write to file.
+    return workbook.toFileAsync(
+      appRoot + "/public/uploads/attendance/punchtotal.xlsx"
+    );
+  });
+}
+
+
+
 export default {
   fillPunchDaily,
   fillPunchCard,
+  fillTotalHours
 };

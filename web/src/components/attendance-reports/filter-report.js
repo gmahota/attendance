@@ -32,8 +32,8 @@ const FilterReport = ({
   allUserDepartments,
   allGroups,
 }) => {
-  const [name, setName] = useState("Punchdaily");
-  const [type, setType] = useState("Punchdaily");
+  const [name, setName] = useState("PunchTotalHours");
+  const [type, setType] = useState("PunchTotalHours");
   const [listGroups, setListGroups] = useState([]);
   const [group, setGroup] = useState("");
   const [user, setUser] = useState("");
@@ -132,6 +132,7 @@ const FilterReport = ({
     type: "radio",
     placeholder: "Report Type",
     options: [
+      { value: "PunchTotalHours", name: "PunchTotalHours", label: "Resume" },
       { value: "Punchdaily", name: "PunchDaily", label: "Punch Daily" },
       { value: "Punchlog", name: "Punchlog", label: "Punch Log" },
     ],

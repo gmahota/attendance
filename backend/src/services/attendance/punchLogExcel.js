@@ -241,13 +241,17 @@ function fillTotalHours(items) {
 
 
     items.forEach((item) => {
+
       workbook.sheet("Sheet1").cell(`A${row}`).value(item.userName).style("border", true);
       workbook.sheet("Sheet1").cell(`B${row}`).value(item.userGroup).style("border", true);
       workbook.sheet("Sheet1").cell(`C${row}`).value(item.workingDays).style("border", true);
       workbook.sheet("Sheet1").cell(`D${row}`).value(item.totalWorkingHours).style({"border": true, numberFormat: "hh:mm:ss"}) ;
       workbook.sheet("Sheet1").cell(`E${row}`).value(item.totalDelay).style({"border": true, numberFormat: "hh:mm:ss" });
 
+
       row++;
+
+
     });
 
     // Write to file.

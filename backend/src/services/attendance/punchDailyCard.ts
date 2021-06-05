@@ -31,7 +31,7 @@ const getByDate = (date: Date) =>
 
 const getReport = async (filter: ReportFilter) => {
 
-  
+
   switch (filter.type) {
     case "Punchdaily":
         const items: PunchDailyCard[] = await PunchDailyCardRepository.findAll({
@@ -47,9 +47,9 @@ const getReport = async (filter: ReportFilter) => {
 
       ExcelPunchLog.fillPunchDaily(items_render)
       return "uploads/attendance/punchdaily.xlsx" ;
-      
+
     case "Punchlog":
-      
+
       const punchs: any = await PunchDailyCardRepository.findAll_Punchlog({
         department:filter.department,
         group: filter.group,
@@ -60,7 +60,7 @@ const getReport = async (filter: ReportFilter) => {
       });
 
       ExcelPunchLog.fillPunchCard(punchs)
-      return "uploads/attendance/punchlog.xlsx"; 
+      return "uploads/attendance/punchlog.xlsx";
 
       case "PunchTotalHours":
         const workhrs: any = await PunchTotalHoursRepository.findAll({
@@ -73,7 +73,9 @@ const getReport = async (filter: ReportFilter) => {
         });
 
         ExcelPunchLog.fillTotalHours(workhrs)
-        return "uploads/attendance/punchtotal.xlsx"; 
+        return "uploads/attendance/punchtotal.xlsx";
+
+
   }
 
 }

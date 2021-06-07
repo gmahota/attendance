@@ -1,10 +1,10 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
 import moment from "moment";
-import SectionTitle from "../../../components/section-title";
-import Widget from "../../../components/widget";
+import SectionTitle from "../../../components/elements/section-title";
+import Widget from "../../../components/elements/widget";
 import workService from "../../../services/workschedule";
-import Datatable from "../../../components/datatable";
+import Datatable from "../../../components/elements/datatable/ActionsTable";
 import {
   DefaultTabs,
   UnderlinedTabs,

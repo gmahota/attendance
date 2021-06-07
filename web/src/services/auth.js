@@ -18,11 +18,11 @@ export async  function signInRequest(data){
 
 export async function recoverUserInformation(){
   await delay()
-  ///images/faces/profileIcon.png
+  ///https://github.com/turaymelo.png
   return{
     user:{
       email:'turaymelo@gmail.com',
-      avatar_url:'https://github.com/turaymelo.png'
+      avatar_url:'images/faces/profileIcon.png'
     }
   }
 }

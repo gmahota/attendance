@@ -1,8 +1,8 @@
-import SectionTitle from '../components/section-title'
-import Modal1 from '../components/modals/modal-1'
-import Modal2 from '../components/modals/modal-2'
-import Modal3 from '../components/modals/modal-3'
-import Widget from '../components/widget'
+import SectionTitle from '../components/elements/section-title'
+import Modal1 from '../components/elements/modals/modal-1'
+import Modal2 from '../components/elements/modals/modal-2'
+import Modal3 from '../components/elements/modals/modal-3'
+import Widget from '../components/elements/widget'
 import {FiX, FiCheck} from 'react-icons/fi'
 
 const Index = () => {

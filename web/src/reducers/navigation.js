@@ -22,7 +22,7 @@ const initialState = [
     title: "Attendance",
     items: [
       {
-        url: "/dashboard",
+        url: "/",
         icon: <FiCompass size={20} />,
         title: "Dashboard",
         items: [],

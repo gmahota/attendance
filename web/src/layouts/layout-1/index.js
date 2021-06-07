@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import {useSelector, shallowEqual} from 'react-redux'
-import Navbar1 from '../../components/navbar-1'
-import LeftSidebar1 from '../../components/left-sidebar-1'
-import RightSidebar1 from '../../components/right-sidebar-1'
+import Navbar1 from '../../components/elements/navbar-1'
+import LeftSidebar1 from '../../components/elements/left-sidebar-1'
+import RightSidebar1 from '../../components/elements/right-sidebar-1'
 
 const Layout1 = ({children}) => {
   const {config, palettes} = useSelector(

@@ -4,12 +4,12 @@ import styles from "../../styles/Home.module.css";
 import { Menu, Dialog, Transition } from "@headlessui/react";
 import { ExclamationIcon } from "@heroicons/react/outline";
 import { DocumentReportIcon, ChevronDownIcon } from "@heroicons/react/solid";
-import SectionTitle from "../../components/section-title";
-import Widget from "../../components/widget";
-import FilterReport from "../../components/attendance-reports/filter-report";
+import SectionTitle from "../../components/elements/section-title";
+import Widget from "../../components/elements/widget";
+import FilterReport from "../../components/partials/attendance-reports/filter-report";
 import groupService from "../../services/userGroup";
 import userService from "../../services/user";
-import userDepartmentService from "../../services/userDepartment";
+
 import { parseCookies } from 'nookies'
 
 function classNames(...classes) {
@@ -255,12 +255,11 @@ export const getServerSideProps= async (ctx) => {
 
   const allGroups = await groupService.get_UserGroups();
   const allUsers = await userService.get_Users();
-  const allUserDepartments = await userDepartmentService.get_UserDepartments();
+
   return {
     props: {
       allGroups,
-      allUsers,
-      allUserDepartments,
+      allUsers
     },
   };
 }

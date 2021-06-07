@@ -1,9 +1,9 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
-import SectionTitle from "../../../components/section-title";
-import Widget from "../../../components/widget";
+import SectionTitle from "../../../components/elements/section-title";
+import Widget from "../../../components/elements/widget";
 import userGroupService from "../../../services/userGroup";
-import Datatable from "../../../components/datatable";
+import Datatable from "../../../components/elements/datatable";
 import moment from "moment";
 
 export default function Workschedules({ usergroup }) {

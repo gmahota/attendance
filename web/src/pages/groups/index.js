@@ -1,10 +1,11 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
 import moment from "moment";
-import SectionTitle from "../../components/section-title";
-import Widget from "../../components/widget";
-import Datatable from "../../components/datatable";
+import SectionTitle from "../../components/elements/section-title";
+import Widget from "../../components/elements/widget";
+import Datatable from "../../components/elements/datatable/ActionsTable";
 import userGroupService from "../../services/userGroup";
+import {FiPlus} from 'react-icons/fi'
 
 export default function Workschedules({ allUserGroup }) {
   const router = useRouter();
@@ -47,7 +48,7 @@ export default function Workschedules({ allUserGroup }) {
       []
     );
     const data = React.useMemo(() => allUserGroup, []);
-    return <Datatable columns={columns} data={data} />;
+    return <Datatable columns={columns} data={data} link="/groups" />;
   };
 
   return (
@@ -56,6 +57,12 @@ export default function Workschedules({ allUserGroup }) {
       <Widget
         title=""
         description=""
+        right={
+          <button className="btn btn-default btn-rounded btn-icon bg-blue-500 hover:bg-blue-600 text-white space-x-1">
+            <FiPlus className="stroke-current text-white" size={16} />
+            <span>Add New</span>
+          </button>
+        }
       >
         <Simple />
       </Widget>

@@ -23,39 +23,39 @@ export default class PunchLog {
   @Column()
   date: Date
 
-  @Column({ length: 100, nullable: false })
+  @Column({ length: 100, nullable: true })
   device?: string
 
-  @Column({ length: 100, nullable: false })
+  @Column({ length: 100, nullable: true })
   deviceId?: string
 
-  @Column({ length: 20, nullable: false })
-  userDefinedSchedulerId: string
+  @Column({ length: 20, nullable: true })
+  userDefinedSchedulerId?: string
 
-  @Column({ length: 20, nullable: false })
-  schedulerId: string
+  @Column({ length: 20, nullable: true })
+  schedulerId?: string
 
-  @Column({ length: 50, nullable: false })
-  userDefinedSchedulerName: string
+  @Column({ length: 50, nullable: true })
+  userDefinedSchedulerName?: string
 
-  @Column({ length: 50, nullable: false })
-  exception: string
+  @Column({ length: 50, nullable: true })
+  exception?: string
 
-  @Column({ length: 20 })
-  punchType: string
+  @Column({ length: 20 ,nullable: true })
+  punchType?: string
 
-  @Column()
-  shiftSupposedTimeIn: Date
+  @Column({nullable: true })
+  shiftSupposedTimeIn?: Date
 
-  @Column()
-  shiftSupposedTimeOut: Date
+  @Column({nullable: true })
+  shiftSupposedTimeOut?: Date
 
-  @Column()
-  shiftSupposedGracePerior: Date
+  @Column({nullable: true })
+  shiftSupposedGracePerior?: Date
 
-  @Column({ length: 50, nullable: false })
-  shiftDescription: string
+  @Column({ length: 50, nullable: true })
+  shiftDescription?: string
 
-  @Column()
-  json: string
+  @Column({ length: 50, nullable: true })
+  json?: string
 }

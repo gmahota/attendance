@@ -30,17 +30,19 @@ const getByDate = (date: Date) =>
   PunchDailyCardRepository.findByDate(date)
 
 const getReport = async (filter: ReportFilter) => {
-
+  let filterRender :any ={
+    department:filter.department || "",
+        group: filter.group || "",
+        user: filter.user || "",
+        dateBegin: new Date(filter.dateBegin|| 0),
+        dateEnd: new Date(filter.dateEnd|| 0),
+        date:new Date(filter.date|| 0)
+  }
 
   switch (filter.type) {
     case "Punchdaily":
         const items: PunchDailyCard[] = await PunchDailyCardRepository.findAll({
-        department:filter.department,
-        group: filter.group,
-        user: filter.user,
-        dateBegin: filter.dateBegin,
-        dateEnd: filter.dateEnd,
-        date:filter.date
+          ...filterRender
       });
 
       let items_render = PunchDailyCard_View.renderMany(items);
@@ -51,12 +53,7 @@ const getReport = async (filter: ReportFilter) => {
     case "Punchlog":
 
       const punchs: any = await PunchDailyCardRepository.findAll_Punchlog({
-        department:filter.department,
-        group: filter.group,
-        user: filter.user,
-        dateBegin: filter.dateBegin,
-        dateEnd: filter.dateEnd,
-        date:filter.date
+        ...filterRender
       });
 
       ExcelPunchLog.fillPunchCard(punchs)
@@ -64,12 +61,7 @@ const getReport = async (filter: ReportFilter) => {
 
       case "PunchTotalHours":
         const workhrs: any = await PunchTotalHoursRepository.findAll({
-          department:filter.department,
-          group: filter.group,
-          user: filter.user,
-          dateBegin: filter.dateBegin,
-          dateEnd: filter.dateEnd,
-          date:filter.date
+          ...filterRender
         });
 
         ExcelPunchLog.fillTotalHours(workhrs)

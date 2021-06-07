@@ -1,14 +1,9 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
-
-//Components
-import Datatable from "../../../components/elements/datatable";
 import SectionTitle from "../../../components/elements/section-title";
 import Widget from "../../../components/elements/widget";
-
-//Services
 import userService from "../../../services/user";
-
+import Datatable from "../../../components/datatable";
 import moment from "moment";
 
 export default function Workschedules({ user }) {

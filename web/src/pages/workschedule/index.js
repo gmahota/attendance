@@ -15,7 +15,7 @@ import {FiClock} from 'react-icons/fi'
 export default function Workschedules({ allWorkschedules }) {
   const router = useRouter();
 
-  const [type, setType] = useState("Normal");
+  const [type, setType] = useState("Regular");
 
   if (router.isFallback) {
     return <p>Carregando...</p>;
@@ -27,9 +27,9 @@ export default function Workschedules({ allWorkschedules }) {
     type: "radio",
     placeholder: "Scheduler Type",
     options: [
-      { value: "Normal", name: "Normal", label: "Normal" },
-      { value: "MultipleIn", name: "MultipleIn", label: "MultipleIn" },
-      { value: "Extra", name: "Extra", label: "Extra" },
+      { value: "Regular", name: "Regular", label: "Regular" },
+      { value: "Eventual", name: "Eventual", label: "Eventual" },
+      { value: "Chronometer", name: "Chronometer", label: "Chronometer" },
     ],
     onValueChange: handleWorkschedulesType,
   };

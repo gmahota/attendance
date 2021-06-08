@@ -11,6 +11,9 @@ export default class WorkSchedule {
   @Column({ length: 50, nullable: false })
   name: string
 
+  @Column({ length: 50, nullable: true })
+  type?: string
+
   @OneToMany(() => Shift, item => item.scheduleId, {
     cascade: ['insert', 'update']
   })

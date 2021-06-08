@@ -27,6 +27,8 @@ export const create_Shift = async (request: Request, response: Response) => {
     type,
     timeIn,
     timeOut,
+    minTimeIn,
+    maxTimeOut,
     gracePeriod,
     dayOfWeek,
     scheduleId
@@ -40,6 +42,8 @@ export const create_Shift = async (request: Request, response: Response) => {
       type,
       timeIn,
       timeOut,
+      minTimeIn,
+      maxTimeOut,
       gracePeriod,
       dayOfWeek,
       scheduleId

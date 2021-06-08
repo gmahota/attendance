@@ -30,18 +30,18 @@ export const get_User = async (request: Request, response: Response) => {
 export const create_User = async (request: Request, response: Response) => {
   const {
     name,
-    scheduleId,
     scheduleByUserOrGroup,
-    userGroupId
+    userGroup,
+    schedule
   } = await request.body;
 
   try {
     let item: User = {
       id:0,
       name,
-      scheduleId,
       scheduleByUserOrGroup,
-      userGroupId
+      userGroup,
+      schedule
     };
 
     item = await UserService.create(item);

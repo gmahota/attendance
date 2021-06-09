@@ -3,6 +3,7 @@ import PunchDailyCard_View from '../../view/attendance/punchDailyCard_View'
 import PunchDailyCardRepository from '../../repository/attendance/punchDailyCardRepository'
 import ExcelPunchLog from '../../services/attendance/punchLogExcel'
 import PunchTotalHoursRepository from '../../repository/attendance/punchTotalHoursRepository';
+import PunchAbsenteeismRepository from '../../repository/attendance/punchAbsenteeismRepository';
 
 interface ReportFilter {
   department?:string,
@@ -66,6 +67,14 @@ const getReport = async (filter: ReportFilter) => {
 
         ExcelPunchLog.fillTotalHours(workhrs)
         return "uploads/attendance/punchtotal.xlsx";
+
+        case "PunchAbsenteeism":
+        const absent: any = await PunchAbsenteeismRepository.findAll({
+          ...filterRender
+        });
+
+        ExcelPunchLog.fillAbsenteeism(absent)
+        return "uploads/attendance/punchabsent.xlsx";
 
 
   }

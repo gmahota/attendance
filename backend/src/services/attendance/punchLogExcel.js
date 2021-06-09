@@ -131,6 +131,10 @@ function fillPunchDaily(items) {
   });
 }
 
+
+
+
+
 function fillPunchCard(items) {
   XlsxPopulate.fromBlankAsync().then((workbook) => {
     // Modify the workbook.
@@ -261,10 +265,50 @@ function fillTotalHours(items) {
   });
 }
 
+function fillAbsenteeism(items) {
+  XlsxPopulate.fromBlankAsync().then((workbook) => {
+    // Modify the workbook.
+    let row = 3;
+
+    workbook
+      // .sheet("Sheet1")
+      // .cell(`A2`)
+      // .value("Date")
+      // .style({ leftBorder: true, topBorder: true });
+
+    workbook.sheet("Sheet1").cell(`A2`).value("User").style("border", true);
+    workbook.sheet("Sheet1").cell(`B2`).value("Shift").style("border", true);
+    workbook.sheet("Sheet1").cell(`C2`).value("Shift time in").style("border", true);
+    workbook.sheet("Sheet1").cell(`D2`).value("Shift time out").style("border", true);
+    workbook.sheet("Sheet1").cell(`E2`).value("Day Absent").style("border", true);
+
+
+    items.forEach((item) => {
+
+      workbook.sheet("Sheet1").cell(`A${row}`).value(item.userName).style("border", true);
+      workbook.sheet("Sheet1").cell(`B${row}`).value(item.description).style("border", true);
+      workbook.sheet("Sheet1").cell(`C${row}`).value(item.entradashift).style({"border":true, numberFormat: "hh:mm:ss"});
+      workbook.sheet("Sheet1").cell(`D${row}`).value(item.saidashift).style({"border": true, numberFormat: "hh:mm:ss"}) ;
+      workbook.sheet("Sheet1").cell(`E${row}`).value(item.selected_date).style({"border": true, numberFormat: "yyyy-mm-dd" });
+
+
+      row++;
+
+
+    });
+
+    // Write to file.
+    return workbook.toFileAsync(
+      appRoot + "/public/uploads/attendance/punchtotal.xlsx"
+    );
+  });
+}
+
 
 
 export default {
   fillPunchDaily,
   fillPunchCard,
-  fillTotalHours
+  fillTotalHours,
+  fillAbsenteeism
 };

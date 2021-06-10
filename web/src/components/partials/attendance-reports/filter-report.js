@@ -133,6 +133,7 @@ const FilterReport = ({
     placeholder: "Report Type",
     options: [
       { value: "PunchTotalHours", name: "PunchTotalHours", label: "Resume" },
+      { value: "PunchAbsenteeism", name: "PunchAbsenteeism", label: "Absenteeism" },
       { value: "Punchdaily", name: "PunchDaily", label: "Punch Daily" },
       { value: "Punchlog", name: "Punchlog", label: "Punch Log" },
     ],

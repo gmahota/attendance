@@ -57,7 +57,7 @@ const findAll = async function findAll(filter:Filter): Promise<PunchDailyCard[]>
   if (filter?.date) {
     str_where += str_where.length === 0 ? "" : " and "
 
-    str_where += `date = '${filter.date}'`
+    str_where += `date = '${moment(filter.date).format("YYYY-MM-DD")}'`
   }
 
   str_where = str_where.length === 0 ? "" : " where " + str_where
@@ -89,9 +89,10 @@ const findAll_Punchlog = async function findAll_Punchlog(filter:Filter): Promise
   }
 
   if (filter?.date) {
-    str_where += str_where.length === 0 ?
-      `date = '${filter.date}'` :
-      ` and date = '${filter.date}'`
+    str_where += str_where.length === 0 ? "" : " and "
+
+    str_where += `date = '${moment(filter.date).format("YYYY-MM-DD")}'`
+
   }
 
   if (filter?.dateBegin && filter?.dateEnd) {

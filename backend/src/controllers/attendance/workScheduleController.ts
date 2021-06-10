@@ -21,17 +21,20 @@ export const get_WorkSchedule = async (request: Request, response: Response) => 
 };
 
 export const create_WorkSchedule = async (request: Request, response: Response) => {
+
   const {
     id,
-    name
+    name,
+    type
   } = await request.body;
 
   try {
     let item: WorkSchedule = {
       id,
-      name
+      name,
+      type
     };
-
+    
     item = await WorkScheduleService.create(item);
 
     return response.status(200).json(item);

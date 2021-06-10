@@ -3,7 +3,7 @@ import {useSelector, shallowEqual} from 'react-redux'
 import Portal from '../../elements/portal'
 import {FiX,FiPlus} from 'react-icons/fi'
 
-const Modal = ({title, icon, buttonTitle, buttonClassName, body}) => {
+const Modal = ({title, icon, buttonTitle, buttonClassName, body, handleSave,handleClear}) => {
   const {palettes} = useSelector(
     (state) => ({
       palettes: state.palettes
@@ -20,7 +20,13 @@ const Modal = ({title, icon, buttonTitle, buttonClassName, body}) => {
     setOpen(true)
   }
   const hide = () => {
-    setOpen(false)
+    setOpen(false)  
+    handleClear()  
+  }
+
+  const save=async ()=> {
+    setOpen(false)  
+    await handleSave()
   }
 
   useEffect(() => {
@@ -78,7 +84,7 @@ const Modal = ({title, icon, buttonTitle, buttonClassName, body}) => {
                   <button
                     className={buttonClassName}
                     type="button"
-                    onClick={hide}>
+                    onClick={save}>
                     {buttonTitle}
                   </button>
                 </div>

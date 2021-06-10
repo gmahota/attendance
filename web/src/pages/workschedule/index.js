@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import Router, { useRouter } from "next/router";
+import getConfig from "next/config";
 import SectionTitle from "../../components/elements/section-title";
 import Widget from "../../components/elements/widget";
 import Datatable from "../../components/elements/datatable/ActionsTable";
@@ -12,10 +13,15 @@ import { parseCookies } from 'nookies'
 
 import {FiClock} from 'react-icons/fi'
 
+// Only holds serverRuntimeConfig and publicRuntimeConfig
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+
 export default function Workschedules({ allWorkschedules }) {
   const router = useRouter();
 
   const [type, setType] = useState("Regular");
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
 
   if (router.isFallback) {
     return <p>Carregando...</p>;
@@ -28,14 +34,42 @@ export default function Workschedules({ allWorkschedules }) {
     placeholder: "Scheduler Type",
     options: [
       { value: "Regular", name: "Regular", label: "Regular" },
-      { value: "Eventual", name: "Eventual", label: "Eventual" },
-      { value: "Chronometer", name: "Chronometer", label: "Chronometer" },
+      { value: "Seasonal", name: "Seasonal", label: "Seasonal" },
+      { value: "Countdown", name: "Countdown", label: "Countdown" },
     ],
     onValueChange: handleWorkschedulesType,
   };
 
   function handleWorkschedulesType(value) {
     setType(value);
+  }
+
+  async function  handleSave(){
+
+    var item = {id,name,type}
+
+    const url = publicRuntimeConfig.SERVER_URI + "api/attendance/workschedule";
+
+    const response = await fetch(url,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+      }
+    );
+
+    handleClear()
+
+    router.reload()
+  }
+
+  function handleClear(){
+    setType("Regular")
+    setId("")
+
+    setName("")
   }
 
   const Simple = () => {
@@ -82,10 +116,12 @@ export default function Workschedules({ allWorkschedules }) {
                 <div className="form flex flex-wrap w-full">
                   <div className="w-full  mb-4">
                     <div className="form-element-inline">
-                      <div className="form-label">Id</div>
+                      <div className="form-label">Code</div>
                       <input
                         name="id"
-                        type="number"
+                        type="text"
+                        value={id}
+                        onChange={event => setId(event.target.value)}
                         className="form-input"
                         placeholder="Enter something..."
                       />
@@ -95,8 +131,10 @@ export default function Workschedules({ allWorkschedules }) {
                     <div className="form-element-inline">
                       <div className="form-label">Name</div>
                       <input
-                        name="id"
+                        name="name"
                         type="text"
+                        value={name}
+                        onChange={event => setName(event.target.value)}
                         className="form-input"
                         placeholder="Enter something..."
                       />
@@ -111,6 +149,8 @@ export default function Workschedules({ allWorkschedules }) {
             }
             buttonTitle="Save"
             buttonClassName="btn btn-default btn-rounded bg-green-500 hover:bg-red-600 text-white"
+            handleSave={handleSave}
+            handleClear={handleClear}
           />
         }
       >

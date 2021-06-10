@@ -10,10 +10,8 @@ import {
   UnderlinedTabs,
   IconTabs,
   Pills,
-  VerticalTabs
-} from '../../../components/tabs'
-
-
+  VerticalTabs,
+} from "../../../components/tabs";
 
 export default function Workschedules({ workschedule }) {
   const router = useRouter();
@@ -22,36 +20,45 @@ export default function Workschedules({ workschedule }) {
   }
 
   
-
   function getDateTime(value) {
-    try{
+    try {
       var a = moment(value);
 
       return a.format("HH:mm");
-    }catch(e){
-      return ""
+    } catch (e) {
+      return "";
     }
-    
   }
 
-  const TabShifts = ({shifts}) => (
-    <SimpleShifts />
-  )  
-  
-  const TabUsers = ({allUsers}) => (
-    <SimpleUsers allUsers={allUsers}/>
-  )
+  const TabShifts = ({ shifts }) =><SimpleShifts />;
 
-  const TabGroupUsers = ({allUsersGroups}) => (
-    <SimpleTabGroupUsers allUsersGroups={allUsersGroups}/>
-  )
+  const TabUsers = ({ allUsers }) => <SimpleUsers allUsers={allUsers} />;
+
+  const TabGroupUsers = ({ allUsersGroups }) => (
+    <SimpleTabGroupUsers allUsersGroups={allUsersGroups} />
+  );
 
   const tabs = [
-    {index: 0, title: 'Shifts', active: true, content: <TabShifts shifts={workschedule.Shifts}/>},
-    {index: 1, title: 'Users', active: false, content: <TabUsers allUsers={workschedule.users}/>},
-    {index: 2, title: 'Groups',active: false, content: <TabGroupUsers allUsersGroups={workschedule.groups}/>}
-  ]
-  
+    {
+      index: 0,
+      title: "Shifts",
+      active: true,
+      content: <TabShifts shifts={workschedule.Shifts} />,
+    },
+    {
+      index: 1,
+      title: "Users",
+      active: false,
+      content: <TabUsers allUsers={workschedule.users} />,
+    },
+    {
+      index: 2,
+      title: "Groups",
+      active: false,
+      content: <TabGroupUsers allUsersGroups={workschedule.groups} />,
+    },
+  ];
+
   const SimpleShifts = () => {
     const columns = React.useMemo(
       () => [
@@ -105,7 +112,7 @@ export default function Workschedules({ workschedule }) {
     return <Datatable columns={columns} data={data} />;
   };
 
-  const SimpleUsers = ({allUsers}) => {
+  const SimpleUsers = ({ allUsers }) => {
     const columns = React.useMemo(
       () => [
         {
@@ -120,13 +127,19 @@ export default function Workschedules({ workschedule }) {
         {
           Header: "User Group",
           accessor: "userGroup",
-          Cell: (props) => <a href={`/groups/${props.value?.name}`}>{props.value?.name}</a>,
+          Cell: (props) => (
+            <a href={`/groups/${props.value?.name}`}>{props.value?.name}</a>
+          ),
         },
         {
           Header: "Schedule",
           accessor: "schedule",
-          Cell: (props) => <a href={`/workschedule/${props.value?.name}`}>{props.value?.name}</a>,
-        }
+          Cell: (props) => (
+            <a href={`/workschedule/${props.value?.name}`}>
+              {props.value?.name}
+            </a>
+          ),
+        },
       ],
       []
     );
@@ -134,7 +147,7 @@ export default function Workschedules({ workschedule }) {
     return <Datatable columns={columns} data={data} />;
   };
 
-  const SimpleTabGroupUsers = ({allUsersGroups}) => {
+  const SimpleTabGroupUsers = ({ allUsersGroups }) => {
     const columns = React.useMemo(
       () => [
         {
@@ -150,12 +163,16 @@ export default function Workschedules({ workschedule }) {
         {
           Header: "Created Att",
           accessor: "createdAt",
-          Cell:(props) => <span>{moment(props.value).format('DD-MM-YYYY HH:mm:ss')}</span>
+          Cell: (props) => (
+            <span>{moment(props.value).format("DD-MM-YYYY HH:mm:ss")}</span>
+          ),
         },
         {
           Header: "Update Att",
           accessor: "updatedAt",
-          Cell:(props) => <span>{moment(props.value).format('DD-MM-YYYY HH:mm:ss')}</span>
+          Cell: (props) => (
+            <span>{moment(props.value).format("DD-MM-YYYY HH:mm:ss")}</span>
+          ),
         },
         {
           Header: "Parent Id",
@@ -163,7 +180,7 @@ export default function Workschedules({ workschedule }) {
           Cell: (props) => (
             <a href={`/usersDepartments/${props.value}`}>{props.value}</a>
           ),
-        }
+        },
       ],
       []
     );
@@ -177,28 +194,12 @@ export default function Workschedules({ workschedule }) {
         title="Tables"
         subtitle={`Workschedule - ${workschedule.id}. ${workschedule.name}`}
       />
-      <Widget
-        title=""
-        description=""
-      >
-
-      <Widget
-      title="Underlined tabs"
-      description={
-        <span>
-          Use the <code>&lt;UnderlinedTabs /&gt;</code> component for underlined
-          tabs
-        </span>
-      }>
-      <div className="flex flex-wrap">
-        <div className="w-full">
-          <UnderlinedTabs tabs={tabs} />
+      <Widget title="" description="">
+        <div className="flex flex-wrap">
+          <div className="w-full">
+            <UnderlinedTabs tabs={tabs} />
+          </div>
         </div>
-      </div>
-    </Widget>
-
-
-        
       </Widget>
     </>
   );

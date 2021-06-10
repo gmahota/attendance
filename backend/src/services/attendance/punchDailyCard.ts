@@ -37,7 +37,7 @@ const getReport = async (filter: ReportFilter) => {
         user: filter.user || "",
         dateBegin: new Date(filter.dateBegin|| 0),
         dateEnd: new Date(filter.dateEnd|| 0),
-        date:new Date(filter.date|| 0)
+        //date:new Date(filter.date|| 0)
   }
 
   switch (filter.type) {

@@ -55,12 +55,12 @@ attendanceRouter
 attendanceRouter
   .get("/shifts", get_all_Shifts)
   .get("/shift/:id", get_Shift)
-  .post("/shift/", create_Shift);
+  .post("/shift", create_Shift);
 
 attendanceRouter
   .get("/workschedules", get_all_WorkSchedules)
   .get("/workschedule/:id", get_WorkSchedule)
-  .post("/workschedule/", create_WorkSchedule);
+  .post("/workschedule", create_WorkSchedule);
 
 attendanceRouter
   .get("/usergroups", get_all_UserGroups)

@@ -35,7 +35,7 @@ const get_Workschedule = async (id) => {
     await fetch(url)
       .then((response) => response.json())
       .then((data) => (res = data));
-      console.log(res)
+
     return res;
   } catch (e) {
     console.error(e);

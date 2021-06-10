@@ -29,13 +29,15 @@ import {
   import {
   get_all_Shifts,
   get_Shift,
-  create_Shift
+  create_Shift,
+  edit_Shift
 } from "../controllers/attendance/shiftController";
 
 import {
   get_all_WorkSchedules,
   get_WorkSchedule,
-  create_WorkSchedule
+  create_WorkSchedule,
+  edit_WorkSchedule
 } from "../controllers/attendance/workScheduleController";
 
 import {
@@ -55,12 +57,14 @@ attendanceRouter
 attendanceRouter
   .get("/shifts", get_all_Shifts)
   .get("/shift/:id", get_Shift)
-  .post("/shift", create_Shift);
+  .post("/shift", create_Shift)
+  .post("/shift/:id", edit_Shift);
 
 attendanceRouter
   .get("/workschedules", get_all_WorkSchedules)
   .get("/workschedule/:id", get_WorkSchedule)
-  .post("/workschedule", create_WorkSchedule);
+  .post("/workschedule", create_WorkSchedule)
+  .post("/workschedule/:id", edit_WorkSchedule);
 
 attendanceRouter
   .get("/usergroups", get_all_UserGroups)

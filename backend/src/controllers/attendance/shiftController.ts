@@ -36,7 +36,7 @@ export const create_Shift = async (request: Request, response: Response) => {
 
   try {
     let item: Shift = {
-      id:0,
+      id: 0,
       name,
       description,
       type,
@@ -52,7 +52,46 @@ export const create_Shift = async (request: Request, response: Response) => {
     item = await ShiftService.create(item);
 
     return response.status(200).json(item);
-    
+
+  } catch (e) {
+    return response.status(404).json(
+      { msg: "error to create a product with that i", error: e },
+    );
+  }
+};
+
+export const edit_Shift = async (request: Request, response: Response) => {
+  const {
+    id,
+    name,
+    description,
+    type,
+    timeIn,
+    timeOut,
+    minTimeIn,
+    maxTimeOut,
+    gracePeriod,
+    dayOfWeek,
+    scheduleId
+  } = await request.body;
+
+  try {
+    let item: Shift = await ShiftService.getById(id)
+
+    item.name = name
+    item.description = description
+    item.type = type
+    item.timeIn = timeIn
+    item.timeOut = timeOut
+    item.minTimeIn = minTimeIn
+    item.maxTimeOut = maxTimeOut
+    item.gracePeriod = gracePeriod
+    item.dayOfWeek = dayOfWeek
+
+    item = await ShiftService.create(item);
+
+    return response.status(200).json(item);
+
   } catch (e) {
     return response.status(404).json(
       { msg: "error to create a product with that i", error: e },

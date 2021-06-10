@@ -23,22 +23,48 @@ export const get_WorkSchedule = async (request: Request, response: Response) => 
 export const create_WorkSchedule = async (request: Request, response: Response) => {
 
   const {
-    id,
     name,
     type
   } = await request.body;
 
   try {
     let item: WorkSchedule = {
-      id,
+      id:0,
       name,
       type
     };
-    
+
     item = await WorkScheduleService.create(item);
 
     return response.status(200).json(item);
-    
+
+  } catch (e) {
+    return response.status(404).json(
+      { msg: "error to create a product with that i", error: e },
+    );
+  }
+};
+
+export const edit_WorkSchedule = async (request: Request, response: Response) => {
+
+  const {
+    id,
+    name,
+    type
+  } = await request.body;
+
+  try {
+
+
+    let item = await WorkScheduleService.getById(id);
+
+    item.name = name;
+    item.type = type;
+
+    item = await WorkScheduleService.create(item);
+
+    return response.status(200).json(item);
+
   } catch (e) {
     return response.status(404).json(
       { msg: "error to create a product with that i", error: e },

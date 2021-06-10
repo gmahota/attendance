@@ -3,9 +3,9 @@ import WorkSchedule from "./workSchedule";
 
 @Entity("shift")
 export default class shift {
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn('increment')
     id: number
-    
+
     @Column({length: 50, nullable:false})
     name: string
 
@@ -17,13 +17,13 @@ export default class shift {
 
     @Column()
     minTimeIn: Date
-    
+
     @Column()
     timeIn: Date
 
     @Column()
     timeOut: Date
-    
+
     @Column()
     maxTimeOut: Date
 

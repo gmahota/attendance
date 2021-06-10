@@ -5,8 +5,8 @@ import Group from "./userGroup";
 
 @Entity("workSchedule")
 export default class WorkSchedule {
-  @PrimaryColumn()
-  id: string;
+  @PrimaryGeneratedColumn('increment')
+  id: number;
 
   @Column({ length: 50, nullable: false })
   name: string

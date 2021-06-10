@@ -5,6 +5,7 @@
     "dev": "cd backend && yarn dev",
     "start": "cd backend && node dist/index.js",
     "heroku-prebuild": "cd backend && npm install && npm run build",
-    "build": "cd backend && npm install && npm run build"
+    "build": "cd backend && npm install && npm run build",
+    "web-dev":"cd web && yarn dev"
   }
 }

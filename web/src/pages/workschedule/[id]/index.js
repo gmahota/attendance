@@ -1,6 +1,9 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
 import moment from "moment";
+
+import SimpleShifts from "../../../components/partials/attendance-shifts";
+
 import SectionTitle from "../../../components/elements/section-title";
 import Widget from "../../../components/elements/widget";
 import workService from "../../../services/workschedule";
@@ -19,7 +22,7 @@ export default function Workschedules({ workschedule }) {
     return <p>Carregando...</p>;
   }
 
-  
+
   function getDateTime(value) {
     try {
       var a = moment(value);

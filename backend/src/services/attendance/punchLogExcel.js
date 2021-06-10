@@ -285,6 +285,7 @@ function fillAbsenteeism(items) {
 
     items.forEach((item) => {
 
+      console.log(item)
       workbook.sheet("Sheet1").cell(`A${row}`).value(item.userName).style("border", true);
       workbook.sheet("Sheet1").cell(`B${row}`).value(item.description).style("border", true);
       workbook.sheet("Sheet1").cell(`C${row}`).value(item.entradashift).style({"border":true, numberFormat: "hh:mm:ss"});
@@ -299,7 +300,7 @@ function fillAbsenteeism(items) {
 
     // Write to file.
     return workbook.toFileAsync(
-      appRoot + "/public/uploads/attendance/punchtotal.xlsx"
+      appRoot + "/public/uploads/attendance/punchabsent.xlsx"
     );
   });
 }

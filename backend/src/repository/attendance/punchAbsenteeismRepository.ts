@@ -64,16 +64,6 @@ const findAll = async function findAll(filter:Filter): Promise<PunchAbsenteeism[
 
   const str_query = `CALL getAbsenteeism(0,1,0,'${moment(filter.dateBegin).format("YYYY-MM-DD")}', '${moment(filter.dateEnd).format("YYYY-MM-DD")}')`
 
-  const a: any = await entityManager.query(
-    str_query
-  );
-
-
-  var aa = a.map((item:any)=>{
-    var aaa:PunchAbsenteeism  = {...item}
-
-  })
-
   const items: any = await entityManager.query(str_query);
 
   return items[0];
@@ -108,7 +98,7 @@ const findAll_Absenteeism = async function findAll_Absenteeism(filter:Filter): P
     `CALL getAbsenteeism(0,1,0,'${moment(filter.dateBegin).format("YYYY-MM-DD")}', '${moment(filter.dateEnd).format("YYYY-MM-DD")}')`
   );
 
-  return items;
+  return items[0];
 };
 
 export default {

@@ -19,7 +19,7 @@ and tab2.diaSemanaPunch = shift.dayofweek);
 /*select * from View_PunchCard;
 */
 
-select * from view_PunchDaily;
+    ;
   alter view view_PunchDaily
 as
 select delayEntrance, delayOut, addtime(delayEntrance, delayOut) totalDelay, date, userId, userName, userGroup, shiftId, description, entrada, entradashift,

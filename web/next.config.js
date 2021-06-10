@@ -8,4 +8,7 @@ module.exports = {
     // Will be available on both server and client
     SERVER_URI: process.env.SERVER_URI,
   },
+  future: {
+    webpack5: true,
+  }
 };

@@ -1,5 +1,5 @@
 import WorkSchedule from "../../models/attendance/workSchedule";
-import { getRepository, getConnection } from "typeorm";
+import { getRepository, getConnection, SimpleConsoleLogger } from "typeorm";
 
 interface Key {
   id?: any;

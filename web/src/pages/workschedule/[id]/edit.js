@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useState} from "react";
+import getConfig from "next/config";
 import SectionTitle from "../../../components/elements/section-title";
 import Router, { useRouter } from "next/router";
 
@@ -12,31 +13,84 @@ import Modal from "../../../components/partials/modals/create-modal";
 import { parseCookies } from 'nookies'
 
 import {FiClock} from 'react-icons/fi'
+import {FiSave} from 'react-icons/fi'
+
 
 import workService from "../../../services/workschedule";
 
+// Only holds serverRuntimeConfig and publicRuntimeConfig
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+
 export default function Workschedules({ workschedule }) {
+
+  const router = useRouter(); //vai buscar o router
+  
+  const [type, setType] = useState(workschedule.type);
+  const [id, setId] = useState(workschedule.id);
+  const [name, setName] = useState(workschedule.name);
+
+  if (router.isFallback) {
+    return <p>Carregando...</p>;
+  }
+
+
+  let itemsReport = {
+    label: "Type",
+    name: "type",
+    type: "radio",
+    placeholder: "Scheduler Type",
+    options: [
+      { value: "Regular", name: "Regular", label: "Regular" },
+      { value: "Seasonal", name: "Seasonal", label: "Seasonal" },
+      { value: "Countdown", name: "Countdown", label: "Countdown" },
+    ],
+    onValueChange: handleWorkschedulesType,
+  };
+
+  function handleWorkschedulesType(value) {
+    setType(value);
+  }
+
+  async function  handleSave(){
+
+    var item = {id,name,type}
+
+    const url = publicRuntimeConfig.SERVER_URI + `api/attendance/workschedule/${id}`;
+
+    const response = await fetch(url,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+      }
+    );
+
+    router.push('/workschedule');
+  }
+
+  function handleClear(){
+    setType("Regular")
+    setId("")
+
+    setName("")
+  }
+
   return (
     <>
       <SectionTitle title="Tables" subtitle="Workschedules" />
       <Widget
         title=""
         description=""
-        right={
-          <Modal
-            title="Edit Work Schedule"
-            icon={
-              <span className="h-10 w-10 bg-red-100 text-white flex items-center justify-center rounded-full text-lg font-display font-bold">
-                <FiClock size={18} className="stroke-current text-red-500" />
-              </span>
-            }
-            body={
-              <form>
+        right=""        
+      >
+        <div>
                 <div className="form flex flex-wrap w-full">
                   <div className="w-full  mb-4">
                     <div className="form-element-inline">
                       <div className="form-label">Code</div>
-                      <p>ID:{id}</p>
+                      <p>ID:{workschedule.id}</p>
                       {/* <input
                         name="id"
                         type="text"
@@ -65,16 +119,20 @@ export default function Workschedules({ workschedule }) {
                     <Radios item={itemsReport} selected={type} />
                   </div>
                 </div>
-              </form>
-            }
-            buttonTitle="Save"
-            buttonClassName="btn btn-default btn-rounded bg-green-500 hover:bg-red-600 text-white"
-            handleSave={handleSave}
-            handleClear={handleClear}
-          />
-        }
-      >
-        <Simple />
+                <div className="w-full flex flex-row">
+            <div className="space-x-2">
+              <button
+                className="btn btn-default bg-blue-500 hover:bg-blue-600 text-white btn-rounded"
+                onClick={handleSave}
+              >                
+                <FiSave className="stroke-current mr-2" />
+                <span>Save</span>
+              </button>
+            </div>
+            </div>
+
+              </div>
+        
       </Widget>
     </>
   );
@@ -108,6 +166,7 @@ export const getStaticProps = async (context) => {
 
     const workschedule = await workService.get_Workschedule(id[0]);
 
+    console.log("vamos imprimir o type: ", workschedule.type)
     return {
       props: {
         workschedule: workschedule,

@@ -52,7 +52,7 @@ export const edit_WorkSchedule = async (request: Request, response: Response) =>
     name,
     type
   } = await request.body;
-
+  
   try {
 
 

@@ -64,16 +64,6 @@ const findAll = async function findAll(filter:Filter): Promise<PunchTotalHours[]
 
   const str_query = `CALL getTotalWorkingHours(0,0,'${moment(filter.dateBegin).format("YYYY-MM-DD")}', '${moment(filter.dateEnd).format("YYYY-MM-DD")}')`
 
-  const a: any = await entityManager.query(
-    str_query
-  );
-
-
-  var aa = a.map((item:any)=>{
-    var aaa:PunchTotalHours  = {...item}
-
-  })
-
   const items: any = await entityManager.query(str_query);
 
   return items[0];
@@ -108,7 +98,7 @@ const findAll_TotalHours = async function findAll_TotalHours(filter:Filter): Pro
     `CALL getTotalWorkingHours(0,0,'${moment(filter.dateBegin).format("YYYY-MM-DD")}', '${moment(filter.dateEnd).format("YYYY-MM-DD")}')`
   );
 
-  return items;
+  return items[0];
 };
 
 export default {

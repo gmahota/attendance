@@ -63,3 +63,32 @@ select * from (
 
 END $$
 DELIMITER ;
+
+
+DELIMITER $$
+create PROCEDURE jobUpdateUser() 
+BEGIN 
+
+update user devuser
+INNER JOIN biostar_tna.user tnauser
+        ON devuser.id = tnauser.user_id
+        set devuser.name = tnauser.name, devuser.userGroupId = tnauser.ugid 
+        where (tnauser.name!=devuser.name or tnauser.ugid!=devuser.userGroupId);
+
+END $$
+DELIMITER ;
+
+DELIMITER $$
+create PROCEDURE git () 
+BEGIN 
+        
+update userGroup devgroup
+inner join biostar_tna.usergroup tnagroup
+on devgroup.id = tnagroup.id
+set devgroup.name = tnagroup.name, devgroup.createdAt = tnagroup.createdAt, devgroup.updatedAt = tnagroup.updatedAt, devgroup.parent_id = tnagroup.parent_id
+where (devgroup.name != tnagroup.name or devgroup.createdAt != tnagroup.createdAt or devgroup.updatedAt != tnagroup.updatedAt or devgroup.parent_id != tnagroup.parent_id);
+
+	
+
+END $$
+DELIMITER ;

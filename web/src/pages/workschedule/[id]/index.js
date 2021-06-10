@@ -22,18 +22,7 @@ export default function Workschedules({ workschedule }) {
     return <p>Carregando...</p>;
   }
 
-
-  function getDateTime(value) {
-    try {
-      var a = moment(value);
-
-      return a.format("HH:mm");
-    } catch (e) {
-      return "";
-    }
-  }
-
-  const TabShifts = ({ shifts }) =><SimpleShifts />;
+  const TabShifts = () =><SimpleShifts workschedule={workschedule}/>;
 
   const TabUsers = ({ allUsers }) => <SimpleUsers allUsers={allUsers} />;
 
@@ -46,7 +35,7 @@ export default function Workschedules({ workschedule }) {
       index: 0,
       title: "Shifts",
       active: true,
-      content: <TabShifts shifts={workschedule.Shifts} />,
+      content: <TabShifts schedule={workschedule} />,
     },
     {
       index: 1,
@@ -62,58 +51,7 @@ export default function Workschedules({ workschedule }) {
     },
   ];
 
-  const SimpleShifts = () => {
-    const columns = React.useMemo(
-      () => [
-        {
-          Header: "Code",
-          accessor: "id",
-          Cell: (props) => (
-            <a href={`/workschedule/${props.value}`}>{props.value}</a>
-          ),
-        },
-        {
-          Header: "Name",
-          accessor: "name",
-        },
-        {
-          Header: "Type",
-          accessor: "type",
-        },
-        {
-          Header: "Time In",
-          accessor: "timeIn",
-          Cell: (props) => <span>{getDateTime(props.value)}</span>,
-        },
-        {
-          Header: "Time Out",
-          accessor: "timeOut",
-          Cell: (props) => <span>{getDateTime(props.value)}</span>,
-        },
-        {
-          Header: "Min Time In",
-          accessor: "minTimeIn",
-          Cell: (props) => <span>{getDateTime(props.value)}</span>,
-        },
-        {
-          Header: "Max Time Out",
-          accessor: "maxTimeOut",
-          Cell: (props) => <span>{getDateTime(props.value)}</span>,
-        },
-        {
-          Header: "Grace Period",
-          accessor: "gracePeriod",
-        },
-        {
-          Header: "Day Of Week",
-          accessor: "dayOfWeek",
-        },
-      ],
-      []
-    );
-    const data = React.useMemo(() => workschedule.Shifts, []);
-    return <Datatable columns={columns} data={data} />;
-  };
+
 
   const SimpleUsers = ({ allUsers }) => {
     const columns = React.useMemo(

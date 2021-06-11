@@ -2,6 +2,10 @@ import { Request, Response } from "express";
 import userService from "../../services/auth/user";
 import token from "../../services/auth/token";
 import crypto from "../../services/auth/crypto";
+import axios from "axios";
+import https from "https"
+import fs from "fs"
+import qs from 'qs'
 
 const login = async (request: Request, response: Response) => {
   try{ 
@@ -9,36 +13,39 @@ const login = async (request: Request, response: Response) => {
       username,
       password,
     } = request.body;
-  
-    const result = await userService.findByName(username);
-  
-    if (result) {
-      
-      
-      if (
-        username.toLowerCase() === result.username.toLowerCase() &&
-         await crypto.compare(password, result.password)
-      ) {
-        const user = {
-          username: result.username,
-          //password: result.password,
-        };
-        // Create JWT and send it to user
-        const jwt = token.sign(user);
-  
-        if (jwt) {
-          return response.status(200).json({
-            userName: user.username,
-            token: jwt,
-          });
-        } else {
-          return response.status(500).json({ msg: "Internal server error" });
-        }
-      }
-    }
-  
+
+    console.log({
+      username,
+      password,
+    })
+
+    let caCrt = fs.readFileSync('./secrets/ca.crt')
+    
+    console.log(caCrt)
+    const httpsAgent = new https.Agent({ ca: caCrt, keepAlive: false });
+    
+    const api = axios.create({
+      baseURL: "https://localhost:444/api",
+      headers: {
+        'content-type': 'application/json'
+      },
+      withCredentials: true,
+      httpsAgent: httpsAgent
+    })
+    let data = {"User":{
+      "login_id": "admin",
+      "password": "admin@2021"
+    }};
+
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+    // Send a POST request
+    await api.post('login')  
+    
+    
     return response.status(422).json({ msg: "Invalid username or password" });
   }catch(e){
+    console.log(e)
     return response.status(500).json({ msg: "Internal server error" , error:e});
   }
   

@@ -5,6 +5,7 @@ export const Radios = ({item,selected}) => (
       {item.options?.map((option, j) => (
         <label className="flex items-center justify-start space-x-2">
           <input
+            key={option.value}
             type="radio"
             value={option.value}
             name={item.name}

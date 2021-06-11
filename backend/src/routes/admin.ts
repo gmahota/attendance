@@ -89,7 +89,7 @@ import {
  *                       example: Leanne Graham
 */
   adminRouter.get("/users/:id", get_user)
-  adminRouter.post("/users", create_user)
+  adminRouter.post("/user", create_user)
   adminRouter.delete("/users/:id", delete_user)
 
 export default adminRouter

@@ -1,3 +1,4 @@
+import React,{useState} from "react";
 import Link from "next/link";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { useForm } from "react-hook-form";
@@ -12,13 +13,16 @@ const Index = () => {
   const { register, handleSubmit } = useForm();
   const { signIn } = useContext(AuthContext);
 
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
   async function handleSignIn(data) {
-    await signIn(data);
+    await signIn({userName,password});
   }
 
   return (
     <Layout>
-      <CenteredForm      >
+      <CenteredForm>
         <div className="max-w-sm w-full space-y-8">
           <div>
             <img
@@ -37,18 +41,20 @@ const Index = () => {
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Email address
+                <label htmlFor="user" className="sr-only">
+                  User Name
                 </label>
                 <input
-                  {...register("email")}
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
+                  {...register("userName")}
+                  id="userName"
+                  name="userName"
+                  type="text"
+                  value={userName}
+                  onChange={event => setUserName(event.target.value)}
+                  autoComplete="userName"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Email address"
+                  placeholder="User Name"
                 />
               </div>
               <div>
@@ -60,6 +66,8 @@ const Index = () => {
                   id="password"
                   name="password"
                   type="password"
+                  value={password}
+                  onChange={event => setPassword(event.target.value)}
                   autoComplete="current-password"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"

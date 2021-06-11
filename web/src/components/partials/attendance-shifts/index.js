@@ -120,8 +120,7 @@ const AttendanceShifts = ({workschedule}) => {
             }
             body={
               <form>
-                <div className="form flex flex-wrap w-full">
-                  
+                <div className="form flex flex-wrap w-full">                  
                   <div className="w-full  mb-4">
                     <div className="form-element-inline">
                       <div className="form-label">Name</div>
@@ -129,6 +128,102 @@ const AttendanceShifts = ({workschedule}) => {
                         name="name"
                         type="text"
                         value={name}
+                        onChange={event => setName(event.target.value)}
+                        className="form-input"
+                        placeholder="Enter something..."
+                      />
+                    </div>
+
+                    <div className="form-element-inline">
+                      <div className="form-label">Description</div>
+                      <input
+                        name="name"
+                        type="text"
+                        value={description}
+                        onChange={event => setName(event.target.value)}
+                        className="form-input"
+                        placeholder="Enter something..."
+                      />
+                    </div>
+
+                    <div className="form-element-inline">
+                      <div className="form-label">Type</div>
+                      <input
+                        name="name"
+                        type="text"
+                        value={type}
+                        onChange={event => setName(event.target.value)}
+                        className="form-input"
+                        placeholder="Enter something..."
+                      />
+                    </div>
+
+                    <div className="form-element-inline">
+                      <div className="form-label">minTimeIn</div>
+                      <input
+                        name="name"
+                        type="text"
+                        value={minTimeIn}
+                        onChange={event => setName(event.target.value)}
+                        className="form-input"
+                        placeholder="Enter something..."
+                      />
+                    </div>
+
+                    <div className="form-element-inline">
+                      <div className="form-label">timeIn</div>
+                      <input
+                        name="name"
+                        type="text"
+                        value={timeIn}
+                        onChange={event => setName(event.target.value)}
+                        className="form-input"
+                        placeholder="Enter something..."
+                      />
+                    </div>
+
+                    <div className="form-element-inline">
+                      <div className="form-label">timeOut</div>
+                      <input
+                        name="name"
+                        type="text"
+                        value={timeOut}
+                        onChange={event => setName(event.target.value)}
+                        className="form-input"
+                        placeholder="Enter something..."
+                      />
+                    </div>
+
+                    <div className="form-element-inline">
+                      <div className="form-label">maxTimeOut</div>
+                      <input
+                        name="name"
+                        type="text"
+                        value={maxTimeOut}
+                        onChange={event => setName(event.target.value)}
+                        className="form-input"
+                        placeholder="Enter something..."
+                      />
+                    </div>
+
+                    <div className="form-element-inline">
+                      <div className="form-label">gracePeriod</div>
+                      <input
+                        name="name"
+                        type="text"
+                        value={gracePeriod}
+                        onChange={event => setName(event.target.value)}
+                        className="form-input"
+                        placeholder="Enter something..."
+                      />
+                    </div>
+
+                    <div className="form-element-inline">
+                      <div className="form-label">dayOfWeek</div>
+                      <input
+                        name="name"
+                        type="text"
+                        value={dayOfWeek}
                         onChange={event => setName(event.target.value)}
                         className="form-input"
                         placeholder="Enter something..."

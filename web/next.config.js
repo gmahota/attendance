@@ -7,6 +7,7 @@ module.exports = {
   publicRuntimeConfig: {
     // Will be available on both server and client
     SERVER_URI: process.env.SERVER_URI,
+    BioStar_Url: process.env.BioStar_Url
   },
   future: {
     webpack5: true,

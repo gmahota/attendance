@@ -1,5 +1,5 @@
-import {UnderlinedTabs} from '../components/tabs'
-import SectionTitle from '../components/section-title'
+import {UnderlinedTabs} from '../components/elements/tabs'
+import SectionTitle from '../components/elements/section-title'
 import {
   Intro,
   Instructions,

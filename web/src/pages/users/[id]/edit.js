@@ -2,9 +2,9 @@ import React from "react";
 import Router, { useRouter } from "next/router";
 import SectionTitle from "../../../components/elements/section-title";
 import Widget from "../../../components/elements/widget";
+
+import Datatable from "../../../components/elements/datatable";
 import userService from "../../../services/user";
-import Datatable from "../../../components/datatable";
-import moment from "moment";
 
 export default function Workschedules({ user }) {
   const router = useRouter();
@@ -12,14 +12,7 @@ export default function Workschedules({ user }) {
     return <p>Carregando...</p>;
   }
 
-  function getDateTime(value) {
-    var a = moment(value);
-    console.log(a.format("HH:mm"));
-    var d = new Date(value);
-    var n = d.getMinutes();
-
-    return a.format("HH:mm");
-  }
+  
 
   const Simple = () => {
     const columns = React.useMemo(

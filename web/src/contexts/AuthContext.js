@@ -23,14 +23,14 @@ export function AuthProvider({children}){
     }
   },[])
 
-  async function signIn({email,password}){
+  async function signIn({userName,password}){
     const { token,user } = await signInRequest({
-      email,
+      userName,
       password
     })
 
     setCookie(undefined,'attendance.token',token,{
-      maxAge:60 *60*1,// 1 hour
+      maxAge:60*60*14,// 1 hour
     })
 
     api.defaults.headers['Authorization'] = `Bearer ${token}`;

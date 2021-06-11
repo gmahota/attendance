@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import ShiftService from "../../services/attendance/shift";
+import WorkScheduleService from "../../services/attendance/workschedule";
 import Shift from "../../models/attendance/shift";
 
 export const get_all_Shifts = async (request: Request, response: Response) => {
@@ -34,6 +35,9 @@ export const create_Shift = async (request: Request, response: Response) => {
     scheduleId
   } = await request.body;
 
+
+  
+  
   try {
     let item: Shift = {
       id: 0,
@@ -45,9 +49,12 @@ export const create_Shift = async (request: Request, response: Response) => {
       minTimeIn,
       maxTimeOut,
       gracePeriod,
-      dayOfWeek,
-      scheduleId
+      dayOfWeek      
     };
+
+    if(!scheduleId){
+      item.scheduleId =await WorkScheduleService.getById(scheduleId)
+    }
 
     item = await ShiftService.create(item);
 

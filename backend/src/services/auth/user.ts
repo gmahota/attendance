@@ -1,4 +1,4 @@
-import R from "ramda";
+
 import crypto from "./crypto";
 import { User } from "../../models/admin/user";
 import UserRepository from "../../repository/admin/userRepository";
@@ -6,7 +6,7 @@ import UserRepository from "../../repository/admin/userRepository";
 const serializeUsers = (users: User[]) =>
   users
     .map((user) => user)
-    .map(R.omit(["password"]));
+    
 
 const getUsers = () =>
   UserRepository.findAll()

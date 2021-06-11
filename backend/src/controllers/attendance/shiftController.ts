@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import ShiftService from "../../services/attendance/shift";
-import WorkScheduleService from "../../services/attendance/workschedule";
 import Shift from "../../models/attendance/shift";
+import WorkScheduleService from "../../services/attendance/workSchedule";
 
 export const get_all_Shifts = async (request: Request, response: Response) => {
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Datetime from "react-datetime";
 
-const Datepicker = ({ title, current,format,onChangeCurrent }) => {
+const Datepicker = ({ title, current,onChangeCurrent }) => {
   const [value, setValue] = useState(current);
   const onChange = (v) => {
     
@@ -16,7 +16,7 @@ const Datepicker = ({ title, current,format,onChangeCurrent }) => {
       </span>
       <Datetime
         defaultValue={new Date()}
-        dateFormat={format || "DD-MM-YYYY"}
+        dateFormat="DD-MM-YYYY"
         timeFormat={false}
         input={true}
         inputProps={{

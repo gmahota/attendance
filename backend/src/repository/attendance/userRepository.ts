@@ -33,8 +33,7 @@ const findAll = async function findAll(filter:Filter): Promise<User[]> {
 }
 
 const findByScheduleId = async function findAll(id: string): Promise<User[]> {
-  const UserRepository = getRepository(User);
-
+  
   const users: User[]= await getConnection()
     .createQueryBuilder()
     .select("user")

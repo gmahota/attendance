@@ -34,5 +34,6 @@ export default class shift {
     dayOfWeek: number
 
     @ManyToOne(() => WorkSchedule, (item) => item.id)
-    scheduleId?: WorkSchedule;
+    @JoinColumn({name:'scheduleId'})
+    schedule?: WorkSchedule;
 }

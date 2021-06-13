@@ -3,14 +3,11 @@ import { useRouter } from 'next/router'
 import { useTable, useSortBy, usePagination, useRowSelect } from "react-table";
 
 //Icons
-import { FiEdit, FiEye, FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { FiEdit, FiEye, FiChevronDown, FiChevronUp,FiDelete } from "react-icons/fi";
 
 import { PageWithText } from "../../pagination";
 
-
-
-
-const Datatable = ({ columns, data,link }) => {
+const Datatable = ({ columns, data,link,canDeleted = false }) => {
   const router = useRouter()
 
   const {
@@ -50,9 +47,14 @@ const Datatable = ({ columns, data,link }) => {
           // to the render a checkbox
           Cell: ({row}) => (
             <>
-              {console.log(row)}
               <button onClick={() => router.push(`${link}/${row.values.id}`)}><FiEye className="stroke-current mr-2" /></button>
               <button onClick={() => router.push(`${link}/${row.values.id}/edit`)}><FiEdit className="stroke-current mr-2" /></button>
+
+              {canDeleted === true ?(
+                 <button onClick={() => alert('Not allow to delete')}><FiDelete className="stroke-current mr-2" /></button>
+
+              ): (<></>) 
+             }
             </>
           )
         }

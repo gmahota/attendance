@@ -129,6 +129,7 @@ const ShiftsNormal = ({ workschedule }) => {
       {
         Header: "Day Of Week",
         accessor: "dayOfWeek",
+        Cell: (props) => <span>{formatDate(props.value, "HH:mm")}</span>,
       },
     ],
     []
@@ -279,14 +280,25 @@ const ShiftsNormal = ({ workschedule }) => {
 
                     <div className="form-element">
                       <div className="form-label">gracePeriod</div>
-                      <input
-                        name="name"
-                        type="number"
+                      
+                      <Datetime
+                        defaultValue={new Date()}
+                        dateFormat={false}
+                        timeFormat={"HH:mm"}
+                        input={true}
+                        inputProps={{
+                          className: "form-input",
+                          placeholder: "Select date",
+                        }}
                         value={gracePeriod}
-                        onChange={(event) => setGracePeriod(event.target.value)}
-                        className="form-input"
-                        placeholder="Enter something..."
-                      />
+                        onChange={(value) =>
+                          {
+                            const dateV = moment(value).toDate()
+                            setGracePeriod(dateV)
+                             
+                          } }
+
+                      />                      
                     </div>
 
                     <div className="form-element">
@@ -308,7 +320,7 @@ const ShiftsNormal = ({ workschedule }) => {
           />
         }
       >
-        <Datatable columns={columns} data={data} />
+        <Datatable columns={columns} data={data} canDeleted={true} />
       </Widget>
     </>
   );

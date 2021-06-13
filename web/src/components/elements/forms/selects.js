@@ -1,11 +1,11 @@
 export const Selects = ({
-  inline = false,
-  item,
+  inline =false,
+  item,  
   selected,
   filter,
   onSelectChange,
 }) => (
-  <div className="form-element-inline">
+  <div className={`form-element ${inline ? "form-element-inline" : ""}`}>
     {item.label && <div className="form-label">{item.label}</div>}
     <select
       ref={item.ref}

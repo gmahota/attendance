@@ -22,7 +22,8 @@ import {
 import {
   get_all_UserGroups,
   get_UserGroup,
-  create_UserGroup
+  create_UserGroup,
+  edit_UserGroup
 } from "../controllers/attendance/userGroupController"
   ;
 
@@ -73,7 +74,8 @@ attendanceRouter
 attendanceRouter
   .get("/usergroups", get_all_UserGroups)
   .get("/usergroup/:id", get_UserGroup)
-  .post("/usergroup/", create_UserGroup);
+  .post("/usergroup/", create_UserGroup)
+  .post("/usergroup/:id", edit_UserGroup);
 
 attendanceRouter
   .get("/punchLogs", get_all_PunchLogs)

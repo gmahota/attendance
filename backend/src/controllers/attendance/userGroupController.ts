@@ -21,6 +21,35 @@ export const get_UserGroup = async (request: Request, response: Response) => {
   return response.status(404).json({ msg: "no UserGroup with that id" });
 };
 
+
+export const edit_UserGroup = async (request: Request, response: Response) => {
+
+  const {
+    id,
+    name,
+    schedule
+  } = await request.body;
+  
+  try {
+
+
+    let item = await UserGroupService.getById(id);
+
+    item.name = name;
+    item.schedule = schedule;
+
+    item = await UserGroupService.create(item);
+
+    return response.status(200).json(item);
+
+  } catch (e) {
+    return response.status(404).json(
+      { msg: "error to create a product with that i", error: e },
+    );
+  }
+};
+
+
 export const create_UserGroup = async (request: Request, response: Response) => {
   const {
     name,

@@ -9,7 +9,7 @@ const findById = async function findById(id: string): Promise<UserGroup> {
   const UserRepository = getRepository(UserGroup);
 
   const data: UserGroup = await UserRepository.findOneOrFail({
-      where: {id: id }
+      where: {id: id }, relations: ['schedule']
     });
 
   return data;

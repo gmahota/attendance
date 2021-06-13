@@ -3,6 +3,8 @@ import WorkScheduleService from "../../services/attendance/workSchedule";
 import UserService from "../../services/attendance/users";
 import WorkSchedule from "../../models/attendance/workSchedule";
 import UserGroupService from "../../services/attendance/userGroup";
+import GroupView from '../../view/attendance/groups'
+import UserView from "../../view/attendance/user";
 
 export const get_all_WorkSchedules = async (request: Request, response: Response) => {
 
@@ -27,8 +29,11 @@ export const get_Workschedule_Users = async (request: Request, response: Respons
 
   const Users = await UserService.getByScheduleId(id);
 
+  const items = UserView.renderMany(Users)
   
-    return response.status(200).json(Users);
+    return response.status(200).json(items);
+  
+
   
   //return response.status(404).json({ msg: "no Users with that schedule id " });
 };
@@ -38,8 +43,9 @@ export const get_Workschedule_Groups = async (request: Request, response: Respon
 
   const Groups = await UserGroupService.getByScheduleId(id);
 
+  const items = GroupView.renderMany(Groups)
   
-    return response.status(200).json(Groups);
+    return response.status(200).json(items);
 };
 
 

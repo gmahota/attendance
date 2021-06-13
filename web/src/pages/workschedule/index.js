@@ -44,6 +44,10 @@ export default function Workschedules({ allWorkschedules }) {
     setType(value);
   }
 
+  function handlerEdit(id){
+    router.push(`workschedule/${id}/edit`)
+  
+  }
   async function  handleSave(){
 
     var item = {id,name,type}
@@ -94,7 +98,10 @@ export default function Workschedules({ allWorkschedules }) {
       []
     );
     const data = React.useMemo(() => allWorkschedules, []);
-    return <Datatable columns={columns} data={data} link="/workschedule" canView={true} canEdit={true}/>;
+    return <Datatable 
+      columns={columns} data={data} link="/workschedule"
+       canView={true} canEdit={true}
+       handlerEdit={handlerEdit}/>;
   };
 
   return (

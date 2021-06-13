@@ -20,6 +20,7 @@ const Datatable = ({
   canView = false,
   canEdit = false,
   canDeleted = false,
+  handlerEdit
 }) => {
   const router = useRouter();
 
@@ -69,7 +70,7 @@ const Datatable = ({
               )}
               {canEdit === true ? (
                 <button
-                  onClick={() => router.push(`${link}/${row.values.id}/edit`)}
+                  onClick={() => handlerEdit(row.values.id) }
                 >
                   <FiEdit className="stroke-current mr-2" />
                 </button>

@@ -12,7 +12,6 @@ const findById = async function findById(id: string): Promise<WorkSchedule> {
     where: { id: id }
   });
 
-  console.log(data)
   return data;
 };
 

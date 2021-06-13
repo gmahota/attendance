@@ -16,19 +16,12 @@ export default function Workschedules({ workschedule, allUsers , allGroups}) {
     return <p>Carregando...</p>;
   }
 
-  if (!workschedule) {
-    console.log(workschedule)
-    return <p>Carregando...</p>;
-    
-  }
-  console.log(workschedule)
-
-  const TabShifts = () =><SimpleShifts workschedule={workschedule}/>;
+  const TabShifts = () =><div workschedule={workschedule}/>;
 
   const TabUsers = ({ allUsers }) => <SimpleUsers allUsers={allUsers} />;
 
-  const TabGroupUsers = ({ allUsersGroups }) => (
-    <SimpleTabGroupUsers allUsersGroups={allUsersGroups} />
+  const TabGroupUsers = ({ allGroups }) => (
+    <SimpleTabGroupUsers allGroups={allGroups} />
   );
 
   const tabs = [
@@ -48,7 +41,7 @@ export default function Workschedules({ workschedule, allUsers , allGroups}) {
       index: 2,
       title: "Groups",
       active: false,
-      content: <TabGroupUsers allUsersGroups={allGroups} />,
+      content: <TabGroupUsers allGroups={allGroups} />,
     },
   ];
 
@@ -87,7 +80,8 @@ export default function Workschedules({ workschedule, allUsers , allGroups}) {
     return <Datatable columns={columns} data={data} />;
   };
 
-  const SimpleTabGroupUsers = ({ allUsersGroups }) => {
+  const SimpleTabGroupUsers = ({ allGroups }) => {
+
     const columns = React.useMemo(
       () => [
         {
@@ -120,7 +114,7 @@ export default function Workschedules({ workschedule, allUsers , allGroups}) {
       ],
       []
     );
-    const data = React.useMemo(() => allUsersGroups, []);
+    const data = React.useMemo(() => allGroups, []);
     return <Datatable columns={columns} data={data} />;
   };
 
@@ -173,24 +167,23 @@ export const getStaticProps = async (context) => {
     const users = await workService.get_Workschedule_Users(id[0]);
 
     const groups = await workService.get_Workschedule_Groups(id[0]);
-
-    console.log(groups )
+    
     return {
       props: {
         workschedule: workschedule,
-        allUsers: users ,
-        allGroups: groups 
+        allUsers: users || [],
+        allGroups: groups || []
       },
       revalidate: 10,
     };
   } catch (e) {
-    console.log(e);
+    console.error(e);
 
     return {
       props: {
         workschedule: null,
-        allUsers: null,
-        allGroups: null
+        allUsers: [],
+        allGroups: []
       },
       revalidate: 10,
     };

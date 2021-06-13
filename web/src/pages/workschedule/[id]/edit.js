@@ -51,6 +51,8 @@ export default function Workschedules({ workschedule }) {
     setType(value);
   }
 
+  
+
   async function  handleSave(){
 
     var item = {id,name,type}

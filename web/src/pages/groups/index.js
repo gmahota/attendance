@@ -48,7 +48,7 @@ export default function Workschedules({ allUserGroup }) {
       []
     );
     const data = React.useMemo(() => allUserGroup, []);
-    return <Datatable columns={columns} data={data} link="/groups" />;
+    return <Datatable columns={columns} data={data} link="/groups" canEdit={true} canView={true}/>;
   };
 
   return (

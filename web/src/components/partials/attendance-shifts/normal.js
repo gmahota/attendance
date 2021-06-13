@@ -17,6 +17,7 @@ import { FiWatch } from "react-icons/fi";
 const ShiftsNormal = ({ workschedule }) => {
   const router = useRouter();
 
+  const [id, setId] = useState(0);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
@@ -60,7 +61,26 @@ const ShiftsNormal = ({ workschedule }) => {
 
     router.reload();
   }
+  function handlerEdit(id){
+    //router.push(`${link}/${row.values.id}/edit`
+    alert(`Ola mundo ${id}`)
 
+    const item = workschedule.Shifts.find(p=> p.id === id)
+
+    if(!item){
+      setId(id)
+      setName(item.name);
+      setDescription(item.description);
+      setType(item.type);
+
+      setTimeIn(item.timeIn)
+      setTimeOut(item.timeOut)
+      setMinTimeIn(item.minTimeIn)
+      setMaxTimeOut(item.maxTimeOut)
+      setGracePeriod(item.gracePeriod)
+      setDayOfWeek(item.dayOfWeek)
+    }
+  }
   function handleClear() {
     setType("Normal");
     setName("");
@@ -322,7 +342,14 @@ const ShiftsNormal = ({ workschedule }) => {
           />
         }
       >
-        <Datatable columns={columns} data={data} canView={false} canEdit={true} canDeleted={true} />
+        <Datatable 
+          columns={columns} 
+          data={data} 
+          canView={false} 
+          canEdit={true} 
+          canDeleted={true}
+          handlerEdit={handlerEdit}
+          />
       </Widget>
     </>
   );

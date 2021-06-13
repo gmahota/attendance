@@ -86,29 +86,8 @@ export default function Workschedules({ user }) {
   );
 }
 
-export const getStaticPaths = async (req) => {
-  try {
-    const users = await userService.get_Users();
 
-    const paths = users?.map((item) => {
-      return { params: { id: item.id.toString() } };
-    });
-
-    return {
-      paths,
-      fallback: true,
-    };
-  } catch (e) {
-    console.log(e);
-
-    return {
-      paths: [],
-      fallback: true,
-    };
-  }
-};
-
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   try {
     const { id } = context.params;
 

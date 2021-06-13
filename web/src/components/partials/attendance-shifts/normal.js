@@ -65,24 +65,23 @@ const ShiftsNormal = ({ workscheduleId , Shifts}) => {
     router.reload();
   }
   function handlerEdit(id){
-    //router.push(`${link}/${row.values.id}/edit`
-    alert(`Ola mundo ${id}`)
+    router.push(`/Shifts/${id}/edit`)
+    
+    // const item = workschedule.Shifts.find(p=> p.id === id)
 
-    const item = workschedule.Shifts.find(p=> p.id === id)
+    // if(!item){
+    //   setId(id)
+    //   setName(item.name);
+    //   setDescription(item.description);
+    //   setType(item.type);
 
-    if(!item){
-      setId(id)
-      setName(item.name);
-      setDescription(item.description);
-      setType(item.type);
-
-      setTimeIn(item.timeIn)
-      setTimeOut(item.timeOut)
-      setMinTimeIn(item.minTimeIn)
-      setMaxTimeOut(item.maxTimeOut)
-      setGracePeriod(item.gracePeriod)
-      setDayOfWeek(item.dayOfWeek)
-    }
+    //   setTimeIn(item.timeIn)
+    //   setTimeOut(item.timeOut)
+    //   setMinTimeIn(item.minTimeIn)
+    //   setMaxTimeOut(item.maxTimeOut)
+    //   setGracePeriod(item.gracePeriod)
+    //   setDayOfWeek(item.dayOfWeek)
+    // }
   }
   function handleClear() {
     setType("Normal");

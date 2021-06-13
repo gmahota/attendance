@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import WorkScheduleService from "../../services/attendance/workSchedule";
 import UserService from "../../services/attendance/users";
-import WorkSchedule from "../../models/attendance/workSchedule";
+import ShiftService from "../../services/attendance/shift";
 import UserGroupService from "../../services/attendance/userGroup";
+import WorkSchedule from "../../models/attendance/workSchedule";
+
 import GroupView from '../../view/attendance/groups'
 import UserView from "../../view/attendance/user";
 
@@ -30,11 +32,11 @@ export const get_Workschedule_Users = async (request: Request, response: Respons
   const Users = await UserService.getByScheduleId(id);
 
   const items = UserView.renderMany(Users)
-  
-    return response.status(200).json(items);
-  
 
-  
+  return response.status(200).json(items);
+
+
+
   //return response.status(404).json({ msg: "no Users with that schedule id " });
 };
 
@@ -44,12 +46,17 @@ export const get_Workschedule_Groups = async (request: Request, response: Respon
   const Groups = await UserGroupService.getByScheduleId(id);
 
   const items = GroupView.renderMany(Groups)
-  
-    return response.status(200).json(items);
+
+  return response.status(200).json(items);
 };
 
+export const get_Workschedule_Shifts = async (request: Request, response: Response) => {
+  const { id } = request.params;
 
+  const Shifts = await ShiftService.getByScheduleId(id);
 
+  return response.status(200).json(Shifts);
+};
 
 export const create_WorkSchedule = async (request: Request, response: Response) => {
 
@@ -60,7 +67,7 @@ export const create_WorkSchedule = async (request: Request, response: Response) 
 
   try {
     let item: WorkSchedule = {
-      id:0,
+      id: 0,
       name,
       type
     };
@@ -83,7 +90,7 @@ export const edit_WorkSchedule = async (request: Request, response: Response) =>
     name,
     type
   } = await request.body;
-  
+
   try {
 
 

@@ -53,7 +53,7 @@ export const create_Shift = async (request: Request, response: Response) => {
     };
 
     if(!!scheduleId){      
-      item.scheduleId =await WorkScheduleService.getById(scheduleId)
+      item.schedule =await WorkScheduleService.getById(scheduleId)
     }
 
     item = await ShiftService.create(item);

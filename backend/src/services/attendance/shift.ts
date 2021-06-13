@@ -8,11 +8,15 @@ const getById = (id:string) =>
 const getAll = () =>
     ShiftRepository.findAll()
 
+const getByScheduleId = (id:string) =>
+  ShiftRepository.findByScheduleId(id)
+
 const create = (item:Shift) =>
   ShiftRepository.create(item)
   
 export default {
   getAll,
   getById,
-  create
+  create,
+  getByScheduleId
 }

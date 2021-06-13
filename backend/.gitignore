@@ -30,4 +30,5 @@ yarn-error.log*
 /content
 
 yarn.lock
+package-lock.json
 *.xlsx

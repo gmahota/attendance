@@ -8,13 +8,7 @@ import SectionTitle from "../../../components/elements/section-title";
 import Widget from "../../../components/elements/widget";
 import workService from "../../../services/workschedule";
 import Datatable from "../../../components/elements/datatable/ActionsTable";
-import {
-  DefaultTabs,
-  UnderlinedTabs,
-  IconTabs,
-  Pills,
-  VerticalTabs,
-} from "../../../components/tabs";
+import { UnderlinedTabs} from "../../../components/elements/tabs";
 
 export default function Workschedules({ workschedule }) {
   const router = useRouter();
@@ -50,8 +44,6 @@ export default function Workschedules({ workschedule }) {
       content: <TabGroupUsers allUsersGroups={workschedule.groups} />,
     },
   ];
-
-
 
   const SimpleUsers = ({ allUsers }) => {
     const columns = React.useMemo(
@@ -104,16 +96,12 @@ export default function Workschedules({ workschedule }) {
         {
           Header: "Created Att",
           accessor: "createdAt",
-          Cell: (props) => (
-            <span>{moment(props.value).format("DD-MM-YYYY HH:mm:ss")}</span>
-          ),
+          Cell:(props) => <span>{moment(props.value).format('DD-MM-YYYY HH:mm:ss')}</span>
         },
         {
           Header: "Update Att",
           accessor: "updatedAt",
-          Cell: (props) => (
-            <span>{moment(props.value).format("DD-MM-YYYY HH:mm:ss")}</span>
-          ),
+          Cell:(props) => <span>{moment(props.value).format('DD-MM-YYYY HH:mm:ss')}</span>
         },
         {
           Header: "Parent Id",
@@ -121,7 +109,7 @@ export default function Workschedules({ workschedule }) {
           Cell: (props) => (
             <a href={`/usersDepartments/${props.value}`}>{props.value}</a>
           ),
-        },
+        }
       ],
       []
     );

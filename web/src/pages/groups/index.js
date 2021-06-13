@@ -7,11 +7,16 @@ import Datatable from "../../components/elements/datatable/ActionsTable";
 import userGroupService from "../../services/userGroup";
 import {FiPlus} from 'react-icons/fi'
 
-export default function Workschedules({ allUserGroup }) {
+export default function Groups({ allUserGroup }) {
   const router = useRouter();
 
   if (router.isFallback) {
     return <p>Carregando...</p>;
+  }
+
+  function handlerEdit(id){
+    router.push(`groups/${id}/edit`)
+  
   }
 
   const Simple = () => {
@@ -48,7 +53,7 @@ export default function Workschedules({ allUserGroup }) {
       []
     );
     const data = React.useMemo(() => allUserGroup, []);
-    return <Datatable columns={columns} data={data} link="/groups" canEdit={true} canView={true}/>;
+    return <Datatable columns={columns} data={data} link="/groups" canEdit={true} canView={true} handlerEdit={handlerEdit} />;
   };
 
   return (

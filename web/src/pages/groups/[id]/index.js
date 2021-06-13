@@ -6,7 +6,7 @@ import userGroupService from "../../../services/userGroup";
 import Datatable from "../../../components/elements/datatable";
 import moment from "moment";
 
-export default function Workschedules({ usergroup }) {
+export default function Groups({ usergroup }) {
   const router = useRouter();
   if (router.isFallback) {
     return <p>Carregando...</p>;

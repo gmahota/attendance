@@ -2,7 +2,7 @@ import { Entity, Column,PrimaryColumn, PrimaryGeneratedColumn, ManyToOne, OneToO
 import WorkSchedule from "./workSchedule";
 
 @Entity("userGroup")
-export default class user {
+export default class userGroup {
     @PrimaryColumn()
     id: number
 
@@ -19,6 +19,7 @@ export default class user {
     parent_id?:number
 
     @ManyToOne(() => WorkSchedule, (item) => item.id)
-    scheduleId?: WorkSchedule;
+    @JoinColumn({name:'scheduleId'})
+    schedule?: WorkSchedule;
 
 }

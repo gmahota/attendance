@@ -24,7 +24,7 @@ export default class WorkSchedule {
   })
   users?: User[]
 
-  @OneToMany(() => Group, item => item.scheduleId, {
+  @OneToMany(() => Group, item => item.schedule, {
     cascade: ['insert', 'update']
   })
   groups?: Group[]

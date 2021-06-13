@@ -37,7 +37,9 @@ import {
   get_all_WorkSchedules,
   get_WorkSchedule,
   create_WorkSchedule,
-  edit_WorkSchedule
+  edit_WorkSchedule,
+  get_Workschedule_Users,
+  get_Workschedule_Groups
 } from "../controllers/attendance/workScheduleController";
 
 import {
@@ -63,6 +65,8 @@ attendanceRouter
 attendanceRouter
   .get("/workschedules", get_all_WorkSchedules)
   .get("/workschedule/:id", get_WorkSchedule)
+  .get("/workschedule/:id/users", get_Workschedule_Users)
+  .get("/workschedule/:id/groups", get_Workschedule_Groups)
   .post("/workschedule", create_WorkSchedule)
   .post("/workschedule/:id", edit_WorkSchedule);
 

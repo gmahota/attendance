@@ -27,6 +27,23 @@ const findAll = async function findAll(): Promise<UserGroup[]> {
   return data;
 }
 
+const findByScheduleId = async function findAll(id: string): Promise<UserGroup[]> {
+  const UserGroupRepository = getRepository(UserGroup);
+
+  const groups: UserGroup[]= await getConnection()
+    .createQueryBuilder()
+    .select("userGroup")
+    .from(UserGroup, "userGroup")
+    .innerJoinAndSelect("userGroup.schedule","schedule")    
+    .where("schedule.id = :id", { id: id })    
+    .getMany();
+
+  return groups;
+
+  
+}
+
+
 const create = async function create(
   data: UserGroup
 ): Promise<UserGroup> {
@@ -40,5 +57,6 @@ const create = async function create(
 export default {
   create,
   findAll,
-  findById
+  findById,
+  findByScheduleId
 };

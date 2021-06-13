@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Router, { useRouter } from "next/router";
 import Datatable from "../../elements/datatable/ActionsTable";
 import { Selects } from "../../elements/forms/selects";
@@ -9,12 +9,13 @@ import formatDate from "../../../functions/datetime";
 import moment from "moment";
 import getConfig from "next/config";
 
+import workService from "../../../services/workschedule";
 // Only holds serverRuntimeConfig and publicRuntimeConfig
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
 import { FiWatch } from "react-icons/fi";
 
-const ShiftsNormal = ({ workschedule }) => {
+const ShiftsNormal = ({ workscheduleId , Shifts}) => {
   const router = useRouter();
 
   const [id, setId] = useState(0);
@@ -31,7 +32,9 @@ const ShiftsNormal = ({ workschedule }) => {
 
   const [dayOfWeek, setDayOfWeek] = useState(2);
 
-  const [scheduleId, setScheduleId] = useState(workschedule.id);
+  const [scheduleId, setScheduleId] = useState(workscheduleId);
+
+  const [shifts,setShifts] = useState(Shifts)
 
   async function handleSave() {
     var item = {
@@ -157,8 +160,7 @@ const ShiftsNormal = ({ workschedule }) => {
     []
   );
 
-  const data = React.useMemo(() => workschedule.Shifts, []);
-
+  const data = React.useMemo(() => shifts, []);
 
   return (
     <>

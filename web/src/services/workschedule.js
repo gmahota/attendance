@@ -32,7 +32,6 @@ const get_Workschedule = async (id) => {
 
     let res = {};
 
-
     await fetch(url)
       .then((response) => response.json())
       .then((data) => (res = data));
@@ -46,7 +45,8 @@ const get_Workschedule = async (id) => {
 const get_Workschedule_Users = async (id) => {
   try {
     const url =
-      publicRuntimeConfig.SERVER_URI + `api/attendance/workschedule/${id}/users`;
+      publicRuntimeConfig.SERVER_URI +
+      `api/attendance/workschedule/${id}/users`;
 
     let res = [];
 
@@ -63,24 +63,43 @@ const get_Workschedule_Users = async (id) => {
 const get_Workschedule_Groups = async (id) => {
   try {
     const url =
-      publicRuntimeConfig.SERVER_URI + `api/attendance/workschedule/${id}/groups`;
+      publicRuntimeConfig.SERVER_URI +
+      `api/attendance/workschedule/${id}/groups`;
 
     let res = [];
 
     await fetch(url)
       .then((response) => response.json())
       .then((data) => (res = data));
-    
+
     return res;
   } catch (e) {
     console.error(e);
   }
 };
 
+const get_Workschedule_Shifts = async (id) => {
+  try {
+    const url =
+      publicRuntimeConfig.SERVER_URI +
+      `api/attendance/workschedule/${id}/shifts`;
+      
+    let res = [];
 
+    await fetch(url)
+      .then((response) => response.json())
+      .then((data) => (res = data));
 
+    return res;
+  } catch (e) {
+    console.error(e);
+  }
+};
 
-
-
-export default { get_Workschedules, get_Workschedule ,
-  get_Workschedule_Groups,get_Workschedule_Users};
+export default {
+  get_Workschedules,
+  get_Workschedule,
+  get_Workschedule_Groups,
+  get_Workschedule_Users,
+  get_Workschedule_Shifts,
+};

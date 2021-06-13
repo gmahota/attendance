@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import ShiftNormal from "./normal"
 import ShiftAdDoc from "./ad-hoc"
 
-const AttendanceShifts = ({ workschedule }) => {
+const AttendanceShifts = ({ workscheduleId,Shifts }) => {
+  
   return (
     <>
       {/* {
@@ -12,7 +13,7 @@ const AttendanceShifts = ({ workschedule }) => {
           (<ShiftAdDoc workschedule={workschedule} />)
       } */}
 
-      <ShiftNormal workschedule={workschedule} />
+      <ShiftNormal workscheduleId={workscheduleId} Shifts={Shifts}/>
 
     </>
   );

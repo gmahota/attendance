@@ -8,15 +8,22 @@ import SectionTitle from "../../../components/elements/section-title";
 import Widget from "../../../components/elements/widget";
 import workService from "../../../services/workschedule";
 import Datatable from "../../../components/elements/datatable/ActionsTable";
-import { UnderlinedTabs} from "../../../components/elements/tabs";
+import { UnderlinedTabs } from "../../../components/elements/tabs";
 
-export default function Workschedules({ workschedule, allUsers , allGroups}) {
+export default function Workschedules({
+  allShifts,
+  workschedule,
+  allUsers,
+  allGroups,
+}) {
   const router = useRouter();
   if (router.isFallback) {
     return <p>Carregando...</p>;
   }
 
-  const TabShifts = () =><div workschedule={workschedule}/>;
+  const TabShifts = () => (
+    <SimpleShifts workscheduleId={workschedule.id} Shifts={allShifts} />
+  );
 
   const TabUsers = ({ allUsers }) => <SimpleUsers allUsers={allUsers} />;
 
@@ -81,7 +88,6 @@ export default function Workschedules({ workschedule, allUsers , allGroups}) {
   };
 
   const SimpleTabGroupUsers = ({ allGroups }) => {
-
     const columns = React.useMemo(
       () => [
         {
@@ -97,12 +103,16 @@ export default function Workschedules({ workschedule, allUsers , allGroups}) {
         {
           Header: "Created Att",
           accessor: "createdAt",
-          Cell:(props) => <span>{moment(props.value).format('DD-MM-YYYY HH:mm:ss')}</span>
+          Cell: (props) => (
+            <span>{moment(props.value).format("DD-MM-YYYY HH:mm:ss")}</span>
+          ),
         },
         {
           Header: "Update Att",
           accessor: "updatedAt",
-          Cell:(props) => <span>{moment(props.value).format('DD-MM-YYYY HH:mm:ss')}</span>
+          Cell: (props) => (
+            <span>{moment(props.value).format("DD-MM-YYYY HH:mm:ss")}</span>
+          ),
         },
         {
           Header: "Parent Id",
@@ -110,7 +120,7 @@ export default function Workschedules({ workschedule, allUsers , allGroups}) {
           Cell: (props) => (
             <a href={`/usersDepartments/${props.value}`}>{props.value}</a>
           ),
-        }
+        },
       ],
       []
     );
@@ -135,57 +145,23 @@ export default function Workschedules({ workschedule, allUsers , allGroups}) {
   );
 }
 
-export const getStaticPaths = async (req) => {
-  try {
-    const workschedules = await workService.get_Workschedules();
+export const getServerSideProps = async (context) => {
+  const { id } = context.params;
 
-    const paths = workschedules?.map((item) => {
-      return { params: { id: item.id.toString() } };
-    });
+  const workschedule = await workService.get_Workschedule(id[0]);
 
-    return {
-      paths,
-      fallback: true,
-    };
-  } catch (e) {
-    console.log(e);
+  const users = await workService.get_Workschedule_Users(id[0]);
 
-    return {
-      paths: [],
-      fallback: true,
-    };
-  }
-};
+  const groups = await workService.get_Workschedule_Groups(id[0]);
 
-export const getStaticProps = async (context) => {
-  try {
-    const { id } = context.params;   
+  const shifts = await workService.get_Workschedule_Shifts(id[0]);
 
-    const workschedule = await workService.get_Workschedule(id[0]);
-    console.log(workschedule)
-
-    const users = await workService.get_Workschedule_Users(id[0]);
-
-    const groups = await workService.get_Workschedule_Groups(id[0]);
-    
-    return {
-      props: {
-        workschedule: workschedule,
-        allUsers: users || [],
-        allGroups: groups || []
-      },
-      revalidate: 10,
-    };
-  } catch (e) {
-    console.error(e);
-
-    return {
-      props: {
-        workschedule: null,
-        allUsers: [],
-        allGroups: []
-      },
-      revalidate: 10,
-    };
-  }
+  return {
+    props: {
+      workschedule: workschedule,
+      allUsers: users || [],
+      allGroups: groups || [],
+      allShifts: shifts || [],
+    },
+  };
 };

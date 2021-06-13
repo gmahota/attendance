@@ -94,7 +94,7 @@ export default function Workschedules({ allWorkschedules }) {
       []
     );
     const data = React.useMemo(() => allWorkschedules, []);
-    return <Datatable columns={columns} data={data} link="/workschedule" />;
+    return <Datatable columns={columns} data={data} link="/workschedule" canView={true} canEdit={true}/>;
   };
 
   return (

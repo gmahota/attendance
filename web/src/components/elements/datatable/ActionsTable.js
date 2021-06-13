@@ -1,14 +1,27 @@
 import React, { useEffect } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import { useTable, useSortBy, usePagination, useRowSelect } from "react-table";
 
 //Icons
-import { FiEdit, FiEye, FiChevronDown, FiChevronUp,FiDelete } from "react-icons/fi";
+import {
+  FiEdit,
+  FiEye,
+  FiChevronDown,
+  FiChevronUp,
+  FiDelete,
+} from "react-icons/fi";
 
 import { PageWithText } from "../../pagination";
 
-const Datatable = ({ columns, data,link,canDeleted = false }) => {
-  const router = useRouter()
+const Datatable = ({
+  columns,
+  data,
+  link,
+  canView = false,
+  canEdit = false,
+  canDeleted = false,
+}) => {
+  const router = useRouter();
 
   const {
     getTableProps,
@@ -39,25 +52,40 @@ const Datatable = ({ columns, data,link,canDeleted = false }) => {
         // Let's make a column for selection
         ...columns,
         {
-          accessor: 'actions',
+          accessor: "actions",
           // The header can use the table's getToggleAllRowsSelectedProps method
           // to render a checkbox
           Header: "",
           // The cell can use the individual row's getToggleRowSelectedProps method
           // to the render a checkbox
-          Cell: ({row}) => (
+          Cell: ({ row }) => (
             <>
-              <button onClick={() => router.push(`${link}/${row.values.id}`)}><FiEye className="stroke-current mr-2" /></button>
-              <button onClick={() => router.push(`${link}/${row.values.id}/edit`)}><FiEdit className="stroke-current mr-2" /></button>
-
-              {canDeleted === true ?(
-                 <button onClick={() => alert('Not allow to delete')}><FiDelete className="stroke-current mr-2" /></button>
-
-              ): (<></>) 
-             }
+              {canView === true ? (
+                <button onClick={() => router.push(`${link}/${row.values.id}`)}>
+                  <FiEye className="stroke-current mr-2" />
+                </button>
+              ) : (
+                <></>
+              )}
+              {canEdit === true ? (
+                <button
+                  onClick={() => router.push(`${link}/${row.values.id}/edit`)}
+                >
+                  <FiEdit className="stroke-current mr-2" />
+                </button>
+              ) : (
+                <></>
+              )}
+              {canDeleted === true ? (
+                <button onClick={() => alert("Not allow to delete")}>
+                  <FiDelete className="stroke-current mr-2" />
+                </button>
+              ) : (
+                <></>
+              )}
             </>
-          )
-        }
+          ),
+        },
       ]);
     }
   );

@@ -52,15 +52,11 @@ export const create_Shift = async (request: Request, response: Response) => {
       dayOfWeek      
     };
 
-    
-
     if(!!scheduleId){      
       item.scheduleId =await WorkScheduleService.getById(scheduleId)
     }
 
     item = await ShiftService.create(item);
-
-    
 
     return response.status(200).json(item);
 

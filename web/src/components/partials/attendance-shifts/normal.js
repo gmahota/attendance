@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Router, { useRouter } from "next/router";
 import Datatable from "../../elements/datatable/ActionsTable";
 import { Selects } from "../../elements/forms/selects";
 import Widget from "../../elements/widget";
@@ -14,6 +15,7 @@ const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 import { FiWatch } from "react-icons/fi";
 
 const ShiftsNormal = ({ workschedule }) => {
+  const router = useRouter();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -26,7 +28,7 @@ const ShiftsNormal = ({ workschedule }) => {
   const [maxTimeOut, setMaxTimeOut] = useState("");
   const [gracePeriod, setGracePeriod] = useState("");
 
-  const [dayOfWeek, setDayOfWeek] = useState("");
+  const [dayOfWeek, setDayOfWeek] = useState(2);
 
   const [scheduleId, setScheduleId] = useState(workschedule.id);
 
@@ -125,11 +127,11 @@ const ShiftsNormal = ({ workschedule }) => {
       {
         Header: "Grace Period",
         accessor: "gracePeriod",
+        Cell: (props) => <span>{formatDate(props.value, "HH:mm")}</span>
       },
       {
         Header: "Day Of Week",
         accessor: "dayOfWeek",
-        Cell: (props) => <span>{formatDate(props.value, "HH:mm")}</span>,
       },
     ],
     []
@@ -320,7 +322,7 @@ const ShiftsNormal = ({ workschedule }) => {
           />
         }
       >
-        <Datatable columns={columns} data={data} canDeleted={true} />
+        <Datatable columns={columns} data={data} canView={false} canEdit={true} canDeleted={true} />
       </Widget>
     </>
   );

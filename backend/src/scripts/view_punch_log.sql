@@ -15,7 +15,7 @@ select tab1.id, tab1.code, tab1.userId, tab1.userName, tab1.userGroup, tab1.date
 SELECT *,
 				ROW_NUMBER() OVER(PARTITION BY userId) AS row_num
 			FROM punchLog) tab1) tab2
-		left outer join shift on tab2.userDefinedSchedulerId = shift.scheduleIdId and tempoEmMinutos between shift.timeIn and shift.timeOut
+		left outer join shift on tab2.userDefinedSchedulerId = shift.scheduleId and tempoEmMinutos between shift.timeIn and shift.timeOut
 			and tab2.diaSemanaPunch = shift.dayofweek);
 
 /*select * from View_PunchCard;

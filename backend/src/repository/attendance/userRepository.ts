@@ -32,6 +32,22 @@ const findAll = async function findAll(filter:Filter): Promise<User[]> {
   return data;
 }
 
+const findByScheduleId = async function findAll(id: string): Promise<User[]> {
+  const UserRepository = getRepository(User);
+
+  const users: User[]= await getConnection()
+    .createQueryBuilder()
+    .select("user")
+    .from(User, "user")
+    .innerJoinAndSelect("user.schedule","schedule")    
+    .where("schedule.id = :id", { id: id })    
+    .getMany();
+
+  return users;
+
+  
+}
+
 const create = async function create(
   data: User
 ): Promise<User> {
@@ -45,5 +61,6 @@ const create = async function create(
 export default {
   create,
   findAll,
-  findById
+  findById,
+  findByScheduleId
 };

@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import WorkScheduleService from "../../services/attendance/workSchedule";
+import UserService from "../../services/attendance/users";
 import WorkSchedule from "../../models/attendance/workSchedule";
+import UserGroupService from "../../services/attendance/userGroup";
 
 export const get_all_WorkSchedules = async (request: Request, response: Response) => {
 
@@ -19,6 +21,29 @@ export const get_WorkSchedule = async (request: Request, response: Response) => 
   }
   return response.status(404).json({ msg: "no WorkSchedule with that id" });
 };
+
+export const get_Workschedule_Users = async (request: Request, response: Response) => {
+  const { id } = request.params;
+
+  const Users = await UserService.getByScheduleId(id);
+
+  
+    return response.status(200).json(Users);
+  
+  //return response.status(404).json({ msg: "no Users with that schedule id " });
+};
+
+export const get_Workschedule_Groups = async (request: Request, response: Response) => {
+  const { id } = request.params;
+
+  const Groups = await UserGroupService.getByScheduleId(id);
+
+  
+    return response.status(200).json(Groups);
+};
+
+
+
 
 export const create_WorkSchedule = async (request: Request, response: Response) => {
 

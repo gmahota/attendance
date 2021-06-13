@@ -10,9 +10,13 @@ const getAll = () =>
 
 const create = (item:UserGroup) =>
   UserGroupRepository.create(item)
-  
+
+  const getByScheduleId = (id: string) =>
+  UserGroupRepository.findByScheduleId(id)
+
 export default {
   getAll,
   getById,
-  create
+  create,
+  getByScheduleId
 }

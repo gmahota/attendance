@@ -9,15 +9,10 @@ const findById = async function findById(id: string): Promise<WorkSchedule> {
   const WorkScheduleRepository = getRepository(WorkSchedule);
 
   const data: WorkSchedule = await WorkScheduleRepository.findOneOrFail({
-    where: { id: id },
-    relations: ["Shifts", "users",
-      "users.userGroup",
-      "users.schedule",
-      "users.department",
-      "groups"
-    ]
+    where: { id: id }
   });
 
+  console.log(data)
   return data;
 };
 

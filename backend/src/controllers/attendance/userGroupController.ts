@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import UserGroupService from "../../services/attendance/userGroup";
 import UserGroup from "../../models/attendance/userGroup";
+import WorkScheduleService from "../../services/attendance/workSchedule";
 
 export const get_all_UserGroups = async (request: Request, response: Response) => {
 
@@ -29,10 +30,13 @@ export const create_UserGroup = async (request: Request, response: Response) => 
   try {
     let item: UserGroup = {
       id:0,
-      name,
-      scheduleId
+      name
     };
 
+    if(!!scheduleId){      
+      item.schedule =await WorkScheduleService.getById(scheduleId)
+    }
+    
     item = await UserGroupService.create(item);
 
     return response.status(200).json(item);

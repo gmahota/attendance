@@ -10,11 +10,18 @@ import workService from "../../../services/workschedule";
 import Datatable from "../../../components/elements/datatable/ActionsTable";
 import { UnderlinedTabs} from "../../../components/elements/tabs";
 
-export default function Workschedules({ workschedule }) {
+export default function Workschedules({ workschedule, allUsers , allGroups}) {
   const router = useRouter();
   if (router.isFallback) {
     return <p>Carregando...</p>;
   }
+
+  if (!workschedule) {
+    console.log(workschedule)
+    return <p>Carregando...</p>;
+    
+  }
+  console.log(workschedule)
 
   const TabShifts = () =><SimpleShifts workschedule={workschedule}/>;
 
@@ -35,13 +42,13 @@ export default function Workschedules({ workschedule }) {
       index: 1,
       title: "Users",
       active: false,
-      content: <TabUsers allUsers={workschedule.users} />,
+      content: <TabUsers allUsers={allUsers} />,
     },
     {
       index: 2,
       title: "Groups",
       active: false,
-      content: <TabGroupUsers allUsersGroups={workschedule.groups} />,
+      content: <TabGroupUsers allUsersGroups={allGroups} />,
     },
   ];
 
@@ -158,13 +165,21 @@ export const getStaticPaths = async (req) => {
 
 export const getStaticProps = async (context) => {
   try {
-    const { id } = context.params;
+    const { id } = context.params;   
 
     const workschedule = await workService.get_Workschedule(id[0]);
+    console.log(workschedule)
 
+    const users = await workService.get_Workschedule_Users(id[0]);
+
+    const groups = await workService.get_Workschedule_Groups(id[0]);
+
+    console.log(groups )
     return {
       props: {
         workschedule: workschedule,
+        allUsers: users ,
+        allGroups: groups 
       },
       revalidate: 10,
     };
@@ -174,6 +189,8 @@ export const getStaticProps = async (context) => {
     return {
       props: {
         workschedule: null,
+        allUsers: null,
+        allGroups: null
       },
       revalidate: 10,
     };

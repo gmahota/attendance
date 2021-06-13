@@ -81,29 +81,9 @@ export default function Groups({ usergroup }) {
   );
 }
 
-export const getStaticPaths = async (req) => {
-  try {
-    const usergroup = await userGroupService.get_UserGroups();
 
-    const paths = usergroup?.map((item) => {
-      return { params: { id: item.id.toString() } };
-    });
 
-    return {
-      paths,
-      fallback: true,
-    };
-  } catch (e) {
-    console.log(e);
-
-    return {
-      paths: [],
-      fallback: true,
-    };
-  }
-};
-
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   try {
     const { id } = context.params;
 

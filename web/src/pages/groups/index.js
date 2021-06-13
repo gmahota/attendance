@@ -75,7 +75,7 @@ export default function Groups({ allUserGroup }) {
   );
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const allUserGroup = await userGroupService.get_UserGroups();
 
   return {

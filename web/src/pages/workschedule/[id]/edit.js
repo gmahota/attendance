@@ -51,8 +51,6 @@ export default function Workschedules({ workschedule }) {
     setType(value);
   }
 
-  
-
   async function  handleSave(){
 
     var item = {id,name,type}
@@ -140,40 +138,16 @@ export default function Workschedules({ workschedule }) {
   );
 }
 
-export const getStaticPaths = async (req) => {
-  try {
-    const workschedules = await workService.get_Workschedules();
-
-    const paths = workschedules?.map((item) => {
-      return { params: { id: item.id.toString() } };
-    });
-
-    return {
-      paths,
-      fallback: true,
-    };
-  } catch (e) {
-    console.log(e);
-
-    return {
-      paths: [],
-      fallback: true,
-    };
-  }
-};
-
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   try {
     const { id } = context.params;
 
     const workschedule = await workService.get_Workschedule(id[0]);
 
-    console.log("vamos imprimir o type: ", workschedule.type)
     return {
       props: {
         workschedule: workschedule,
-      },
-      revalidate: 10,
+      }
     };
   } catch (e) {
     console.log(e);
@@ -181,8 +155,7 @@ export const getStaticProps = async (context) => {
     return {
       props: {
         workschedule: null,
-      },
-      revalidate: 10,
+      }
     };
   }
 };

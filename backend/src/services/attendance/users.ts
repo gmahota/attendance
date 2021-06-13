@@ -20,9 +20,13 @@ const create = (item:User) =>
 const getByScheduleId = (id: string) =>
 UserRepository.findByScheduleId(id)
 
+const getByUserGroup = (id: number) =>
+UserRepository.findByGroupId(id)
+
 export default {
   getAll,
   getById,
   create,
-  getByScheduleId
+  getByScheduleId, 
+  getByUserGroup
 }

@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import UserGroupService from "../../services/attendance/userGroup";
+import UserService from "../../services/attendance/users";
 import UserGroup from "../../models/attendance/userGroup";
 import WorkScheduleService from "../../services/attendance/workSchedule";
+import User from "../../models/attendance/user";
 
 export const get_all_UserGroups = async (request: Request, response: Response) => {
 
@@ -39,6 +41,13 @@ export const edit_UserGroup = async (request: Request, response: Response) => {
     item.schedule = schedule;
 
     item = await UserGroupService.create(item);
+
+    const users :User[]= await UserService.getByUserGroup(item.id)
+
+   users.forEach(user => {
+     user.userGroup = item;
+     UserService.create(user);
+   });
 
     return response.status(200).json(item);
 

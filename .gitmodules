@@ -1,0 +1,3 @@
+[submodule "node-scheduler"]
+	path = node-scheduler
+	url = https://github.com/turaymelo/node-scheduler.git

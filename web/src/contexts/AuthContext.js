@@ -33,6 +33,10 @@ export function AuthProvider({children}){
       setCookie(undefined,'attendance.token',user.token,{
         maxAge:60*60*14,// 1 hour
       })
+
+      setCookie(undefined,'attendance.user',user.user,{
+        maxAge:60*60*14,// 1 hour
+      })
   
       api.defaults.headers['Authorization'] = `Bearer ${user.token}`;
   

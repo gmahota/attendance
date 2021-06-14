@@ -2,53 +2,61 @@ import { Request, Response } from "express";
 import userService from "../../services/auth/user";
 import token from "../../services/auth/token";
 import crypto from "../../services/auth/crypto";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import https from "https"
 import fs from "fs"
 import qs from 'qs'
 
 const login = async (request: Request, response: Response) => {
-  try{ 
+  try {
     const {
       username,
       password,
     } = request.body;
 
-    console.log({
-      username,
-      password,
-    })
-
     let caCrt = fs.readFileSync('./secrets/ca.crt')
-    
-    console.log(caCrt)
-    const httpsAgent = new https.Agent({ ca: caCrt, keepAlive: false });
-    
-    const api = axios.create({
-      baseURL: "https://localhost:444/api",
+
+    const httpsAgent = new https.Agent({
+      requestCert: true,
+      rejectUnauthorized: false,
+      ca: caCrt,
+      maxVersion: "TLSv1.2",
+      minVersion: "TLSv1.2"
+    });
+
+    let token = ""
+
+    const options: AxiosRequestConfig = {
+      url: `${process.env.Biostar_Host}login`,  // <---this is  a fake ip do not bother
+      method: "POST",
+      httpsAgent: httpsAgent,
       headers: {
-        'content-type': 'application/json'
+        'Accept': '*/*',
+        'Content-Type': 'application/json'
       },
-      withCredentials: true,
-      httpsAgent: httpsAgent
+      data: {
+        "User": {
+          "login_id": username,
+          "password": password
+        }
+      }
+    };
+
+    await axios(options).then((res => {
+      console.log(res)
+      token = res.headers["bs-session-id"]
+      return response.status(200).json({ token: token });
+    })).catch((err) => {
+      console.log(err);
+      return response.status(422).json({ msg: "Invalid username or password" });
     })
-    let data = {"User":{
-      "login_id": "admin",
-      "password": "admin@2021"
-    }};
 
-    axios.defaults.headers.post['Content-Type'] = 'application/json';
-
-    // Send a POST request
-    await api.post('login')  
-    
-    
-    return response.status(422).json({ msg: "Invalid username or password" });
-  }catch(e){
+    //return response.status(422).json({ msg: "Invalid username or password" });
+  } catch (e) {
     console.log(e)
-    return response.status(500).json({ msg: "Internal server error" , error:e});
+    return response.status(500).json({ msg: "Internal server error", error: e });
   }
-  
+
 };
 
 const guest = (request: Request, response: Response) => {

@@ -28,7 +28,7 @@ yarn-error.log*
 #content
 /content/*.json
 /content
-
+/secrets/*
 yarn.lock
 package-lock.json
 *.xlsx

@@ -45,7 +45,14 @@ const login = async (request: Request, response: Response) => {
     await axios(options).then((res => {
       console.log(res)
       token = res.headers["bs-session-id"]
-      return response.status(200).json({ token: token });
+      return response.status(200).json({
+        token: token,
+        user: {
+          name :res.data.User.name,
+          id:res.data.User.user_id,
+          avatar_url:"images/faces/profileIcon.png"
+        }
+      });
     })).catch((err) => {
       console.log(err);
       return response.status(422).json({ msg: "Invalid username or password" });

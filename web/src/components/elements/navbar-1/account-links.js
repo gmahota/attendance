@@ -3,14 +3,14 @@ import { FiMail, FiStar, FiUser, FiLogIn } from "react-icons/fi";
 
 const AccountLinks = () => {
   const items = [
+    // {
+    //   url: "/extras/user-profile",
+    //   icon: <FiUser size={18} className="stroke-current" />,
+    //   name: "Profile",
+    //   badge: null,
+    // },
     {
-      url: "/extras/user-profile",
-      icon: <FiUser size={18} className="stroke-current" />,
-      name: "Profile",
-      badge: null,
-    },
-    {
-      url: "/pages/logout",
+      url: "/logout",
       icon: <FiLogIn size={18} className="stroke-current" />,
       name: "Logout",
       badge: null,

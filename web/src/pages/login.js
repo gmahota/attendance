@@ -13,11 +13,11 @@ const Index = () => {
   const { register, handleSubmit } = useForm();
   const { signIn } = useContext(AuthContext);
 
-  const [userName, setUserName] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   async function handleSignIn(data) {
-    await signIn({userName,password});
+    await signIn({username,password});
   }
 
   return (
@@ -49,7 +49,7 @@ const Index = () => {
                   id="userName"
                   name="userName"
                   type="text"
-                  value={userName}
+                  value={username}
                   onChange={event => setUserName(event.target.value)}
                   autoComplete="userName"
                   required

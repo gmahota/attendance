@@ -8,23 +8,32 @@ const delay = (amount = 758) =>
 // Only holds serverRuntimeConfig and publicRuntimeConfig
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
-export async function signInRequest(data) {
-  data = { User:{
-    login_id: data.userName,
-    password: data.password
-  }};
+export async function signInRequest({username,password}) {
 
-  return {
-    token: uuid(),
-    user: {
-      email: "turaymelo@gmail.com",
-      avatar_url: "images/faces/profileIcon.png",
+  
+  const url = `${publicRuntimeConfig.SERVER_URI}api/auth/login`
+  
+  let res = {
+    token:null,
+    user:null
+  }
+
+  await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-  };
+    body: JSON.stringify({username,password}),
+  }).then((response) => response.json())
+  .then((data) => (res = data));
+  
+  return res
+  
+
 }
 
 export async function recoverUserInformation() {
-  await delay();
+
   ///https://github.com/turaymelo.png
   return {
     user: {

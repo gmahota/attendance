@@ -1,6 +1,21 @@
-import Link from 'next/link'
+import React, { useState,useEffect } from "react";
+import Router, { useRouter } from "next/router";
 
-const EmailConfirmation = () => {
+import Link from 'next/link'
+import nookies  from 'nookies'
+
+const Logout = () => {
+
+  const router = useRouter();
+  
+  useEffect(() => {
+    const cookies = nookies.get(this)
+
+    for (const cookie of Object.keys(cookies)) {
+      nookies.destroy(this, cookie)
+    }
+   }, [router]);
+
   return (
     <div className="flex flex-col w-full max-w-xl text-center">
       <img
@@ -22,4 +37,4 @@ const EmailConfirmation = () => {
   )
 }
 
-export default EmailConfirmation
+export default Logout

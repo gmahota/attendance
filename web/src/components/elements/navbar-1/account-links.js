@@ -28,7 +28,7 @@ const AccountLinks = () => {
                 <span className="mx-2">{item.name}</span>
                 {item.badge && (
                   <span
-                    className={`uppercase font-bold inline-flex text-center p-0 leading-none text-2xs h-4 w-4 inline-flex items-center justify-center rounded-full ${item.badge.color} ml-auto`}
+                    className={`uppercase font-bold text-center p-0 leading-none text-2xs h-4 w-4 inline-flex items-center justify-center rounded-full ${item.badge.color} ml-auto`}
                   >
                     {item.badge.number}
                   </span>

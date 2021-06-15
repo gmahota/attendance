@@ -1,3 +1,6 @@
 [submodule "node-scheduler"]
 	path = node-scheduler
 	url = https://github.com/turaymelo/node-scheduler.git
+[submodule "node-windowsservice"]
+	path = node-windowsservice
+	url = https://github.com/turaymelo/node-windowsservice.git

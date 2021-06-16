@@ -4,3 +4,9 @@
 [submodule "node-windowsservice"]
 	path = node-windowsservice
 	url = https://github.com/turaymelo/node-windowsservice.git
+[submodule "nodejs-attendance-api"]
+	path = nodejs-attendance-api
+	url = https://github.com/gmahota/nodejs-attendance-api.git
+[submodule "nodejs-attendance-web"]
+	path = nodejs-attendance-web
+	url = https://github.com/gmahota/nodejs-attendance-web.git

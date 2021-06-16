@@ -10,3 +10,9 @@
 [submodule "nodejs-attendance-web"]
 	path = nodejs-attendance-web
 	url = https://github.com/gmahota/nodejs-attendance-web.git
+[submodule "nextjs-attendance-web"]
+	path = nextjs-attendance-web
+	url = https://github.com/gmahota/nextjs-attendance-web.git
+[submodule "nodejs-biostar2-api"]
+	path = nodejs-biostar2-api
+	url = https://github.com/gmahota/nodejs-biostar2-api.git
